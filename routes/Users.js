@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const UserController = require('../controller/Users.js');
+const UserController = require('../controller/Users');
 
 router.get('/', async (req, res) => {
   try {
-    const examplePeopleList = await Users.getUserList();
+    const examplePeopleList = await UserController.getUserList();
     if (!examplePeopleList.length) {
       res.status(404).json({ message: 'no people were found.' });
     }

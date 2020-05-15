@@ -1,9 +1,11 @@
 const UserStore = require('../stores/Users');
 
-export default class Users {
+class Users {
   static async getUserList() {
-    const examplePeopleList = await UserStore.get();
-    return examplePeopleList.data;
+    const userListQuery = await UserStore.get();
+    console.log(userListQuery);
+    return userListQuery;
   }
-
 }
+
+module.exports = Users;
