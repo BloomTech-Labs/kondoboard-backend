@@ -20,7 +20,7 @@ exports.up = function(knex) {
             .notNullable();
           users.string('profile_image', 255)
           users.string('user_track')
-          users.string('tags', 255)
+          users.json('tags')
       })
 
       .createTable('jobs', jobs => {
@@ -75,4 +75,5 @@ exports.down = function(knex) {
     .dropTableIfExist('user_saved_jobs')
     .dropTableIfExist('jobs')
     .dropTableIfExist('users')
+    .dropTableIfExist('irrelevant_jobs')
 };
