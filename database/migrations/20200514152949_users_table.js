@@ -88,20 +88,29 @@ exports.up = function(knex) {
 
       //joined table
       .createTable('job_tags', jobTag => {
-        jobtag.increments('id')
-        jobtag
-          .integer('jobs_tags_id')
-
+        jobTag.increments('id')
+        jobTag
+          .integer('job_tags_id', 255)
+          .notNullable()
+          .references('user_tags.id')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE')
+        jobTag
+          .integer('jobs_id', 255)
+          .notNullable()
+          .references('jobs.id')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE')
       })
-
-
   )
 };
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists('job_tags')
+    .dropTableIfExists('user_tags')
+    .dropTableIfExist('irrelevant_jobs')
     .dropTableIfExist('user_saved_jobs')
     .dropTableIfExist('jobs')
     .dropTableIfExist('users')
-    .dropTableIfExist('irrelevant_jobs')
 };

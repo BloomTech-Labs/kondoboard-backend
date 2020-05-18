@@ -13,7 +13,6 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
-          tags: '',
         }, 
       ]);
     });
