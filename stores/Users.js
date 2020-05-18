@@ -1,14 +1,14 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-  get,
+  getAllUsers,
   getById,
   insert,
   update,
   remove,
 };
 
-function get() {
+function getAllUsers() {
   return db('users');
 }
 
