@@ -21,6 +21,11 @@ async function insert(user) {
   return getById(id);
 }
 
+async function insertTag(newTag) {
+  const id = await db('user').insert(newTag, 'id');
+  return getById(id);
+}
+
 function update(id, changes) {
   return db('users').where({ id }).update(changes);
 }
