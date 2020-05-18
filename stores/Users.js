@@ -22,7 +22,7 @@ async function insert(user) {
 }
 
 async function insertTag(newTag) {
-  const id = await db('user').insert(newTag, 'id');
+  const id = await db('user_tags').insert(newTag, 'id');
   return getById(id);
 }
 
