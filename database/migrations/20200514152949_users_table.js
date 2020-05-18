@@ -2,6 +2,7 @@
 exports.up = function(knex) {
   return(
       knex.schema
+
       // users
       .createTable('users', users => {
           users.increments('id')
@@ -20,7 +21,6 @@ exports.up = function(knex) {
             .notNullable();
           users.string('profile_image', 255)
           users.string('user_track')
-          users.json('tags')
       })
 
       .createTable('jobs', jobs => {
@@ -36,6 +36,7 @@ exports.up = function(knex) {
           jobs.string('skills', 255)
       })
 
+      //joined table
       .createTable('user_saved_jobs', saved => {
         saved.increments('id')
         saved
@@ -52,6 +53,7 @@ exports.up = function(knex) {
           .onUpdate('CASCADE')
       })
 
+      //joined table
       .createTable('irrelevant_jobs', irrelevant => {
         irrelevant.increments('id')
         irrelevant
@@ -65,8 +67,34 @@ exports.up = function(knex) {
           .notNullable()
           .references('jobs.id')
           .onDelete('CASCADE')
-          .onUpdate('CASCADE')
+          .onUpdate('CASCADE')        
       })
+
+      .createTable('user_tags', tag =>{
+        tag.increments('id')
+        tag
+          .integer('user_id', 255)
+          .notNullable()
+          .references('users.id')
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE')
+        tag
+          .string('tag_name', 64)
+          .notNullable()
+        tag
+          .string('color', 10)
+          .notNullable()
+      })
+
+      //joined table
+      .createTable('job_tags', jobTag => {
+        jobtag.increments('id')
+        jobtag
+          .integer('jobs_tags_id')
+
+      })
+
+
   )
 };
 
