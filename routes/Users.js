@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require("bcryptjs");
 const UserController = require('../controller/Users');
-
 //------------GET----------
-
 //get all users
 router.get('/', async (req, res) => {
   try {
@@ -16,7 +14,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 });
-
 //Get user by id
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -30,20 +27,15 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'somthing unexpected happened.' })
   }
 })
-
 //Get user saved jobs
-
 //Get user tags
-
 //------------POST----------
-
 //Create new user
 router.post('/', async (req, res) => {
   const userData = req.body;
   const rounds = process.env.HASH_ROUNDS || 8;
   const hash = bcrypt.hashSync(userData.password, rounds);
   userData.password = hash;
-
   try {
     const user = await UserController.addUser(userData);
     res.status(201).json({ message: 'User has been created!'});
@@ -51,12 +43,10 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 });
-
 //Create user_tag
 router.post('/:id/tags', async (req, res) => {
   const userId = req.params.id;
   const newTag = req.body;
-
   try {
     const createTag = await UserController.addTag(newTag);
     res.status(201).json({ message: 'Tag has been created!'});
@@ -64,9 +54,7 @@ router.post('/:id/tags', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 })
-
 //------------PUT-----------
-
 //Update user
 router.put('/:id', async (req, res) => {
   const userData = req.body;
@@ -78,12 +66,8 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' })
   }
 })
-
 //Update user_tag
-
-
 //------------DELETE----------
-
 //Delete user
 router.delete('/:id', async (req, res) => {
   const id = req.params.id;
@@ -94,8 +78,5 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' })
   }
 })
-
 //Delete user_tag
-
-
 module.exports = router;
