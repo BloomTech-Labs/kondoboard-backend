@@ -1,12 +1,11 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('user_saved_jobs').del()
+  return knex('job_tags').del()
     .then(function () {
       // Inserts seed entries
-      return knex('user_saved_jobs').insert([
+      return knex('job_tags').insert([
         {
-          user_id: 1,
+          job_tags_id: 1,
           jobs_id: 1
         },
       ]);

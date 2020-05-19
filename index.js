@@ -1,5 +1,7 @@
 //Program Setup
-const server = require('./api/server');
+// @TODO: may not need to save result
+const dotenv = require('dotenv').config();
+const server = require('./src/api/server');
 
 const PORT = process.env.PORT || 3333;
 

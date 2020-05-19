@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require("bcryptjs");
 const UserController = require('../controller/Users');
+
 //------------GET----------
 //get all users
 router.get('/', async (req, res) => {
@@ -14,6 +15,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 });
+
 //Get user by id
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -26,9 +28,10 @@ router.get('/:id', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'somthing unexpected happened.' })
   }
-})
+});
 //Get user saved jobs
 //Get user tags
+
 //------------POST----------
 //Create new user
 router.post('/', async (req, res) => {
@@ -43,6 +46,7 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 });
+
 //Create user_tag
 router.post('/:id/tags', async (req, res) => {
   const userId = req.params.id;
@@ -53,7 +57,8 @@ router.post('/:id/tags', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
-})
+});
+
 //------------PUT-----------
 //Update user
 router.put('/:id', async (req, res) => {
@@ -65,8 +70,9 @@ router.put('/:id', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' })
   }
-})
+});
 //Update user_tag
+
 //------------DELETE----------
 //Delete user
 router.delete('/:id', async (req, res) => {
@@ -77,6 +83,8 @@ router.delete('/:id', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' })
   }
-})
+});
+
 //Delete user_tag
+
 module.exports = router;

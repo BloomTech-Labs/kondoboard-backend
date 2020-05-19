@@ -27,7 +27,6 @@ class Users {
     return user;
   }
   //------------------
-  
 
   static async addTag(newTag) {
     const tag = await UserStore.insertTag(newTag);

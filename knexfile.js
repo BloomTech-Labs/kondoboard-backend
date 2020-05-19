@@ -1,10 +1,9 @@
 module.exports = {
-
   development: {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: './database/kondoboard_backend.db3'
+      filename: './src/database/kondoboard_backend.db3'
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -12,10 +11,10 @@ module.exports = {
       },
     },
     migrations: {
-      directory: './database/migrations',
+      directory: './src/database/migrations',
     },
     seeds: {
-      directory: './database/seeds'
+      directory: './src/database/seeds',
     },
   },
 };
