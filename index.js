@@ -1,6 +1,6 @@
 //Program Setup
 const server = require('./src/api/server');
-
+const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 3333;
 
 server.listen(PORT, () => {
