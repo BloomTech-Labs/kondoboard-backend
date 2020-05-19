@@ -1,5 +1,5 @@
 //Program Setup
-const server = require('./api/server');
+const server = require('./src/api/server');
 
 const PORT = process.env.PORT || 3333;
 
