@@ -20,10 +20,9 @@ exports.up = function(knex) {
             .string('password', 255)
             .notNullable();
           users.string('profile_image', 255)
-          //added
           users.string('user_track')
-          users.json('skills')
-          users.json('cities')
+          users.string('skills')
+          users.string('cities')
       })
 
       .createTable('jobs', jobs => {
@@ -39,7 +38,6 @@ exports.up = function(knex) {
           jobs.string('skills', 255)
           jobs.string('estimated_pay', 255)
           jobs.date('post_date')
-          //added
           jobs.boolean('remote')
           jobs.string('url', 512)
       })

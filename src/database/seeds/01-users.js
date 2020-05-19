@@ -12,6 +12,8 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
+          skills: 'HTML, CSS, JavaScript, React, Node, Express',
+          cities: 'Boston, New York, New Jersey'
         }, 
         {
           first_name: 'Spider',
@@ -20,6 +22,8 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
+          skills: 'HTML, CSS, JavaScript, React, Node, Express',
+          cities: 'New York, London, Los Angeles'
         }, 
         {
           first_name: 'Iron',
@@ -28,7 +32,9 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
-        }, 
+          skills: 'AWS, Python, Machine Learning, AI', 
+          cities: 'New York, Los Angeles, Seattle, Denver'
+        },  
         {
           first_name: 'Captain',
           last_name: 'America',
@@ -36,6 +42,8 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
+          skills: 'AWS, Python, Machine Learning, AI', 
+          cities: 'San Francisco, Washington DC'
         },
 
       ]);

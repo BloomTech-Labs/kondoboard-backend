@@ -12,7 +12,9 @@ exports.seed = function(knex) {
           company: 'Slack',
           estimated_pay: '$80,000', 
           post_date: '5/12/2020',
-          skills: 'HTML5, CSS3, JavaScript, React, Angular, Node, AWS'
+          skills: 'HTML5, CSS3, JavaScript, React, Angular, Node, AWS',
+          remote: true,
+          url: 'google.com'
         },
         {
           title: 'Software Engineer - Senior',
@@ -21,7 +23,9 @@ exports.seed = function(knex) {
           company: 'Okta',
           estimated_pay: '$120,000',
           post_date: '5/15/2020',
-          skills: 'JavaScript, React, Node, AWS'
+          skills: 'JavaScript, React, Node, AWS',
+          remote: true,
+          url: 'google.com'
         },
         {
           title: 'Data Science Engineer',
@@ -30,7 +34,9 @@ exports.seed = function(knex) {
           company: 'Amazon',
           estimated_pay: '$180,000',  
           post_date: '5/19/2020',
-          skills: 'Python, Java, C++, AI'
+          skills: 'Python, Java, C++, AI',
+          remote: true,
+          url: 'google.com'
         },
       ]);
     });
