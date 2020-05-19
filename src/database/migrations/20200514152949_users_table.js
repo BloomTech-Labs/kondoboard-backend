@@ -23,6 +23,7 @@ exports.up = function(knex) {
           users.string('user_track')
           users.string('skills')
           users.string('cities')
+          users.boolean('remote')
       })
 
       .createTable('jobs', jobs => {
@@ -38,7 +39,6 @@ exports.up = function(knex) {
           jobs.string('skills', 255)
           jobs.string('estimated_pay', 255)
           jobs.date('post_date')
-          jobs.boolean('remote')
           jobs.string('url', 512)
       })
 

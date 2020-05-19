@@ -13,7 +13,6 @@ exports.seed = function(knex) {
           estimated_pay: '$80,000', 
           post_date: '5/12/2020',
           skills: 'HTML5, CSS3, JavaScript, React, Angular, Node, AWS',
-          remote: true,
           url: 'google.com'
         },
         {
@@ -24,7 +23,6 @@ exports.seed = function(knex) {
           estimated_pay: '$120,000',
           post_date: '5/15/2020',
           skills: 'JavaScript, React, Node, AWS',
-          remote: true,
           url: 'google.com'
         },
         {
@@ -35,7 +33,6 @@ exports.seed = function(knex) {
           estimated_pay: '$180,000',  
           post_date: '5/19/2020',
           skills: 'Python, Java, C++, AI',
-          remote: true,
           url: 'google.com'
         },
       ]);
