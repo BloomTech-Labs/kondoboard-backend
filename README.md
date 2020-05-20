@@ -1,17 +1,41 @@
 # Kondoboard-backend 
 ### https://kondo-board-api.herokuapp.com/api
+##### Note: All endpoints start with /api
 
 *** ***
 
-### Get User Info
-### GET Request
-#### All or Specific User 
-#### /users or /users/:id (setting up oAuth)
+# ~ Things to add ~
+
+### ~ users table ~
+##### "Get User Info" route to include an array of "favorite jobs" and "irrelevant jobs" 
+##### Toggle if user would like to see remote jobs (boolean)
+##### cities  - view, add, update, delete
+##### skills  - view, add, update, delete
+##### track   - view
+
+### ~ jobs table ~ (stores jobs from datascience API if user favorites/marks irrelevant)
+##### View, add
+
+### ~ user_saved_jobs && irrlevant_jobs ~ (relationship between jobs and users)
+##### View, add, update, delete
+###### Can a user delete a saved job? Could add an "archived" boolean column to user_saved_jobs
+
+### ~ user_tags table ~ (stores tags to a user)
+##### view, add, update, delete
+
+### ~ jobs_tags table ~ (relationship between jobs and tags)
+##### View, add, update, delete
+
+*** ***
+
+### Get All User Info
+### GET Request 
+#### /users (setting up oAuth, URL might change)
 
 ##### 200 (Success) 
 ```javascript
-	...
-	{
+...
+  {
     "id": 2,
     "first_name": "Spider",
     "last_name": "Man",
@@ -22,10 +46,47 @@
     "skills": "HTML, CSS, JavaScript, React, Node, Express",
     "cities": "New York, London, Los Angeles",
     "remote": true
-    "Favorited jobs": [],
-    "Irrelevant jobs": []
   },
-  ...
+...
+``` 
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user(s) found.
+```javascript
+{
+  "message": "No users found"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### Get Single User Info
+### GET Request
+#### Specific User 
+#### /users/:id (setting up oAuth, URL might change)
+
+##### 200 (Success) 
+```javascript
+  {
+    "id": 2,
+    "first_name": "Spider",
+    "last_name": "Man",
+    "email": "peterparker@newyork.com",
+    "password": "[hashedPassword]",
+    "profile_image": "",
+    "user_track": "Web",
+    "skills": "HTML, CSS, JavaScript, React, Node, Express",
+    "cities": "New York, London, Los Angeles",
+    "remote": true
+  },
 ``` 
 
 ##### 404 (Bad Request)
@@ -48,12 +109,12 @@
 
 ### Register User
 #### POST Request
-#### URL: - Setting up oAuth
+#### URL: (Setting up oAuth)
 
 ##### Example Request
 ```javascript
 {
-    ~~~ data ~~~
+   "Waiting on oAuth setup"
 }
 ```
 
@@ -80,7 +141,6 @@
 }
 ```
 
-
 *** ***
 
 ### Login User 
@@ -90,8 +150,7 @@
 ##### Example Request
 ```javascript
 {
-    email: "spiderman@newyork.com",
-    password: "password"
+    "Waiting on oAuth Setup"
 }
 ```
 ##### 201 (Success)
@@ -105,7 +164,7 @@
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no users that match
+> Will receive a 404 response if invalid login info
 ```javascript
 {
   "message": "Unable to login"
@@ -119,6 +178,7 @@
   "error": "Server Error"
 }
 ```
+
 *** ***
 
 ### Update User 
@@ -129,22 +189,24 @@
 ```javascript
 {
     "profile_image": "https://image.flaticon.com/icons/svg/188/188987.svg"
-  
 }
 ```
 
 ##### 201 (Success)
 ```javascript
 {
-  ~~~ User data ~~~
+  id: 1,
+  first_name: "Spider",
+  last_name: "man",
+  ...
 }
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no user id or if there is no field to update.
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": "Unable to update"
+  "message": "Invalid request"
 }
 ```
 
@@ -169,6 +231,13 @@
 }
 ````
 
+##### 404 (Bad Request)
+> Will receive a 404 response if there is a problem with the server
+```javascript
+{
+  "message": "User not found"
+}
+
 ##### 500 (Internal Server Error)
 > Will receive a 500 response if there is a problem with the server
 ```javascript
@@ -179,24 +248,15 @@
 
 *** ***
 
+### View user_tag (Not used for release 1)
+#### GET Request
+#### URL: /tags
+
+*** ***
+
 ### Create user_tag (Not used for release 1)
 #### POST Request
 #### URL: /tags
-
-##### 201 (Success)
-```javascript
-{
-   "message": "User deleted successfully"
-}
-````
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
 
 *** ***
 

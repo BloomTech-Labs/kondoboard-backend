@@ -15,8 +15,6 @@ router.get('/', async (req, res) => {
     res.status(200) .json(userList);
     } catch {
         res.status(500).json({ error: 'something unexpected happened.' });
-    } finally {
-
     }
 });
 
@@ -50,6 +48,9 @@ router.post('/', async (req, res) => {
 
   try {
     const user = await UserController.addUser(userData);
+    if(!user){
+      res.status(404).json({ message: 'Unable to create user'})
+    }
     res.status(201).json({ message: 'User has been created!'});
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' });
@@ -64,6 +65,9 @@ router.post('/tags', async (req, res) => {
 
   try {
     const createTag = await UserController.addTag(newTag);
+    if(!createTag){
+      res.status(404).json({ message: 'Unable to create tag'})
+    }
     res.status(201).json({ message: 'Tag has been created!'});
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' });
@@ -79,6 +83,9 @@ router.put('/:id', async (req, res) => {
 
   try {
     const user = await UserController.updateUser(id, userData);
+    if(!user){
+      res.status(404).json({ message:'Invalid request' })
+    }
     res.status(201).json(user);
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' })
@@ -94,6 +101,9 @@ router.delete('users/:id', async (req, res) => {
   const id = req.params.id;
   try {
     const user = await UserController.deleteUser(id);
+    if(!user){
+      res.status(404).json({ message: "User not found" })
+    }
     res.status(201).json({ message: "User deleted successfully"});
   } catch {
     res.status(500).json({ error: 'Server Error' })
