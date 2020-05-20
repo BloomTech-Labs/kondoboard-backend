@@ -8,6 +8,18 @@ exports.seed = function(knex) {
           job_tags_id: 1,
           jobs_id: 1
         },
+        {
+          job_tags_id: 3,
+          jobs_id: 1
+        },  
+        {
+          job_tags_id: 3,
+          jobs_id: 2
+        },
+        {
+          job_tags_id: 2,
+          jobs_id: 3
+        },
       ]);
     });
 };

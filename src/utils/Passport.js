@@ -9,7 +9,7 @@ passport.use(new OktaStrategy({
     // clientID is the public Okta Application Client Credentials, 
     // its a 20 character alphanumeric string
     // e.g. U7VYvsaiuqlDOHjIVTIA  (generated example)
-  clientSecret: process.env.OKTA_CLIENTSECRET,
+  // clientSecret: process.env.OKTA_CLIENTSECRET,
     // clientSecret is the private Okta Application Client Credentials, 
     // its a 40 character alphanumeric string with a hypen(s).
     // e.g. Vwb-R4fQnSH7uJkokDhPI-WR4qEiuWFokYANM5C  (generated example)

@@ -21,6 +21,9 @@ exports.up = function(knex) {
             .notNullable();
           users.string('profile_image', 255)
           users.string('user_track')
+          users.string('skills')
+          users.string('cities')
+          users.boolean('remote')
       })
 
       .createTable('jobs', jobs => {
@@ -31,9 +34,12 @@ exports.up = function(knex) {
           jobs
             .string('description', 255)
             .notNullable()
-          jobs.string('pay_min', 255)
-          jobs.string('pay_max', 255)
+          jobs.string('location', 255)
+          jobs.string('company', 255)
           jobs.string('skills', 255)
+          jobs.string('estimated_pay', 255)
+          jobs.date('post_date')
+          jobs.string('url', 512)
       })
 
       //joined table
@@ -102,13 +108,14 @@ exports.up = function(knex) {
           .onDelete('CASCADE')
           .onUpdate('CASCADE')
       })
+
   )
 };
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists('job_tags')
-    .dropTableIfExists('user_tags')
+    .dropTableIfExist('job_tags')
+    .dropTableIfExist('user_tags')
     .dropTableIfExist('irrelevant_jobs')
     .dropTableIfExist('user_saved_jobs')
     .dropTableIfExist('jobs')
