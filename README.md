@@ -1,16 +1,15 @@
 # Kondoboard-backend 
-### https://kondo-board-api.herokuapp.com/
+### https://kondo-board-api.herokuapp.com/api
 
 *** ***
 
 ### Get User Info
-### GET Request 
-####All or Specific User 
-####/users or /users/:id (might change)
+### GET Request
+#### All or Specific User 
+#### /users or /users/:id (setting up oAuth)
 
 ##### 200 (Success) 
 ```javascript
-{
 	...
 	{
     "id": 2,
@@ -23,15 +22,17 @@
     "skills": "HTML, CSS, JavaScript, React, Node, Express",
     "cities": "New York, London, Los Angeles",
     "remote": true
+    "Favorited jobs": [],
+    "Irrelevant jobs": []
   },
   ...
 ``` 
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no users are in the database.
+> Will receive a 404 response if no user(s) found.
 ```javascript
 {
-  "message": "no people were found"
+  "message": "No users found"
 }
 ```
 
@@ -64,7 +65,7 @@
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no users are in the database.
+> Will receive a 404 response if there are missing/invalid fields.
 ```javascript
 {
   "message": "Unable to create user"
@@ -84,7 +85,7 @@
 
 ### Login User 
 #### POST Request
-#### URL: - Setting up oAuth -
+#### URL: (Setting up oAuth)
 
 ##### Example Request
 ```javascript
@@ -104,7 +105,7 @@
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no users are in the database.
+> Will receive a 404 response if no users that match
 ```javascript
 {
   "message": "Unable to login"
@@ -140,10 +141,10 @@
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no users are in the database.
+> Will receive a 404 response if no user id or if there is no field to update.
 ```javascript
 {
-  "message": "Unable to login"
+  "message": "Unable to update"
 }
 ```
 
@@ -160,7 +161,6 @@
 ### Delete user
 #### DELETE Request
 #### URL: /users/:id
-
 
 ##### 201 (Success)
 ```javascript
