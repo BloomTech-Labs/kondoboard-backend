@@ -6,6 +6,8 @@ module.exports = {
   insert,
   update,
   remove,
+  getUserFavorited,
+  addUserFavorited,
 };
 
 function getAllUsers() {
@@ -17,11 +19,20 @@ function getById(id) {
 }
 
 function getUserFavorited(id) {
-  return db('users').where({ id });
-}
+  return db('user_saved_jobs')
+    .where('user_id', id)
+    .select('*')
+    .where('user_id', id)
+    .join('jobs',
+    'user_saved_jobs.jobs_id',
+    'jobs.id')
+    .catch(err => console.log('******helper: ', err))
+};
 
-function updateUserSkills(id, changes) {
-  return 
+function addUserFavorited(id, favorited) {
+  console.log('id', id, 'favorited', favorited);
+  return db('user_saved_jobs')
+    .insert({user_id:id, jobs_id:favorited.jobs_id})
 }
 
 async function insert(user) {

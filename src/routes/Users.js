@@ -34,8 +34,39 @@ router.get('/:id', async (req, res) => {
 })
 
 //Get user saved jobs
+router.get('/:id/saved_jobs', async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
 
-//Get user tags
+  try {
+    const savedJob = await UserController.getUserSavedJobs(id);
+    if(!savedJob) {
+      res.status(404).json({ message: 'there is no saved jobs for user with that id.' });
+    }
+    res.status(200).json(savedJob);
+  } catch {
+    res.status(500).json({ error: 'somthing unexpected happened.' })
+  }
+})
+
+// Add favorited job
+router.post('/:id/saved_jobs', async (req, res) => {
+  const {id} = req.params;
+  const favorited = req.body;
+
+  console.log(favorited)
+
+  try {
+    const newFavorited = await UserController.addUserFavorited(id, favorited)
+    if (!newFavorited) {
+      res.status(404).json({ message: 'error adding favorited job for user with that id.' });
+    }
+    res.status(200).json(newFavorited);
+  } catch {
+    res.status(500).json({ error: 'somthing unexpected happened.' })
+  }
+})
+
 
 //------------POST----------
 
