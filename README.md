@@ -6,31 +6,26 @@
 
 # ~ Things to add ~
 
-### ~ users table ~
-##### "Get User Info" route to include an array of "favorite jobs" and "irrelevant jobs" 
-##### Toggle if user would like to see remote jobs (boolean)
+### users table 
+##### "Get User Info" route to include an array of "favorite jobs" and "irrelevant jobs" - for datascience
+##### Toggle if user would like to see remote jobs
 ##### cities  - view, add, update, delete
 ##### skills  - view, add, update, delete
 ##### track   - view
 
-### ~ jobs table ~ (stores jobs from datascience API if user favorites/marks irrelevant)
+### jobs table
 ##### View, add
 
-### ~ user_saved_jobs && irrlevant_jobs ~ (relationship between jobs and users)
+### user_saved_jobs && irrlevant_jobs
 ##### View, add, update, delete
 ###### Can a user delete a saved job? Could add an "archived" boolean column to user_saved_jobs
 
-### ~ user_tags table ~ (stores tags to a user)
-##### view, add, update, delete
-
-### ~ jobs_tags table ~ (relationship between jobs and tags)
-##### View, add, update, delete
 
 *** ***
 
-### Get All User Info
+### Get All User Info [ Data science ]
 ### GET Request 
-#### /users (setting up oAuth, URL might change)
+#### /users
 
 ##### 200 (Success) 
 ```javascript
@@ -71,7 +66,7 @@
 ### Get Single User Info
 ### GET Request
 #### Specific User 
-#### /users/:id (setting up oAuth, URL might change)
+#### /users/:id
 
 ##### 200 (Success) 
 ```javascript
@@ -237,6 +232,7 @@
 {
   "message": "User not found"
 }
+```
 
 ##### 500 (Internal Server Error)
 > Will receive a 500 response if there is a problem with the server

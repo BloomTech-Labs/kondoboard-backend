@@ -58,6 +58,11 @@ router.post('/', async (req, res) => {
 
 });
 
+
+
+
+
+
 //Create user_tag
 router.post('/tags', async (req, res) => {
   const userId = req.params.id;
@@ -73,6 +78,7 @@ router.post('/tags', async (req, res) => {
     res.status(500).json({ error: 'something unexpected happened.' });
   }
 })
+
 
 //------------UPDATE-----------
 
@@ -90,6 +96,23 @@ router.put('/:id', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'something unexpected happened.' })
   }
+})
+
+//Add new skill
+router.put('/:user_id/skills', async (req, res) => {
+  const { user_id } = req.params;
+  const newSkill = req.body.newSkill;
+
+   try {
+    const skills = await UserController.addSkill(user_id, newSkill);
+    if(!skills){
+      res.status(404).json({ message: 'Unable to view skill'})
+    }
+    res.status(201).json(skills);
+  } catch {
+    res.status(500).json({ error: 'something unexpected happened.' });
+  }
+
 })
 
 //Update user_tag

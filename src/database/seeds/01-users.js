@@ -35,7 +35,7 @@ exports.seed = function(knex) {
           profile_image: '',
           user_track: 'Data Science',
           skills: 'AWS, Python, Machine Learning, AI', 
-          cities: 'New York, Los Angeles, Seattle, Denver',
+          cities: 'New York, Seattle, Denver, Los Angeles',
           remote: true
         },  
         {

@@ -16,6 +16,14 @@ function getById(id) {
   return db('users').where({ id });
 }
 
+function getUserFavorited(id) {
+  return db('users').where({ id });
+}
+
+function updateUserSkills(id, changes) {
+  return 
+}
+
 async function insert(user) {
   const id = await db('users').insert(user, 'id');
   return getById(id);
