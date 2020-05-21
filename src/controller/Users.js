@@ -28,6 +28,12 @@ class Users {
   }
   //------------------
 
+  static async addUserFavorited(id, favorited) {
+    const user = await UserStore.addUserFavorited(id, favorited);
+    console.log(user);
+
+    return user;
+  }
   //not working
   static async addSkill(user_id, newSkill) {
    const user = await UserStore.getById(user_id);
