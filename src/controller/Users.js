@@ -20,14 +20,26 @@ class Users {
   }
 
   //------------------
-  static async getUserJobs() {
+  static async getUserSavedJobs(id) {
     const user = await UserStore.getUserFavorited(id);
     console.log(user);
 
     return user;
   }
   //------------------
-  
+
+  //not working
+  static async addSkill(user_id, newSkill) {
+   const user = await UserStore.getById(user_id);
+   const skills = user[0].skills;
+   const skillsArray = skills.split(",");
+   skillsArray.push(newSkill);
+
+    const skill = await UserStore.updateUserSkills(user_id, skillsArray);
+    console.log(skillsArray);
+
+    return skill
+  }
 
   static async addTag(newTag) {
     const tag = await UserStore.insertTag(newTag);
