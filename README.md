@@ -3,19 +3,19 @@
 ##### Note: All endpoints start with /api
 
 *** ***
-#### Get All User Info
-#### Get Single User Info
+#### [Get All User Info](#Get-All-User-Info)
+#### [Get Single User Info](#Get-Single-User-Info)
 
-#### Register User (Switching over to oAuth)
-#### Login User (Switching over to oAuth)
-#### Update User (Switching over to oAuth)
-#### Delete User
+#### [Register User](#Register-User)
+#### [Login User](#Login-User)
+#### [Update User](#Update-User)
+#### [Delete User](#Delete-User)
 
-#### Toggle Remote on/off (not added)
-#### Add skill (not added)
-#### Delete skills (not added)
-#### Add city (not added)
-#### Delete cities (not added)
+#### [Toggle Remote on/off](Toggle-Remote-on/off)
+#### [Add skill](Add-skill)
+#### [Delete skills](Delete-skill)
+#### [Add city](Add-city)
+#### [Delete cities](Delete-City)
 
 #### Add Job (not added)
 #### Archive Job? (add option to archive if jobs older than 2 months)
@@ -32,7 +32,7 @@
 *** ***
 *** ***
 
-### <ins>Get All User Info</ins>
+# <ins>Get All User Info</ins>
 ### <em>GET Request</em> 
 #### URL: /users
 
@@ -109,7 +109,6 @@
 }
 ```
 
-*** ***
 *** ***
 
 ### <ins>Register User</ins>
@@ -253,7 +252,6 @@
 ```
 
 *** ***
-*** ***
 
 ### <ins>Toggle Remote on/off</ins>
 #### <em>GET Request</em>
@@ -355,7 +353,6 @@
 ```
 
 *** ***
-*** ***
 
 ### <ins>Add city</ins>
 #### <em>PUT Request</em>
@@ -428,7 +425,6 @@
 ```
 
 *** ***
-*** ***
 
 ### <ins>Add Job</ins>
 #### <em>POST Request</em>
@@ -493,7 +489,6 @@
 }
 ```
 
-*** ***
 *** ***
 
 ## User Saved Jobs
@@ -607,7 +602,6 @@
 }
 ```
 
-*** ***
 *** ***
 
 ### <ins>View user_ta</ins> (Not used for release 1)
