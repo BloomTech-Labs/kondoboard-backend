@@ -28,22 +28,23 @@ exports.up = function(knex) {
 
       .createTable('jobs', jobs => {
           jobs.increments('id')
+          jobs.integer('datascience_id')
           jobs
             .string('title', 255)
             .notNullable()
           jobs
             .string('description', 255)
             .notNullable()
-          jobs.string('location', 255)
+          jobs.date('post_date')
           jobs.string('company', 255)
+          jobs.string('location', 255)
+          jobs.string('url', 512)
           jobs.string('skills', 255)
           jobs.string('estimated_pay', 255)
-          jobs.date('post_date')
-          jobs.string('url', 512)
-      })
+        })
 
-      //joined table
-      .createTable('user_saved_jobs', saved => {
+      //joined table -- Relationship between Users and Jobs
+      .createTable('users_jobs', saved => {
         saved.increments('id')
         saved
           .integer('user_id', 255)
@@ -57,23 +58,11 @@ exports.up = function(knex) {
           .references('jobs.id')
           .onDelete('CASCADE')
           .onUpdate('CASCADE')
-      })
-
-      //joined table
-      .createTable('irrelevant_jobs', irrelevant => {
-        irrelevant.increments('id')
-        irrelevant
-          .integer('user_id', 255)
+        saved
+          .string('status', 32)
           .notNullable()
-          .references('users.id')
-          .onDelete('CASCADE')
-          .onUpdate('CASCADE')
-        irrelevant
-          .integer('jobs_id', 255)
-          .notNullable()
-          .references('jobs.id')
-          .onDelete('CASCADE')
-          .onUpdate('CASCADE')        
+        saved
+          .boolean('archived')
       })
 
       .createTable('user_tags', tag =>{
@@ -116,8 +105,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExist('job_tags')
     .dropTableIfExist('user_tags')
-    .dropTableIfExist('irrelevant_jobs')
-    .dropTableIfExist('user_saved_jobs')
+    .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')
     .dropTableIfExist('users')
 };

@@ -1,69 +1,126 @@
 const UserStore = require('../stores/Users');
 
 class Users {
+
+  // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
+
   static async getUserList() {
     const userListQuery = await UserStore.getAllUsers();
-    console.log(userListQuery);
     return userListQuery;
   }
 
-  static async getUser(id) {
-    const userQuery = await UserStore.getById(id);
-    console.log(userQuery);
+  static async getUser(user_id) {
+    const userQuery = await UserStore.getById(user_id);
     return userQuery;
   }
 
-  static async addUser(userData) {
-    const user = await UserStore.insert(userData);
-    console.log(user);
+  static async updateUser(user_id, changes) {
+    if(changes.id || changes.email || changes.skills || changes.cities){
+      return null;
+    };
+    const updatedUser = await UserStore.update(user_id, changes);
+    return updatedUser;
+  }
+
+  static async deleteUser(user_id){
+    const user = await UserStore.remove(user_id);
     return user;
   }
 
-  //------------------
-  static async getUserSavedJobs(id) {
-    const user = await UserStore.getUserFavorited(id);
-    console.log(user);
+  // ~~~~~~~~~~~~~ Users Info ~~~~~~~~~~~~
 
-    return user;
-  }
-  //------------------
-
-  static async addUserFavorited(id, favorited) {
-    const user = await UserStore.addUserFavorited(id, favorited);
-    console.log(user);
-
-    return user;
-  }
-  //not working
-  static async addSkill(user_id, newSkill) {
-   const user = await UserStore.getById(user_id);
-   const skills = user[0].skills;
-   const skillsArray = skills.split(",");
-   skillsArray.push(newSkill);
-
-    const skill = await UserStore.updateUserSkills(user_id, skillsArray);
-    console.log(skillsArray);
-
-    return skill
+  static async addSkill(user_id, skill) {
+   
+    const updateSkills = await UserStore.updateSkills(user_id, skillsArray);
+    
+    return updateSkills;
   }
 
-  static async addTag(newTag) {
-    const tag = await UserStore.insertTag(newTag);
-    console.log(tag);
-    return tag;
+  static async removeSkill(user_id, skill) {
+    
+    const updateSkills = await UserStore.updateSkills(user_id, skillsArray);
+
+    return updateSkills;
+  }  
+
+  static async addCity(user_id, city) {
+   
+    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+    
+    return updateCities;
   }
 
-  static async updateUser(id, changes) {
-    const user = await UserStore.update(id, changes);
-    console.log(user);
-    return user;
+  static async removeCity(user_id, city) {
+    
+    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+
+    return updateCities;
   }
 
-  static async deleteUser(id){
-    const user = await UserStore.remove(id);
-    console.log("Deleted user: ", user);
-    return user;
+  static async toggleRemote(user_id) {
+    const remoteStatus = await UserStore.toggleRemote(user_id);
+
+    return remoteStatus;
   }
+
+  // ~~~~~~~~~~~ Users Saved Jobs ~~~~~~~~~~
+  
+  static async getFavoriteJobs(user_id) {
+    const getFavorited = await UserStore.getFavoriteJobs(user_id);
+
+    return getFavorited; 
+  }
+
+  static async saveFavoriteJob(user_id, job_id) {
+    const addFavorite = await UserStore.addFavoriteJob(user_id, job_id);
+
+    return addFavorite;
+  }
+
+  static async getIrrelevantJobs(user_id) {
+    const getIrrelevant = await UserStore.getIrrelevantJobs(user_id);
+
+    return getIrrelevant;
+  }
+
+  static async saveIrrelevantJob(user_id, job_id) {
+    const addIrrelevant = await UserStore.addIrrelevantJob(user_id, job_id);
+
+    return addIrrelevant;
+  }
+
+  static async toggleArchive(saved_job_id) {
+    const toggleArchive = await UserStore.archiveJob(saved_job_id);
+
+    return toggleArchive;
+  }
+
+  // ~~~~~~~~~~~ Users Tags ~~~~~~~~~~
+
+   static async getUserTags(user_id) {
+    const userTags = await UserStore.getUserTags(user_id);
+
+    return userTags; 
+  }
+
+  static async addUserTag(userTag) {
+    const newUserTag = await UserStore.addUserTag(userTag);
+
+    return newUserTag;
+  }
+
+  static async updateUserTag(tag_id, changes) {
+    const updateUserTag = await UserStore.updateUserTag(tag_id, changes);
+
+    return updateUserTag;
+  }
+
+  static async removeUserTag(tag_id) {
+    const removeUserTag = await UserStore.removeUserTag(tag_id);
+
+    return removeUserTag;
+  }
+
 }
 
 module.exports = Users;

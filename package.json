@@ -36,6 +36,7 @@
     "njwt": "^1.0.0",
     "nnode": "^0.3.3",
     "passport": "^0.4.1",
+    "passport-oauth2-jwt-bearer": "^0.2.0",
     "passport-okta-oauth": "0.0.1",
     "pg": "^8.2.1",
     "sqlite3": "^4.2.0"

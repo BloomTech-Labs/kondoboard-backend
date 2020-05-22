@@ -12,7 +12,7 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
-          skills: 'HTML, CSS, JavaScript, React, Node, Express',
+          skills: 'HTML,CSS,JavaScript,React,Node,Express',
           cities: 'Boston, New York, New Jersey',
           remote: true
         }, 
@@ -23,7 +23,7 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
-          skills: 'HTML, CSS, JavaScript, React, Node, Express',
+          skills: 'HTML,CSS,JavaScript,React,Node,Express',
           cities: 'New York, London, Los Angeles',
           remote: true
         }, 
@@ -34,7 +34,7 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS, Python, Machine Learning, AI', 
+          skills: 'AWS,Python,Machine Learning,AI', 
           cities: 'New York, Seattle, Denver, Los Angeles',
           remote: true
         },  
@@ -45,7 +45,7 @@ exports.seed = function(knex) {
           password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS, Python, Machine Learning, AI', 
+          skills: 'AWS,Python,Machine Learning,AI', 
           cities: 'San Francisco, Washington DC',
           remote: false
         },
