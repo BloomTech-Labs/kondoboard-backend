@@ -3,36 +3,40 @@
 ##### Note: All endpoints start with /api
 
 *** ***
+#### Endpoints
+
+###### Users
 - [Get All User Info](#Get-All-User-Info)
 - [Get Single User Info](#Get-Single-User-Info)
-
 - [Register User](#Register-User)
 - [Login User](#Login-User)
 - [Update User](#Update-User)
 - [Delete User](#Delete-User)
 
-- [Toggle Remote on/off](#Toggle-Remote-on/off)
-- [Add skill](#Add-skill)
-- [Delete skills](#Delete-skill)
-- [Add city](#Add-city)
-- [Delete cities](#Delete-City)
+###### Users Info
+- [Toggle Remote on/off](#Toggle-Remote-On/Off)
+- [Add Skill](#Add-Skill)
+- [Delete Skills](#Delete-Skill)
+- [Add City](#Add-City)
+- [Delete Cities](#Delete-City)
 
-- Add Job (not added)
-- Archive Job? (add option to archive if jobs older than 2 months)
+###### Jobs
+- [Add Job](#Add-Job)
+- [Archive Job](#Archive-Job)
+- [Add Job to liked](#Add-Job-to-Liked)
+- [Add Irrelevant job](#Add-Irrelevant-job)
+- [Toggle Archived Saved Job](#Toggle-archived-Saved-Job)
 
-- Add liked job
-- Add irrelevant job
-- Toggle archived saved job
-
-- View User Tag (not needed in version 1)
-- Add User Tag (not needed in version 1)
-- Update User Tag (not needed in version 1)
-- Delete User Tag (not needed in version 1)
+###### User Tags (Not on first release)
+- [View User Tag](#View-User-Tag)
+- [Add User Tag](#Add-User-Tag)
+- [Update User Tag](#Update-User-Tag)
+- [Delete User Tag](#Delete-User-Tag)
 
 *** ***
 *** ***
 
-# <ins>Get All User Info</ins>
+### <ins>Get All User Info</ins>
 ### <em>GET Request</em> 
 #### URL: /users
 
@@ -189,6 +193,8 @@
 #### <em>PUT Request</em>
 #### URL: /users/:id
 
+###### Note: Updating [cities](#Add-City), [skills](#Add-Skill), and [toggling remote](#Toggle-Remote-On/Off) have their own endpoints 
+
 ##### Example Request
 ```javascript
 {
@@ -224,7 +230,7 @@
 
 *** ***
 
-### <ins>Delete user</ins>
+### <ins>Delete User</ins>
 #### <em>DELETE Request</em>
 #### URL: /users/:id
 
@@ -253,7 +259,7 @@
 
 *** ***
 
-### <ins>Toggle Remote on/off</ins>
+### <ins>Toggle Remote On/Off</ins>
 #### <em>GET Request</em>
 #### URL: /users/:id/remote
 
@@ -282,7 +288,7 @@
 
 *** ***
 
-### <ins>Add skill</ins>
+### <ins>Add Skill</ins>
 #### <em>PUT Request</em>
 #### URL: /users/:id/addSkill
 
@@ -318,7 +324,7 @@
 
 *** ***
 
-### <ins>Delete skill</ins>
+### <ins>Delete Skill</ins>
 #### <em>PUT Request</em>
 #### URL: /users/:id/deleteSkill
 
@@ -354,7 +360,7 @@
 
 *** ***
 
-### <ins>Add city</ins>
+### <ins>Add City</ins>
 #### <em>PUT Request</em>
 #### URL: /users/:id/addCity
 
@@ -390,7 +396,7 @@
 
 *** ***
 
-### <ins>Delete city</ins>
+### <ins>Delete City</ins>
 #### <em>PUT Request</em>
 #### URL: /users/:id/deleteCity
 
@@ -491,8 +497,6 @@
 
 *** ***
 
-## User Saved Jobs
-
 ### <ins>Add Liked Job</ins>
 #### <em>POST Request</em>
 #### URL: /users/:id/jobs/
@@ -530,7 +534,7 @@
 
 *** ***
 
-### <ins>Add irrelevant Job</ins>
+### <ins>Add Irrelevant Job</ins>
 #### <em>POST Request</em>
 #### URL: /users/:id/jobs/
 
@@ -567,7 +571,7 @@
 
 *** ***
 
-### <ins>Toggle archived saved job</ins>
+### <ins>Toggle Archived on Saved job</ins>
 #### <em>POST Request</em>
 #### URL: /users/:id/jobs/
 
@@ -604,25 +608,25 @@
 
 *** ***
 
-### <ins>View user_ta</ins> (Not used for release 1)
+### <ins>View User Tag</ins>
 #### <em>GET Request</em>
 #### URL: /tags
 
 *** ***
 
-### <ins>Create user_tag</ins> (Not used for release 1)
+### <ins>Create User Tag</ins>
 #### <em>POST Request</em>
 #### URL: /tags
 
 *** ***
 
-### <ins>Update user_tag</ins> (Not used for release 1)
+### <ins>Update User Tag</ins>
 #### <em>PUT Request</em>
 #### URL: /tags/:id
 
 *** ***
 
-### <ins>Delete user_tag</ins> (Not used for release 1)
+### <ins>Delete User Tag</ins>
 #### <em>DELETE Request</em>
 #### URL: /tags/:id
 
