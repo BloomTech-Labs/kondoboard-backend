@@ -3,28 +3,48 @@
 ##### Note: All endpoints start with /api
 
 *** ***
-
-# ~ Things to add ~
-
-### users table 
-##### "Get User Info" route to include an array of "favorite jobs" and "irrelevant jobs" - for datascience
-##### Toggle if user would like to see remote jobs
-##### cities  - view, add, update, delete
-##### skills  - view, add, update, delete
-##### track   - view
-
-### jobs table
-##### View, add
-
-### user_saved_jobs && irrlevant_jobs
-##### View, add, update, delete
-###### Can a user delete a saved job? Could add an "archived" boolean column to user_saved_jobs
-
-
 *** ***
 
-### Get All User Info [ Data science ]
-### GET Request 
+## Table of Contents
+### User Data Endpoints
+#### Get All User Info (Still building)
+#### Get Single User Info (Still building)
+
+### Users Account Endpoints
+#### Register User (Switching over to oAuth)
+#### Login User (Switching over to oAuth)
+#### Update User (Switching over to oAuth)
+#### Delete User
+
+### User Info Endpoints
+#### Toggle Remote on/off (not added)
+#### Add skill (not added)
+#### Delete skills (not added)
+#### Add city (not added)
+#### Delete cities (not added)
+
+### Jobs Endpoints (need same structure as datascience db)
+#### Add Job (not added)
+#### Archive Job? (add option to archive if jobs older than 2 months)
+
+### User Saved Jobs
+#### Add liked job
+#### Add irrelevant job
+#### Toggle archived saved job
+
+### User Tags (not adding in release 1)
+#### View User Tag (not added)
+#### Add User Tag (not added)
+#### Update User Tag (not added)
+#### Delete User Tag (not added)
+
+*** ***
+*** ***
+
+## User Data Endpoints
+
+### <ins>Get All User Info</ins>
+### <em>GET Request</em> 
 #### /users
 
 ##### 200 (Success) 
@@ -63,8 +83,8 @@
 
 *** ***
 
-### Get Single User Info
-### GET Request
+### <ins>Get Single User Info</ins>
+### <em>GET Request</em>
 #### Specific User 
 #### /users/:id
 
@@ -101,9 +121,12 @@
 ```
 
 *** ***
+*** ***
 
-### Register User
-#### POST Request
+## Users Account Endpoints
+
+### <ins>Register User</ins>
+#### <em>POST Request</em>
 #### URL: (Setting up oAuth)
 
 ##### Example Request
@@ -138,8 +161,8 @@
 
 *** ***
 
-### Login User 
-#### POST Request
+### <ins>Login User</ins> 
+#### <em>POST Request</em>
 #### URL: (Setting up oAuth)
 
 ##### Example Request
@@ -176,8 +199,8 @@
 
 *** ***
 
-### Update User 
-#### PUT Request
+### <ins>Update User</ins>
+#### <em>PUT Request</em>
 #### URL: /users/:id
 
 ##### Example Request
@@ -215,8 +238,8 @@
 
 *** ***
 
-### Delete user
-#### DELETE Request
+### <ins>Delete user</ins>
+#### <em>DELETE Request</em>
 #### URL: /users/:id
 
 ##### 201 (Success)
@@ -242,6 +265,366 @@
 }
 ```
 
+*** ***
+*** ***
+
+## User Info Endpoints
+
+### Toggle Remote on/off
+#### GET Request
+#### URL: /users/:id/remote
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Remote has been turned [on/off]}"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error completing request"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### Add skill
+#### PUT Request
+#### URL: /users/:id/addSkill
+
+##### Example Request
+```javascript
+{
+    "skill": "postgres"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "postgres has been added to skills"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error adding skill"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### Delete skill
+#### PUT Request
+#### URL: /users/:id/deleteSkill
+
+##### Example Request
+```javascript
+{
+    "skill": "React"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "React has been deleted from skills"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error deleting skill"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+*** ***
+
+### Add city
+#### PUT Request
+#### URL: /users/:id/addCity
+
+##### Example Request
+```javascript
+{
+    "city": "Boston"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Boston has been added to cities"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error adding city"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### Delete city
+#### PUT Request
+#### URL: /users/:id/deleteCity
+
+##### Example Request
+```javascript
+{
+    "city": "Los Angeles"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Los Angeles has been deleted from cities"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error deleting city"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+*** ***
+
+## Jobs Endpoints
+
+### Add Job
+#### POST Request
+#### URL: /jobs
+
+##### Example Request
+```javascript
+{
+    ""
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": ""
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": ""
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
+
+### Archive Job
+#### GET Request
+#### URL: /jobs/:id/archive
+
+##### 201 (Success)
+```javascript
+{
+  "message": ""
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": ""
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
+*** ***
+
+## User Saved Jobs
+
+### Add Liked Job
+#### POST Request
+#### URL: /users/:id/jobs/
+
+##### Example Request
+```javascript
+{
+  "job_id": 1,
+  "status": "like"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Added job to liked"
+}
+```
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": ""
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
+
+### Add irrelevant Job
+#### POST Request
+#### URL: /users/:id/jobs/
+
+##### Example Request
+```javascript
+{
+  "job_id": 2,
+  "status": "dislike"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Added to irrelevant jobs"
+}
+```
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": ""
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
+
+### Toggle archived saved job
+#### POST Request
+#### URL: /users/:id/jobs/
+
+##### Example Request
+```javascript
+{
+  "job_id": 2,
+  "status": "dislike"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Added to irrelevant jobs"
+}
+```
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": ""
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
 *** ***
 
 ### View user_tag (Not used for release 1)
