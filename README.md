@@ -9,9 +9,9 @@
 ##### Users
 - [Get All User Info](#Get-All-User-Info) *
 - [Get Single User Info](#Get-Single-User-Info) *
-- [Register User](#Register-User) *
-- [Login User](#Login-User) *
-- [Update User](#Update-User) *
+- [Register User](#Register-User) **
+- [Login User](#Login-User) **
+- [Update User](#Update-User) **
 - [Delete User](#Delete-User)
 
 ##### Users Info
