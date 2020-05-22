@@ -1,51 +1,40 @@
-# Kondoboard-backend 
+# Kondoboard Users DB
 ### https://kondo-board-api.herokuapp.com/api
 ##### Note: All endpoints start with /api
 
 *** ***
-*** ***
+#### Get All User Info
+#### Get Single User Info
 
-## Table of Contents
-### User Data Endpoints
-#### Get All User Info (Still building)
-#### Get Single User Info (Still building)
-
-### Users Account Endpoints
 #### Register User (Switching over to oAuth)
 #### Login User (Switching over to oAuth)
 #### Update User (Switching over to oAuth)
 #### Delete User
 
-### User Info Endpoints
 #### Toggle Remote on/off (not added)
 #### Add skill (not added)
 #### Delete skills (not added)
 #### Add city (not added)
 #### Delete cities (not added)
 
-### Jobs Endpoints (need same structure as datascience db)
 #### Add Job (not added)
 #### Archive Job? (add option to archive if jobs older than 2 months)
 
-### User Saved Jobs
 #### Add liked job
 #### Add irrelevant job
 #### Toggle archived saved job
 
-### User Tags (not adding in release 1)
-#### View User Tag (not added)
-#### Add User Tag (not added)
-#### Update User Tag (not added)
-#### Delete User Tag (not added)
+#### View User Tag (not needed in version 1)
+#### Add User Tag (not needed in version 1)
+#### Update User Tag (not needed in version 1)
+#### Delete User Tag (not needed in version 1)
 
 *** ***
 *** ***
-
-## User Data Endpoints
 
 ### <ins>Get All User Info</ins>
 ### <em>GET Request</em> 
-#### /users
+#### URL: /users
 
 ##### 200 (Success) 
 ```javascript
@@ -86,7 +75,7 @@
 ### <ins>Get Single User Info</ins>
 ### <em>GET Request</em>
 #### Specific User 
-#### /users/:id
+#### URL: /users/:id
 
 ##### 200 (Success) 
 ```javascript
@@ -123,16 +112,14 @@
 *** ***
 *** ***
 
-## Users Account Endpoints
-
 ### <ins>Register User</ins>
 #### <em>POST Request</em>
-#### URL: (Setting up oAuth)
+#### URL: 
 
 ##### Example Request
 ```javascript
 {
-   "Waiting on oAuth setup"
+   ""
 }
 ```
 
@@ -163,12 +150,12 @@
 
 ### <ins>Login User</ins> 
 #### <em>POST Request</em>
-#### URL: (Setting up oAuth)
+#### URL:
 
 ##### Example Request
 ```javascript
 {
-    "Waiting on oAuth Setup"
+    ""
 }
 ```
 ##### 201 (Success)
@@ -268,10 +255,8 @@
 *** ***
 *** ***
 
-## User Info Endpoints
-
-### Toggle Remote on/off
-#### GET Request
+### <ins>Toggle Remote on/off</ins>
+#### <em>GET Request</em>
 #### URL: /users/:id/remote
 
 ##### 201 (Success)
@@ -299,8 +284,8 @@
 
 *** ***
 
-### Add skill
-#### PUT Request
+### <ins>Add skill</ins>
+#### <em>PUT Request</em>
 #### URL: /users/:id/addSkill
 
 ##### Example Request
@@ -335,8 +320,8 @@
 
 *** ***
 
-### Delete skill
-#### PUT Request
+### <ins>Delete skill</ins>
+#### <em>PUT Request</em>
 #### URL: /users/:id/deleteSkill
 
 ##### Example Request
@@ -372,8 +357,8 @@
 *** ***
 *** ***
 
-### Add city
-#### PUT Request
+### <ins>Add city</ins>
+#### <em>PUT Request</em>
 #### URL: /users/:id/addCity
 
 ##### Example Request
@@ -408,8 +393,8 @@
 
 *** ***
 
-### Delete city
-#### PUT Request
+### <ins>Delete city</ins>
+#### <em>PUT Request</em>
 #### URL: /users/:id/deleteCity
 
 ##### Example Request
@@ -445,10 +430,8 @@
 *** ***
 *** ***
 
-## Jobs Endpoints
-
-### Add Job
-#### POST Request
+### <ins>Add Job</ins>
+#### <em>POST Request</em>
 #### URL: /jobs
 
 ##### Example Request
@@ -483,8 +466,8 @@
 
 *** ***
 
-### Archive Job
-#### GET Request
+### <ins>Archive Job</ins>
+#### <em>GET Request</em>
 #### URL: /jobs/:id/archive
 
 ##### 201 (Success)
@@ -515,8 +498,8 @@
 
 ## User Saved Jobs
 
-### Add Liked Job
-#### POST Request
+### <ins>Add Liked Job</ins>
+#### <em>POST Request</em>
 #### URL: /users/:id/jobs/
 
 ##### Example Request
@@ -552,8 +535,8 @@
 
 *** ***
 
-### Add irrelevant Job
-#### POST Request
+### <ins>Add irrelevant Job</ins>
+#### <em>POST Request</em>
 #### URL: /users/:id/jobs/
 
 ##### Example Request
@@ -589,8 +572,8 @@
 
 *** ***
 
-### Toggle archived saved job
-#### POST Request
+### <ins>Toggle archived saved job</ins>
+#### <em>POST Request</em>
 #### URL: /users/:id/jobs/
 
 ##### Example Request
@@ -627,26 +610,26 @@
 *** ***
 *** ***
 
-### View user_tag (Not used for release 1)
-#### GET Request
+### <ins>View user_ta</ins> (Not used for release 1)
+#### <em>GET Request</em>
 #### URL: /tags
 
 *** ***
 
-### Create user_tag (Not used for release 1)
-#### POST Request
+### <ins>Create user_tag</ins> (Not used for release 1)
+#### <em>POST Request</em>
 #### URL: /tags
 
 *** ***
 
-### Update user_tag (Not used for release 1)
-#### PUT Request
+### <ins>Update user_tag</ins> (Not used for release 1)
+#### <em>PUT Request</em>
 #### URL: /tags/:id
 
 *** ***
 
-### Delete user_tag (Not used for release 1)
-#### DELETE Request
+### <ins>Delete user_tag</ins> (Not used for release 1)
+#### <em>DELETE Request</em>
 #### URL: /tags/:id
 
 *** ***
