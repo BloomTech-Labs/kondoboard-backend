@@ -2,38 +2,40 @@
 ### https://kondo-board-api.herokuapp.com/api
 ##### Note: All endpoints start with /api
 
+
 *** ***
 #### Endpoints
+###### * = not fully working
+###### ** = not added
 
-###### Users
-- [Get All User Info](#Get-All-User-Info)
-- [Get Single User Info](#Get-Single-User-Info)
-- [Register User](#Register-User)
-- [Login User](#Login-User)
-- [Update User](#Update-User)
+##### Users
+- [Get All User Info](#Get-All-User-Info) *
+- [Get Single User Info](#Get-Single-User-Info) *
+- [Register User](#Register-User) *
+- [Login User](#Login-User) *
+- [Update User](#Update-User) *
 - [Delete User](#Delete-User)
 
-###### Users Info
-- [Toggle Remote on/off](#Toggle-Remote-On/Off)
-- [Add Skill](#Add-Skill)
-- [Delete Skills](#Delete-Skill)
-- [Add City](#Add-City)
-- [Delete Cities](#Delete-City)
+##### Users Info
+- [Add Skill](#Add-Skill) **
+- [Delete Skills](#Delete-Skill) **
+- [Add City](#Add-City) **
+- [Delete Cities](#Delete-City) **
+- [Toggle Remote on/off](#Toggle-Remote-On/Off) *
 
-###### Jobs
-- [Add Job](#Add-Job)
-- [Archive Job](#Archive-Job)
-- [Add Job to liked](#Add-Job-to-Liked)
-- [Add Irrelevant job](#Add-Irrelevant-job)
-- [Toggle Archived Saved Job](#Toggle-archived-Saved-Job)
+##### Jobs
+- [Add Job](#Add-Job) *
+- [Archive Job](#Archive-Job) *
+- [Add Job to liked](#Add-Job-to-Liked) *
+- [Add Irrelevant job](#Add-Irrelevant-job) *
+- [Toggle Archived Saved Job](#Toggle-archived-Saved-Job) **
 
-###### User Tags (Not on first release)
-- [View User Tag](#View-User-Tag)
-- [Add User Tag](#Add-User-Tag)
-- [Update User Tag](#Update-User-Tag)
-- [Delete User Tag](#Delete-User-Tag)
+##### User Tags (Not on first release)
+- [View User Tag](#View-User-Tag) **
+- [Add User Tag](#Add-User-Tag) **
+- [Update User Tag](#Update-User-Tag) **
+- [Delete User Tag](#Delete-User-Tag) **
 
-*** ***
 *** ***
 
 ### <ins>Get All User Info</ins>
@@ -259,35 +261,6 @@
 
 *** ***
 
-### <ins>Toggle Remote On/Off</ins>
-#### <em>GET Request</em>
-#### URL: /users/:id/remote
-
-##### 201 (Success)
-```javascript
-{
-  "message": "Remote has been turned [on/off]}"
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "Error completing request"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
 ### <ins>Add Skill</ins>
 #### <em>PUT Request</em>
 #### URL: /users/:id/addSkill
@@ -419,6 +392,35 @@
 ```javascript
 {
   "message": "Error deleting city"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>Toggle Remote On/Off</ins>
+#### <em>GET Request</em>
+#### URL: /users/:id/remote
+
+##### 201 (Success)
+```javascript
+{
+  "message": "Remote has been turned [on/off]}"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Error completing request"
 }
 ```
 
