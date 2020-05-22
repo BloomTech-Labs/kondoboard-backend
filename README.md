@@ -5,8 +5,6 @@
 
 *** ***
 #### Endpoints
-###### * = not fully working
-###### ** = not added
 
 ##### Users
 - [Get All User Info](#Get-All-User-Info) *
@@ -21,13 +19,13 @@
 - [Delete Skills](#Delete-Skill) **
 - [Add City](#Add-City) **
 - [Delete Cities](#Delete-City) **
-- [Toggle Remote on/off](#Toggle-Remote-On/Off) *
+- [Toggle Remote On/Off](#Toggle-Remote-On/Off) **
 
-##### Jobs
-- [Add Job](#Add-Job) *
-- [Archive Job](#Archive-Job) *
-- [Add Job to liked](#Add-Job-to-Liked) *
-- [Add Irrelevant job](#Add-Irrelevant-job) *
+##### Jobs (Needs same structure as Datascience DB)
+- [Add Job](#Add-Job) **
+- [Archive Job](#Archive-Job) **
+- [Add Liked Job](#Add-Liked-Job)
+- [Add Irrelevant Job](#Add-Irrelevant-job)
 - [Toggle Archived Saved Job](#Toggle-archived-Saved-Job) **
 
 ##### User Tags (Not on first release)
@@ -35,6 +33,9 @@
 - [Add User Tag](#Add-User-Tag) **
 - [Update User Tag](#Update-User-Tag) **
 - [Delete User Tag](#Delete-User-Tag) **
+
+###### * = not fully working
+###### ** = not added
 
 *** ***
 
