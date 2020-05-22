@@ -3,31 +3,31 @@
 ##### Note: All endpoints start with /api
 
 *** ***
-#### [Get All User Info](#Get-All-User-Info)
-#### [Get Single User Info](#Get-Single-User-Info)
+- [Get All User Info](#Get-All-User-Info)
+- [Get Single User Info](#Get-Single-User-Info)
 
-#### [Register User](#Register-User)
-#### [Login User](#Login-User)
-#### [Update User](#Update-User)
-#### [Delete User](#Delete-User)
+- [Register User](#Register-User)
+- [Login User](#Login-User)
+- [Update User](#Update-User)
+- [Delete User](#Delete-User)
 
-#### [Toggle Remote on/off](Toggle-Remote-on/off)
-#### [Add skill](Add-skill)
-#### [Delete skills](Delete-skill)
-#### [Add city](Add-city)
-#### [Delete cities](Delete-City)
+- [Toggle Remote on/off](#Toggle-Remote-on/off)
+- [Add skill](#Add-skill)
+- [Delete skills](#Delete-skill)
+- [Add city](#Add-city)
+- [Delete cities](#Delete-City)
 
-#### Add Job (not added)
-#### Archive Job? (add option to archive if jobs older than 2 months)
+- Add Job (not added)
+- Archive Job? (add option to archive if jobs older than 2 months)
 
-#### Add liked job
-#### Add irrelevant job
-#### Toggle archived saved job
+- Add liked job
+- Add irrelevant job
+- Toggle archived saved job
 
-#### View User Tag (not needed in version 1)
-#### Add User Tag (not needed in version 1)
-#### Update User Tag (not needed in version 1)
-#### Delete User Tag (not needed in version 1)
+- View User Tag (not needed in version 1)
+- Add User Tag (not needed in version 1)
+- Update User Tag (not needed in version 1)
+- Delete User Tag (not needed in version 1)
 
 *** ***
 *** ***
