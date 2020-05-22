@@ -1,20 +1,24 @@
 //Server Setup
 const express = require('express');
-//Server Setup
 const cors = require('cors');
 const helmet = require('helmet');
+
 //Routes
 const UserRouter = require('../routes/Users');
-const server = express();
+const JobsRouter = require('../routes/Jobs');
 
+//Express
+const server = express();
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
-// original
+//Routes
+server.use('/api/jobs', JobsRouter);
 server.use('/api/users', UserRouter);
 
-//Root Route
+//Catch traffic
 server.get('/', (req, res) => res.send('Server is active'));
+server.get('/api/', (req, res) => res.send('API is ready'));
 
 module.exports = server;
