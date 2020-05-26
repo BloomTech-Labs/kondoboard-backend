@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return(
-      knex.schema
+    knex.schema
 
       // users
       .createTable('users', users => {

@@ -98,6 +98,11 @@ router.delete('/:user_id/skills', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'Server Error' });
   }
+<<<<<<< HEAD
+});
+//Get user saved jobs
+//Get user tags
+=======
 
 });
 
@@ -122,6 +127,7 @@ router.put('/:user_id/cities', async (req, res) => {
 router.delete('/:id/cities', async (req, res) => {
   const { user_id } = req.params;
   const city = req.body.city;
+>>>>>>> 61686e899d13efb32c191598e0f16ca6160cdc51
 
   try {
     const skills = await UserController.removeCity(user_id, city);
@@ -148,6 +154,39 @@ router.get('/:user_id/remote', async (req, res) => {
   } catch {
     res.status(500).json({ error: 'Server Error' });
   }
+<<<<<<< HEAD
+});
+
+//------------PUT-----------
+//Update user
+router.put('/:id', async (req, res) => {
+  const userData = req.body;
+  const id = req.params.id;
+  try {
+    const user = await UserController.updateUser(id, userData);
+    res.status(201).json(user);
+  } catch {
+    res.status(500).json({ error: 'something unexpected happened.' })
+  }
+});
+//Update user_tag
+
+//------------DELETE----------
+//Delete user
+router.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await UserController.deleteUser(id);
+    res.status(201).json({ message: "User deleted successfully"});
+  } catch {
+    res.status(500).json({ error: 'something unexpected happened.' })
+  }
+});
+
+//Delete user_tag
+
+module.exports = router;
+=======
 
 });
 
@@ -203,3 +242,4 @@ router.get('/:saved_job_id/archive', async (req, res) => {
 
 
 module.exports = router;
+>>>>>>> 61686e899d13efb32c191598e0f16ca6160cdc51

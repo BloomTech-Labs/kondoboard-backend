@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/kondoboard-backend#readme",
   "dependencies": {
-    "@okta/oidc-middleware": "^4.0.1",
+    "@okta/jwt-verifier": "^1.0.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
