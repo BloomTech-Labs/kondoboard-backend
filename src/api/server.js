@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authenticationRequired = require('../utils/OktaAuth');
+// const authenticationRequired = require('../utils/OktaAuth');
 
 //Routes
 const UserRouter = require('../routes/Users');
