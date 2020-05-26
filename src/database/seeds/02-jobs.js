@@ -5,18 +5,37 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('jobs').insert([
         {
-          title: 'junior software engineer',
-          description: 'Looking for a front end programmer skills in HTML5, CSS3, JavaScript, React, Node, AWS',
-          pay_min: '$75000/year',
-          pay_max: '$120000/year',
-          skills: 'HTML5, CSS3, JavaScript, React, Node, AWS'
+          datascience_id: 100,
+          title: 'Junior Software Engineer',
+          description: 'Looking for a front end programmer who can use Angular or React',
+          location: 'Denver',
+          company: 'Slack',
+          estimated_pay: '$80,000', 
+          post_date: '5/12/2020',
+          skills: 'JavaScript,React,Angular,Node,AWS',
+          url: 'google.com'
         },
         {
-          title: 'senior software engineer',
-          description: 'Looking for a machine learning programmer skills in Python, Java, C++, and AI',
-          pay_min: '$150000/year',
-          pay_max: '$300000/year',
-          skills: 'Python, Java, C++, AI'
+          datascience_id: 250,
+          title: 'Software Engineer - Senior',
+          description: 'We need a full stack programmer, who can build web apps on AWS',
+          location: 'San Francisco',
+          company: 'Okta',
+          estimated_pay: '$120,000',
+          post_date: '5/15/2020',
+          skills: 'JavaScript,React,Node,AWS',
+          url: 'google.com'
+        },
+        {
+          datascience_id: 500,
+          title: 'Data Science Engineer',
+          description: 'We need someone to direct our machine learning algorithim in the right direction',
+          location: 'Seattle',
+          company: 'Amazon',
+          estimated_pay: '$180,000',  
+          post_date: '5/19/2020',
+          skills: 'Python,Java,C#,AI',
+          url: 'google.com'
         },
       ]);
     });
