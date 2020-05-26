@@ -28,19 +28,16 @@ exports.up = function(knex) {
 
       .createTable('jobs', jobs => {
           jobs.increments('id')
-          jobs.integer('datascience_id')
+          jobs.string('datascience_id')
+          jobs.string('source_url')
           jobs
             .string('title', 255)
             .notNullable()
           jobs
-            .string('description', 255)
+            .string('description', 1000)
             .notNullable()
-          jobs.date('post_date')
-          jobs.string('company', 255)
-          jobs.string('location', 255)
-          jobs.string('url', 512)
-          jobs.string('skills', 255)
-          jobs.string('estimated_pay', 255)
+          jobs.date('date_published')
+          jobs.string('location_raw', 255)
         })
 
       //joined table -- Relationship between Users and Jobs
@@ -82,28 +79,28 @@ exports.up = function(knex) {
       })
 
       //joined table
-      .createTable('job_tags', jobTag => {
-        jobTag.increments('id')
-        jobTag
-          .integer('job_tags_id', 255)
-          .notNullable()
-          .references('user_tags.id')
-          .onDelete('CASCADE')
-          .onUpdate('CASCADE')
-        jobTag
-          .integer('jobs_id', 255)
-          .notNullable()
-          .references('jobs.id')
-          .onDelete('CASCADE')
-          .onUpdate('CASCADE')
-      })
+      // .createTable('job_tags', jobTag => {
+      //   jobTag.increments('id')
+      //   jobTag
+      //     .integer('job_tags_id', 255)
+      //     .notNullable()
+      //     .references('user_tags.id')
+      //     .onDelete('CASCADE')
+      //     .onUpdate('CASCADE')
+      //   jobTag
+      //     .integer('jobs_id', 255)
+      //     .notNullable()
+      //     .references('jobs.id')
+      //     .onDelete('CASCADE')
+      //     .onUpdate('CASCADE')
+      // })
 
   )
 };
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExist('job_tags')
+    // .dropTableIfExist('job_tags')
     .dropTableIfExist('user_tags')
     .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')
