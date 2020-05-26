@@ -23,8 +23,4 @@ server.use('/api/users', UserRouter);
 server.get('/', (req, res) => res.send('Server is active'));
 server.get('/api/', (req, res) => res.send('API is ready'));
 
-server.post('/', authenticationRequired, (req, res) => {
-  console.log('in post');
-});
-
 module.exports = server;
