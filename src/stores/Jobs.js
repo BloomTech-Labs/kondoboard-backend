@@ -12,5 +12,3 @@ function add(jobData) {
 function archive(job_id) {
   return db('jobs'); //change archived to true
 }
-
-

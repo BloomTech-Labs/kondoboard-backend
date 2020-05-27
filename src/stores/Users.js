@@ -1,7 +1,6 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-  getAllUsers,
   getById,
   insert,
   update,
@@ -20,19 +19,14 @@ module.exports = {
   removeUserTag
 };
 
-
 // ~~~~~~~~~~ Users ~~~~~~~~~
-
-function getAllUsers() {
-  return db('users');
-}
 
 function getById(id) {
   return db('users').where({ id });
 }
 
 //Add new user -- not used yet
-async function insert(user ) {
+async function insert(user) {
   const id = await db('users').insert(user, 'id');
   return getById(id);
 }

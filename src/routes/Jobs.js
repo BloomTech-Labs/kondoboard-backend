@@ -1,7 +1,5 @@
-//User Router (All start with /api/users)
-const JobsController = require('../controller/Jobs');
-
 const router = require('express').Router();
+const JobsController = require('../controller/Jobs');
 
 
 // Add Job
