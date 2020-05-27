@@ -51,23 +51,23 @@ class Users {
 
   static async removeSkill(user_id, skill) {
     
-    const updateSkills = await UserStore.updateSkills(user_id, skillsArray);
+    const updateSkills = await UserStore.update(user_id, skillsArray);
 
     return updateSkills;
   }  
 
-  static async addCity(user_id, city) {
+  static async addLocation(user_id, location) {
    
-    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+    const updateLocations = await UserStore.update(user_id, locationsArray);
     
-    return updateCities;
+    return updateLocations;
   }
 
-  static async removeCity(user_id, city) {
+  static async removeLocation(user_id, location) {
     
-    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+    const updateLocations = await UserStore.update(user_id, locationsArray);
 
-    return updateCities;
+    return updateLocations;
   }
 
   static async toggleRemote(user_id) {
