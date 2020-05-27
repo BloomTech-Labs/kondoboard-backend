@@ -3,13 +3,17 @@ const JobStore = require('../stores/Jobs');
 class Jobs {
     static async addJob(newJobData) {
         const newJob = await JobStore.addJob(newJobData);
-
         return newJob;
     }
-    
-    static async getJob(job_id) {
-        const JobQuery = await JobStore.getJobById(job_id);
-        return JobQuery;
+
+    static async getJobs() {
+        const jobs = await JobStore.getJobs();
+        return jobs;
+    }
+
+    static async getJobById(job_id) {
+        const job = await JobStore.getJobById(job_id);
+        return job;
     }
 
     static async updateJob(job_id, changes){

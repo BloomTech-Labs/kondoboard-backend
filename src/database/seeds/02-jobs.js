@@ -4,15 +4,7 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('jobs').insert([
-        {
-          datascience_id: "A1551130791",
-          source_url: "https://www.adzuna.com/land/ad/1551130791?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=979581E2002B04CAA97AE0C211527E4893562357",
-          title: "Data Engineer",
-          description: "Job Title Data Engineer Location Portland, OR Duration 6-12 Months Primary Skill MS SQL Other Mandatory Skills SQL Server, No-SQL databases, SQL Python Project Description ...  of outputs Good knowledge of Data Engineering, Big Data Analytics, Excellent analytical and problem-solving skills A knack for independent and group work Scrupulous approach to duties ...",
-          date_published: "2020-05-21",
-          location_raw: "Portland"
-        },
-        {
+        { // id: 1
           datascience_id: "A1521288337",
           source_url: "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
           title: "Data Engineer",
@@ -20,7 +12,7 @@ exports.seed = function(knex) {
           date_published: "2020-04-14",
           location_raw: "Newark"  
         },
-        {
+        { // id: 2
           datascience_id: "A1550124138",
           source_url: "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
           title: "Data Engineer",
@@ -28,6 +20,47 @@ exports.seed = function(knex) {
           date_published: "2020-05-20",
           location_raw: "Redmond"
         },
+        { // id: 3
+          datascience_id: "A1550551",
+          source_url: "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
+          title: "Data Engineer",
+          description: "Hi, Please find the below requirements: Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python ...",
+          date_published: "2020-05-22",
+          location_raw: "Redmond"
+        },
+        { // id: 4
+          datascience_id: "B1550551",
+          source_url: "application url",
+          title: "Data Engineer",
+          description: "Hi, Please find the below requirements: Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python ...",
+          date_published: "2020-05-22",
+          location_raw: "Redmond"
+        },
+        { // id: 5
+          datascience_id: "C1550551",
+          source_url: "application url",
+          title: "Data Engineer",
+          description: " Microsoft Note We are looking for a Data Engineer with Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python Responsibilities bull Build and maintain ETL ...",
+          date_published: "2020-05-23",
+          location_raw: "Redmond"
+        },
+        { // id: 6
+          datascience_id: "D1550551",
+          source_url: "application url",
+          title: "Full Stack Web Developer",
+          description: "This position affords the opportunity to collaborate with other experienced engineers while also providing plenty of space for autonomy and coding.",
+          date_published: "2020-05-24",
+          location_raw: "Redmond"
+        },
+        { // id: 7
+          datascience_id: "E1550551",
+          source_url: "application url",
+          title: "Front End Web Developer",
+          description: "Hi, Please find the below requirements. You can respond back with an updated resume to praveenrajpvkc.com Title Data Engineer (Azure Data Engineer )Location Redmond, WAClient ...  Microsoft Note We are looking for a Data Engineer with Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python Responsibilities bull Build and maintain ETL ...",
+          date_published: "2020-05-20",
+          location_raw: "Redmond"
+        },
+        
       ]);
     });
 };
