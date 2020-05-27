@@ -16,13 +16,10 @@ exports.up = function(knex) {
             .string('email', 255)
             .unique()
             .notNullable();
-          users
-            .string('password', 255)
-            .notNullable();
           users.string('profile_image', 255)
           users.string('user_track')
           users.string('skills')
-          users.string('cities')
+          users.string('locations')
           users.boolean('remote')
       })
 
@@ -60,23 +57,24 @@ exports.up = function(knex) {
           .notNullable()
         saved
           .boolean('archived')
+          .defaultTo(false)
       })
 
-      .createTable('user_tags', tag =>{
-        tag.increments('id')
-        tag
-          .integer('user_id', 255)
-          .notNullable()
-          .references('users.id')
-          .onDelete('CASCADE')
-          .onUpdate('CASCADE')
-        tag
-          .string('tag_name', 64)
-          .notNullable()
-        tag
-          .string('color', 10)
-          .notNullable()
-      })
+      // .createTable('user_tags', tag =>{
+      //   tag.increments('id')
+      //   tag
+      //     .integer('user_id', 255)
+      //     .notNullable()
+      //     .references('users.id')
+      //     .onDelete('CASCADE')
+      //     .onUpdate('CASCADE')
+      //   tag
+      //     .string('tag_name', 64)
+      //     .notNullable()
+      //   tag
+      //     .string('color', 10)
+      //     .notNullable()
+      // })
 
       //joined table
       // .createTable('job_tags', jobTag => {
@@ -101,7 +99,7 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema
     // .dropTableIfExist('job_tags')
-    .dropTableIfExist('user_tags')
+    // .dropTableIfExist('user_tags')
     .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')
     .dropTableIfExist('users')

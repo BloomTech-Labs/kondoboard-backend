@@ -1,26 +1,25 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
+  getAllUsers,
   getById,
   findUserBy,
   insert,
   update,
   remove,
-  updateSkills,
-  updateCities,
-  toggleRemote,
   getFavoriteJobs,
   addFavoriteJob,
   getIrrelevantJobs,
   addIrrelevantJob,
-  archiveUserJob,
-  getUserTags,
-  addUserTag,
-  updateUserTag,
-  removeUserTag
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
+
+async function getAllUsers() {
+  //const users = await db.select('id', 'user_track', 'skills', 'cities', 'remote').from('users');
+  const users = await db.select('*').from('users');
+  return users;
+}
 
 function getById(id) {
   return db('users').where({ id });
@@ -44,23 +43,6 @@ function update(id, changes) {
 
 function remove(user_id) {
   return db('users').where({ user_id }).del();
-}
-
-// ~~~~~~~~ Users Info ~~~~~~~
-
-function updateSkills(user_id, skillsArray) {
-  return db('users'); //update users.skills = skillsArray
-  //return updated user
-}
-
-function updateCities(user_id, citiesArray) {
-  return db('users'); //update users.cities = citiesArray
-  //return updated user
-}
-
-function toggleRemote(user_id) {
-  return db('users'); //invert users.remote boolean
-  //return updated user
 }
 
 // ~~~~~~~~~~~ Jobs ~~~~~~~~~~
