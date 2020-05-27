@@ -45,7 +45,6 @@
 
 ##### 200 (Success) 
 ```javascript
-...
 [
   {
     "user": {
@@ -110,8 +109,6 @@
   "error": "Server Error"
 }
 ```
-
-*** ***
 
 *** ***
 
