@@ -9,15 +9,15 @@ class Users {
     return userQuery;
   }
 
+  static async getUserByEmail(email) {
+    const userQuery = await UserStore.getUserByEmail(email);
+    return userQuery;
+  }
+
   static async addUser(newUser) {
     const user = await UserStore.insert(newUser)
     return user;
-  }
-
-  static async getUserByEmail(email) {
-    const userQuery = await UserStore.getUserBy({email});
-    return userQuery;
-  }
+  }  
 
   static async updateUser(user_id, changes) {
     if(changes.id || changes.email){

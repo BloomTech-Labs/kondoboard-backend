@@ -18,20 +18,6 @@ router.get('/:user_id', async (req, res) => {
   }
 });
 
-// Add New User
-router.post('/', async (req, res) => {
-  const newUser = req.body;
-  try {
-    const user = await UserController.addUser(newUser);
-    if (!user) {
-      res.status(404).json({ message: 'Unable to creaste new user.' });
-    }
-    res.status(200).json(user);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-})
-
 // Get User By Email
 router.post('/email', async (req, res) => {
   const {email} = req.body;
@@ -44,6 +30,20 @@ router.post('/email', async (req, res) => {
     res.status(200).json(user);
   } catch {
     res.status(500).json({ error: 'Server Error' })
+  }
+})
+
+// Add New User
+router.post('/', async (req, res) => {
+  const newUser = req.body;
+  try {
+    const user = await UserController.addUser(newUser);
+    if (!user) {
+      res.status(404).json({ message: 'Unable to create new user.' });
+    }
+    res.status(200).json({ message: 'User created successfully' });
+  } catch {
+    res.status(500).json({ error: 'Server Error' });
   }
 })
 
@@ -186,13 +186,6 @@ router.post('/:user_id/irrelevant', async (req, res) => {
   //Check if job exists in jobs table, if not then create job
 
   //try catch to insert job
-});
-
-// Archive User Job
-router.get('/:saved_job_id/archive', async (req, res) => {
-  const { saved_job_id } =req.params
-  
-  //try catch to change archived to true
 });
 
 // ~~~~~~~~~~~~~~~~ User Tags ~~~~~~~~~~~~~~~
