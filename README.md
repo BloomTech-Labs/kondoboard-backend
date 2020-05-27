@@ -46,43 +46,53 @@
 ##### 200 (Success) 
 ```javascript
 ...
-  { 
-        "user": {
-            "id": 1,
-            "first_name": "Spider",
-            "last_name": "Man",
-            "email": "peterparker@newyork.com",
-            "profile_image": "",
-            "user_track": "Web",
-            "skills": "HTML,CSS,JavaScript,React,Node,Express",
-            "locations": "New York,London,Los Angeles",
-            "remote": 1
-        },
-        "savedJobs": [
-            {
-                "id": 1,
-                "datascience_id": "A1521288337",
-                "source_url": "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
-                "title": "Data Engineer",
-                "description": "Description We are seeking a highly talented Data Engineer (DE) within the Data Engineering group. We need your help to build systems to enable data-driven decision-making. Our ...  Data Engineering team owns and develops the technology platform that offers decision makers both performance metrics and analysis as well as the self-service capability to perform ...",
-                "date_published": "2020-04-14",
-                "location_raw": "Newark"
-            },
-           ...
-        ],
-        "irrelevantJobs": [
-            {
-                "id": 2,
-                "datascience_id": "A1550124138",
-                "source_url": "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
-                "title": "Data Engineer",
-                "description": "Hi, Please find the below requirements. You can respond back with an updated resume to praveenrajpvkc.com Title Data Engineer (Azure Data Engineer )Location Redmond, WAClient ...  Microsoft Note We are looking for a Data Engineer with Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python Responsibilities bull Build and maintain ETL ...",
-                "date_published": "2020-05-20",
-                "location_raw": "Redmond"
-            }
-        ]
+[
+  {
+    "user": {
+      "id": 1,
+      "first_name": "Spider",
+      "last_name": "Man",
+      "email": "peterparker@newyork.com",
+      "profile_image": "",
+      "user_track": "Web",
+      "skills": "HTML,CSS,JavaScript,React,Node,Express,postgres",
+      "locations": "New York,London,Los Angeles",
+      "remote": 1
     },
-...
+    "savedJobs": [
+      {
+        "id": 1,
+        "datascience_id": "A1521288337",
+        "source_url": "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
+        "title": "Data Engineer",
+        "description": "Description We are seeking a highly talented Data Engineer (DE) within the Data Engineering group. We need your help to build systems to enable data-driven decision-making. Our ...  Data Engineering team owns and develops the technology platform that offers decision makers both performance metrics and analysis as well as the self-service capability to perform ...",
+        "date_published": "2020-04-14",
+        "location_raw": "Newark"
+      },
+      {
+        "id": 3,
+        "datascience_id": "A1550551",
+        "source_url": "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
+        "title": "Data Engineer",
+        "description": "Hi, Please find the below requirements: Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python ...",
+        "date_published": "2020-05-22",
+        "location_raw": "Redmond"
+      }
+    ],
+    "irrelevantJobs": [
+      {
+        "id": 2,
+        "datascience_id": "A1550124138",
+        "source_url": "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
+        "title": "Data Engineer",
+        "description": "Hi, Please find the below requirements. You can respond back with an updated resume to praveenrajpvkc.com Title Data Engineer (Azure Data Engineer )Location Redmond, WAClient ...  Microsoft Note We are looking for a Data Engineer with Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python Responsibilities bull Build and maintain ETL ...",
+        "date_published": "2020-05-20",
+        "location_raw": "Redmond"
+      }
+    ]
+  },
+  ...
+]
 ``` 
 
 ##### 404 (Bad Request)
@@ -115,19 +125,31 @@
 ##### 200 (Success) 
 ```javascript
 ...
-  { 
-        "user": {
-            "id": 1,
-            "first_name": "Spider",
-            "last_name": "Man",
-            "email": "peterparker@newyork.com",
-            "profile_image": "",
-            "user_track": "Web",
-            "skills": "HTML,CSS,JavaScript,React,Node,Express",
-            "locations": "New York,London,Los Angeles",
-            "remote": 1
-        },        
-...
+[
+  {
+    "id": 1,
+    "first_name": "Spider",
+    "last_name": "Man",
+    "email": "peterparker@newyork.com",
+    "profile_image": "",
+    "user_track": "Web",
+    "skills": "HTML,CSS,JavaScript,React,Node,Express,postgres",
+    "locations": "New York,London,Los Angeles",
+    "remote": 1
+  },
+  {
+    "id": 2,
+    "first_name": "Iron",
+    "last_name": "Man",
+    "email": "tonystark@california.com",
+    "profile_image": "",
+    "user_track": "Data Science",
+    "skills": "AWS,Python,Machine Learning,AI",
+    "locations": "New York,Seattle,Denver,Los Angeles",
+    "remote": 1
+  },
+  ...
+]
 ``` 
 
 ##### 404 (Bad Request)
@@ -155,16 +177,16 @@
 ##### 200 (Success) 
 ##### https://kondo-board-api.herokuapp.com/api/users/2
 ```javascript
-  {
-    "id": 2,
-    "first_name": "Spider",
-    "last_name": "Man",
-    "email": "peterparker@newyork.com",
-    ...
-    "skills": "HTML,CSS,JavaScript,React,Node,Express",
-    "cities": "New York,London,Los Angeles",
-    "remote": 1
-  },
+{
+  "id": 2,
+  "first_name": "Spider",
+  "last_name": "Man",
+  "email": "peterparker@newyork.com",
+  ...
+  "skills": "HTML,CSS,JavaScript,React,Node,Express",
+  "cities": "New York,London,Los Angeles",
+  "remote": 1
+}
 ``` 
 
 ##### 404 (Bad Request)
