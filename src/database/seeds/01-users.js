@@ -1,54 +1,50 @@
-const bcrypt = require('bcryptjs');
 
 exports.seed = function(knex) {
-  // Deletes existing entries, then add new data 
+  // Deletes ALL existing entries
   return knex('users').del()
     .then(function () {
+      // Inserts seed entries
       return knex('users').insert([
-        {
-          first_name: 'Billy',
-          last_name: 'Baney',
-          email: 'Billy@gmail.com',
-          password: bcrypt.hashSync('testtest', 10),
-          profile_image: '',
-          user_track: 'Web',
-          skills: 'HTML, CSS, JavaScript, React, Node, Express',
-          cities: 'Boston, New York, New Jersey',
-          remote: true
-        }, 
-        {
+        { // id: 1
           first_name: 'Spider',
           last_name: 'Man',
           email: 'peterparker@newyork.com',
-          password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Web',
-          skills: 'HTML, CSS, JavaScript, React, Node, Express',
-          cities: 'New York, London, Los Angeles',
+          skills: 'HTML,CSS,JavaScript,React,Node,Express',
+          locations: 'New York,London,Los Angeles',
           remote: true
         }, 
-        {
+        { // id: 2
           first_name: 'Iron',
           last_name: 'Man',
           email: 'tonystark@california.com',
-          password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS, Python, Machine Learning, AI', 
-          cities: 'New York, Los Angeles, Seattle, Denver',
+          skills: 'AWS,Python,Machine Learning,AI', 
+          locations: 'New York,Seattle,Denver,Los Angeles',
           remote: true
         },  
-        {
+        { // id: 3
           first_name: 'Captain',
           last_name: 'America',
           email: 'superguy@america.com',
-          password: bcrypt.hashSync('testtest', 10),
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS, Python, Machine Learning, AI', 
-          cities: 'San Francisco, Washington DC',
+          skills: 'AWS,Python,Machine Learning,AI', 
+          locations: 'San Francisco,Washington DC',
           remote: false
         },
+        { // id: 4
+          first_name: 'Bat',
+          last_name: 'Man',
+          email: 'batman@gmail.com',
+          profile_image: '',
+          user_track: 'Data Science',
+          skills: 'Neural Network, AI, Robotics',
+          locations: 'Unknown',
+          remote: true
+        }
 
       ]);
     });
