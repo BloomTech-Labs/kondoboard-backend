@@ -1,20 +1,6 @@
 const router = require('express').Router();
 const JobsController = require('../controller/Jobs');
 
-// Get Job
-router.get('/', async (req, res) => {  
-
-  try {
-    const jobsList = await JobsController.getJobs();
-    if (!jobsList.length) {
-      res.status(404).json({ message: 'No jobs were found.' });
-    }
-    res.status(200).json(jobsList);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
 // Add Job
 router.post('/', async (req, res) => {
     const new_job = req.body;

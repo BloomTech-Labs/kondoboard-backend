@@ -4,14 +4,14 @@ class Users {
 
   // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
-  static async getUserList() {
-    const userListQuery = await UserStore.getAllUsers();
-    return userListQuery;
-  }
-
   static async getUser(user_id) {
     const userQuery = await UserStore.getById(user_id);
     return userQuery;
+  }
+
+  static async addUser(newUser) {
+    const user = await UserStore.insert(newUser)
+    return user;
   }
 
   static async getUserByEmail(email) {
@@ -20,7 +20,7 @@ class Users {
   }
 
   static async updateUser(user_id, changes) {
-    if(changes.id || changes.email || changes.skills || changes.cities){
+    if(changes.id || changes.email){
       return null;
     };
     const updatedUser = await UserStore.update(user_id, changes);
