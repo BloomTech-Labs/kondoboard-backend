@@ -8,12 +8,11 @@
 ###### ** = not currently working
 
 ##### Users
-- [Get All User Data](#Get-All-User-Data) - Data Science
-- [Get All User Info](#Get-All-User-Info)
+- [Get All User Data](#Get-All-User-Data)
 - [Get Single User Info](#Get-Single-User-Info)
-- [Update User](#Update-User) - Change everything except skills and locations
-- [Register](#Register) **
-- [Login](#Login) **
+- [Get User by Email](#Get-User-by-Email) 
+- [Add New User](#Add-New-User)
+- [Update User](#Update-User)
 - [Delete User](#Delete-User)
 
 ##### Users Info
@@ -23,7 +22,6 @@
 - [Delete Location](#Delete-Location) **
 
 ##### Jobs
-- [Get All Jobs](#Get-All-Jobs)
 - [Get Job](#Get-Job) **
 - [Add Job](#Add-Job)
 - [Update Job](#Update-Job)
@@ -40,7 +38,7 @@
 ### <em>GET Request</em> 
 #### URL: /ds 
 
-##### Will return every user
+##### Will return every user and their jobs (This is for Data Science)
 ##### https://kondo-board-api.herokuapp.com/api/ds
 
 ##### 200 (Success) 
@@ -112,28 +110,14 @@
 
 *** ***
 
-### <ins>Get All User Info</ins>
-### <em>GET Request</em> 
-#### URL: /users 
-
-##### Will return every user
-##### https://kondo-board-api.herokuapp.com/api/users
+### <ins>Get Single User Info</ins>
+### <em>GET Request</em>
+#### URL: /users/:user_id
 
 ##### 200 (Success) 
+##### https://kondo-board-api.herokuapp.com/api/users/2
 ```javascript
-...
 [
-  {
-    "id": 1,
-    "first_name": "Spider",
-    "last_name": "Man",
-    "email": "peterparker@newyork.com",
-    "profile_image": "",
-    "user_track": "Web",
-    "skills": "HTML,CSS,JavaScript,React,Node,Express,postgres",
-    "locations": "New York,London,Los Angeles",
-    "remote": 1
-  },
   {
     "id": 2,
     "first_name": "Iron",
@@ -143,9 +127,8 @@
     "user_track": "Data Science",
     "skills": "AWS,Python,Machine Learning,AI",
     "locations": "New York,Seattle,Denver,Los Angeles",
-    "remote": 1
-  },
-  ...
+    "remote": 0
+  }
 ]
 ``` 
 
@@ -167,30 +150,72 @@
 
 *** ***
 
-### <ins>Get Single User Info</ins>
+### <ins>Get User by Email</ins> 
 ### <em>GET Request</em>
-#### URL: /users/:user_id
+#### URL: /email
 
-##### 200 (Success) 
-##### https://kondo-board-api.herokuapp.com/api/users/2
+##### Example Request
 ```javascript
 {
-  "id": 2,
-  "first_name": "Spider",
-  "last_name": "Man",
-  "email": "peterparker@newyork.com",
-  ...
-  "skills": "HTML,CSS,JavaScript,React,Node,Express",
-  "cities": "New York,London,Los Angeles",
-  "remote": 1
+  "email": "spiderman@newyork.com",
 }
-``` 
+```
+##### 201 (Success) 
+###### Provides Authentication key to client localStorage
+```javascript
+{
+  "login": "Logged in successfully." 
+}
+````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no user(s) found.
+> Will receive a 404 response if invalid login info
 ```javascript
 {
-  "message": "No users found"
+  "login": "Failed to login"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>Add New User</ins>
+### <em>POST Request</em>
+#### URL: /users
+
+##### Example Request
+```javascript
+{
+  "first_name": "Spider",
+  "last_name": "Pig",
+  "email": "spiderpig@gmail.com",
+  "profile_image": "",
+  "user_track": "Web",
+  "skills": "HTML,CSS,React,Angular",
+  "locations": "New York,Seattle,Denver,Los Angeles",
+  "remote": 0
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+  "message": "User created succesfully!"
+}
+````
+
+##### 404 (Bad Request)
+> Will receive a 404 response if there are missing/invalid fields.
+```javascript
+{
+  "message": "Unable to create new user"
 }
 ```
 
@@ -209,7 +234,9 @@
 #### URL: /users/:user_id
 
 ##### You can update single, or multiple fields at a time
-##### Updating [locations](#Add-Location) and [skills](#Add-Skill) have their own endpoints 
+##### Skills and Locations are stored as a string, in CSV format (Boston,New York,Denver)
+##### Currently these fields can be updated through this endpoint, but you need to pull previous skills/locations, add new skill/location onto existing string, and then upload the whole string of skills/locations
+##### If needed, we can do these fields separately with these endpoints: [locations](#Add-Location) and [skills](#Add-Skill) -- This is not fully added yet
 
 ##### Example Request
 ```javascript
@@ -224,17 +251,17 @@
 ##### 201 (Success)
 ```javascript
 {
-    "id": 1,
-    "first_name": "Frodo",
-    "last_name": "Baggins",
-    "email": "peterparker@newyork.com",
-    "profile_image": "https://image.flaticon.com/icons/svg/188/188987.svg",
-    "user_track": "Web",
-    "skills": "HTML,CSS,JavaScript,React,Node,Express",
-    "locations": "New York,London,Los Angeles",
-    "remote": 1
+  "id": 1,
+  "first_name": "Frodo",
+  "last_name": "Baggins",
+  "email": "peterparker@newyork.com",
+  "profile_image": "https://image.flaticon.com/icons/svg/188/188987.svg",
+  "user_track": "Web",
+  "skills": "HTML,CSS,JavaScript,React,Node,Express",
+  "locations": "New York,London,Los Angeles",
+  "remote": 1
 }
-````
+```
 
 ##### 404 (Bad Request)
 > Will recieve 404 response if you try to update "id", "email", "skills" or "locations"
@@ -242,85 +269,6 @@
 ```javascript
 {
   "message": "Invalid request"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
-### <ins>Register User</ins>
-### <em>POST Request</em>
-#### URL: /auth/register
-
-##### Example Request
-```javascript
-{
-  "first_name": "Spider",
-  "last_name": "Pig",
-  "email": "spiderpig@gmail.com",
-  "profile_image": "",
-  "user_track": "Web",
-  "skills": "HTML,CSS,JavaScript,React,Node,Express",
-  "locations": "New York,London,Phoenix",
-  "remote": false
-}
-```
-
-##### 201 (Success)
-```javascript
-{
-  "message": "User created succesfully!"
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if there are missing/invalid fields.
-```javascript
-{
-  "message": "Unable to create user"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
-### <ins>Login User</ins> 
-### <em>POST Request</em>
-#### URL: /auth/login
-
-##### Example Request
-```javascript
-{
-    "loginData": "",
-}
-```
-##### 201 (Success) 
-###### Provides Authentication key to client localStorage
-```javascript
-{
-  "login": "Logged in successfully." 
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if invalid login info
-```javascript
-{
-  "login": "Failed to login"
 }
 ```
 
@@ -365,7 +313,7 @@
 
 ### <ins>Add Skill</ins>
 ### <em>PUT Request</em>
-#### URL: /users/:user_id/skill
+#### URL: /users/:user_id/add_skill
 
 ##### Example Request
 ```javascript
@@ -377,8 +325,7 @@
 ##### 201 (Success)
 ```javascript
 {
-  "message": "postgres has been added to skills"
-  
+  "message": "postgres has been added to skills"  
 }
 ````
 
@@ -402,7 +349,7 @@
 
 ### <ins>Delete Skill</ins>
 ### <em>PUT Request</em>
-#### URL: /users/:user_id/skill
+#### URL: /users/:user_id/delete_skill
 
 ##### Example Request
 ```javascript
@@ -419,7 +366,7 @@
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+> Will receive a 404 response if no user id, if unmatching field, or no skill exists
 ```javascript
 {
   "message": "Error deleting skill"
@@ -438,7 +385,7 @@
 
 ### <ins>Add Location</ins>
 ### <em>PUT Request</em>
-#### URL: /users/:user_id/addLocation
+#### URL: /users/:user_id/add_location
 
 ##### Example Request
 ```javascript
@@ -474,7 +421,7 @@
 
 ### <ins>Delete Location</ins>
 ### <em>PUT Request</em>
-#### URL: /users/:user_id/deleteLocation
+#### URL: /users/:user_id/delete_location
 
 ##### Example Request
 ```javascript
@@ -508,52 +455,11 @@
 
 *** ***
 
-### <ins>Get All Jobs</ins>
-### <em>GET Request</em>
-#### URL: /jobs
-
-##### 201 (Success)
-
-######
-```javascript
-{
-  {
-      "id": 1,
-      "datascience_id": "A1521288337",
-      "source_url": "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
-      "title": "Data Engineer",
-      "description": "Description We are seeking a highly talented ...",
-      "date_published": "2020-04-14",
-      "location_raw": "Newark"
-  },
-  ...
-}
-````
-
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "No jobs were found."
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
 ### <ins>Get Job</ins>
 ### <em>GET Request</em>
 #### URL: /jobs/:datascience_id
 
-##### Checks if job has been saved into Users database from Datascience database
+##### Use to check if job has been saved into Users database from Datascience database
 
 ##### 201 (Success)
 

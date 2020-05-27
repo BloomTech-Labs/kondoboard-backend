@@ -1,9 +1,8 @@
 const db = require('../database/dbConfig.js');
 
 module.exports = {
-  getAllUsers,
   getById,
-  findUserBy,
+  findUserByEmail,
   insert,
   update,
   remove,
@@ -15,22 +14,16 @@ module.exports = {
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
 
-async function getAllUsers() {
-  //const users = await db.select('id', 'user_track', 'skills', 'cities', 'remote').from('users');
-  const users = await db.select('*').from('users');
-  return users;
-}
-
 function getById(id) {
   return db('users').where({ id });
 }
 
-function findUserBy(filter) {
+function findUserByEmail(email) {
   return db("users")
-  .where(filter);
+  .where('email', email);
 }
 
-//Add new user -- not used yet
+//Add new user
 async function insert(user) {
   const id = await db('users').insert(user, 'id');
   return getById(id);

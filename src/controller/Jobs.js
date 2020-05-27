@@ -6,11 +6,6 @@ class Jobs {
         return newJob;
     }
 
-    static async getJobs() {
-        const jobs = await JobStore.getJobs();
-        return jobs;
-    }
-
     static async getJobById(job_id) {
         const job = await JobStore.getJobById(job_id);
         return job;

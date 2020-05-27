@@ -4,19 +4,6 @@ const UserController = require('../controller/Users');
 
 // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
-// Get All User Info
-router.get('/', async (req, res) => {    
-  try {
-    const userList = await UserController.getUserList();
-    if (!userList.length) {
-      res.status(404).json({ message: 'No users were found.' });
-    }
-    res.status(200).json(userList);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
 // Get Single User Info
 router.get('/:user_id', async (req, res) => {
   const { user_id } = req.params;
@@ -43,6 +30,20 @@ router.post('/email', async (req, res) => {
     res.status(200).json(user);
   } catch {
     res.status(500).json({ error: 'Server Error' })
+  }
+})
+
+// Add New User
+router.post('/', async (req, res) => {
+  const newUser = req.body;
+  try {
+    const user = await UserController.addUser(newUser);
+    if (!user) {
+      res.status(404).json({ message: 'Unable to create new user.' });
+    }
+    res.status(200).json({ message: 'User created successfully' });
+  } catch {
+    res.status(500).json({ error: 'Server Error' });
   }
 })
 
@@ -78,7 +79,7 @@ router.delete('users/:user_id', async (req, res) => {
 // ~~~~~~~~~~~~~ Users Info ~~~~~~~~~~~~
 
 // Add Skill
-router.put('/:user_id/skill', async (req, res) => {
+router.put('/:user_id/add_skill', async (req, res) => {
   const { user_id } = req.params;
   const skill = req.body.skill;
 
@@ -87,14 +88,14 @@ router.put('/:user_id/skill', async (req, res) => {
     if(!skills){
       res.status(404).json({ message: 'Unable to add skill'})
     }
-  res.status(201).json(skills);
+  res.status(201).json({ message: `${skill} has been added to skills`});
   } catch {
     res.status(500).json({ error: 'Server Error' });
   }
 });
 
 // Delete Skill
-router.delete('/:user_id/skill', async (req, res) => {
+router.delete('/:user_id/delete_skill', async (req, res) => {
   const { user_id } = req.params;
   const skill = req.body.skill;
   try {
@@ -108,15 +109,15 @@ router.delete('/:user_id/skill', async (req, res) => {
   }
 });
 
-// Add City
-router.put('/:user_id/cities', async (req, res) => {
+// Add Location
+router.put('/:user_id/add_location', async (req, res) => {
   const { user_id } = req.params;
-  const city = req.body.city;
+  const location = req.body.location;
 
   try {
-    const skills = await UserController.addCity(user_id, city);
+    const skills = await UserController.addLocation(user_id, location);
     if(!skills){
-      res.status(404).json({ message: 'Unable to add city'})
+      res.status(404).json({ message: 'Unable to add location'})
     }
   res.status(201).json(skills);
   } catch {
@@ -124,14 +125,14 @@ router.put('/:user_id/cities', async (req, res) => {
   }
 });
 
-// Delete City
-router.delete('/:user_id/cities', async (req, res) => {
+// Delete Location
+router.delete('/:user_id/delete_location', async (req, res) => {
   const { user_id } = req.params;
-  const city = req.body.city;
+  const location = req.body.location;
   try {
-    const skills = await UserController.removeCity(user_id, city);
+    const skills = await UserController.removeLocation(user_id, location);
     if (!skills) {
-      res.status(404).json({ message: 'Unable to delete city'});
+      res.status(404).json({ message: 'Unable to delete location'});
     }
     res.status(201).json(skills);
   } catch {
@@ -139,19 +140,6 @@ router.delete('/:user_id/cities', async (req, res) => {
   }
 });
 
-// Toggle Remote On/Off
-router.get('/:user_id/remote', async (req, res) => {
-  const { user_id } = req.params;
-  try {
-    const remote = await UserController.toggleRemote(user_id);
-    if (!remote) {
-      res.status(404).json({ message: 'Unable to change remote status'});
-    }
-    res.status(201).json(remote);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
 
 // ~~~~~~~~~~~ Users Saved Jobs ~~~~~~~~~~
 
@@ -185,13 +173,6 @@ router.post('/:user_id/irrelevant', async (req, res) => {
   //Check if job exists in jobs table, if not then create job
 
   //try catch to insert job
-});
-
-// Archive User Job
-router.get('/:saved_job_id/archive', async (req, res) => {
-  const { saved_job_id } =req.params
-  
-  //try catch to change archived to true
 });
 
 // ~~~~~~~~~~~~~~~~ User Tags ~~~~~~~~~~~~~~~

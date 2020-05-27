@@ -4,23 +4,23 @@ class Users {
 
   // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
-  static async getUserList() {
-    const userListQuery = await UserStore.getAllUsers();
-    return userListQuery;
-  }
-
   static async getUser(user_id) {
     const userQuery = await UserStore.getById(user_id);
     return userQuery;
   }
 
   static async getUserByEmail(email) {
-    const userQuery = await UserStore.getUserBy({email});
+    const userQuery = await UserStore.getUserByEmail(email);
     return userQuery;
   }
 
+  static async addUser(newUser) {
+    const user = await UserStore.insert(newUser)
+    return user;
+  }  
+
   static async updateUser(user_id, changes) {
-    if(changes.id || changes.email || changes.skills || changes.cities){
+    if(changes.id || changes.email){
       return null;
     };
     const updatedUser = await UserStore.update(user_id, changes);
@@ -51,23 +51,23 @@ class Users {
 
   static async removeSkill(user_id, skill) {
     
-    const updateSkills = await UserStore.updateSkills(user_id, skillsArray);
+    const updateSkills = await UserStore.update(user_id, skillsArray);
 
     return updateSkills;
   }  
 
-  static async addCity(user_id, city) {
+  static async addLocation(user_id, location) {
    
-    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+    const updateLocations = await UserStore.update(user_id, locationsArray);
     
-    return updateCities;
+    return updateLocations;
   }
 
-  static async removeCity(user_id, city) {
+  static async removeLocation(user_id, location) {
     
-    const updateCities = await UserStore.updateCities(user_id, citiesArray);
+    const updateLocations = await UserStore.update(user_id, locationsArray);
 
-    return updateCities;
+    return updateLocations;
   }
 
   static async toggleRemote(user_id) {

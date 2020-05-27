@@ -15,7 +15,8 @@ exports.up = function(knex) {
           users
             .string('email', 255)
             .unique()
-            .notNullable();
+            .notNullable()
+            .index();
           users.string('profile_image', 255)
           users.string('user_track')
           users.string('skills')
