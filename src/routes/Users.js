@@ -78,22 +78,23 @@ router.delete('users/:user_id', async (req, res) => {
 // ~~~~~~~~~~~~~ Users Info ~~~~~~~~~~~~
 
 // Add Skill
-router.put('/:user_id/skills', async (req, res) => {
+router.put('/:user_id/skill', async (req, res) => {
   const { user_id } = req.params;
   const skill = req.body.skill;
+
   try {
     const skills = await UserController.addSkill(user_id, skill);
-    if (!skills) {
-      res.status(404).json({ message: 'Unable to add skill' });
+    if(!skills){
+      res.status(404).json({ message: 'Unable to add skill'})
     }
-    res.status(201).json(skills);
+  res.status(201).json(skills);
   } catch {
     res.status(500).json({ error: 'Server Error' });
   }
 });
 
 // Delete Skill
-router.delete('/:user_id/skills', async (req, res) => {
+router.delete('/:user_id/skill', async (req, res) => {
   const { user_id } = req.params;
   const skill = req.body.skill;
   try {

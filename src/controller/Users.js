@@ -35,8 +35,16 @@ class Users {
   // ~~~~~~~~~~~~~ Users Info ~~~~~~~~~~~~
 
   static async addSkill(user_id, skill) {
+    // Get user.skills, convert to array, push new skill on
+    const currentSkills = await UserStore.getById(user_id);
+    const skillsArray = currentSkills[0].skills.split(',');
+    skillsArray.push(skill);
+    // SkillsArray to string
+    const updatedSkills = skillsArray.toString();
+    // format for update query
+    const changes = { "skills": updatedSkills };
    
-    const updateSkills = await UserStore.updateSkills(user_id, skillsArray);
+    const updateSkills = await UserStore.update(user_id, changes);
     
     return updateSkills;
   }
