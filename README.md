@@ -149,8 +149,8 @@
 *** ***
 
 ### <ins>Get Single User Info</ins>
-#### <em>GET Request</em>
-### URL: /users/:user_id
+### <em>GET Request</em>
+#### URL: /users/:user_id
 
 ##### 200 (Success) 
 ##### https://kondo-board-api.herokuapp.com/api/users/2
@@ -186,14 +186,13 @@
 *** ***
 
 ### <ins>Update User</ins>
-#### <em>PUT Request</em>
-### URL: /users/:user_id
+### <em>PUT Request</em>
+#### URL: /users/:user_id
 
 ##### You can update single, or multiple fields at a time
 ##### Updating [cities](#Add-City) and [skills](#Add-Skill) have their own endpoints 
 
 ##### Example Request
-##### https://kondo-board-api.herokuapp.com/api/users/1
 ```javascript
 {
   "first_name": "Frodo",
@@ -238,13 +237,20 @@
 *** ***
 
 ### <ins>Register User</ins>
-#### <em>POST Request</em>
-### URL: /auth/register
+### <em>POST Request</em>
+#### URL: /auth/register
 
 ##### Example Request
 ```javascript
 {
-  "data": "new user"
+  "first_name": "Spider",
+  "last_name": "Pig",
+  "email": "spiderpig@gmail.com",
+  "profile_image": "",
+  "user_track": "Web",
+  "skills": "HTML,CSS,JavaScript,React,Node,Express",
+  "locations": "New York,London,Phoenix",
+  "remote": false
 }
 ```
 
@@ -274,8 +280,8 @@
 *** ***
 
 ### <ins>Login User</ins> 
-#### <em>POST Request</em>
-### URL: /auth/login
+### <em>POST Request</em>
+#### URL: /auth/login
 
 ##### Example Request
 ```javascript
@@ -310,8 +316,8 @@
 *** ***
 
 ### <ins>Delete User</ins>
-#### <em>DELETE Request</em>
-### URL: /users/:user_id
+### <em>DELETE Request</em>
+#### URL: /users/:user_id
 
 ##### 201 (Success)
 ```javascript
@@ -339,10 +345,10 @@
 *** ***
 
 ### <ins>Add Skill</ins>
-#### <em>PUT Request</em>
-### URL: /users/:user_id/addSkill
+### <em>PUT Request</em>
+#### URL: /users/:user_id/skill
 
-##### POST
+##### Example Request
 ```javascript
 {
     "skill": "postgres"
@@ -376,8 +382,8 @@
 *** ***
 
 ### <ins>Delete Skill</ins>
-#### <em>PUT Request</em>
-### URL: /users/:user_id/deleteSkill
+### <em>PUT Request</em>
+#### URL: /users/:user_id/skill
 
 ##### Example Request
 ```javascript
@@ -412,8 +418,8 @@
 *** ***
 
 ### <ins>Add Location</ins>
-#### <em>PUT Request</em>
-### URL: /users/:user_id/addLocation
+### <em>PUT Request</em>
+#### URL: /users/:user_id/addLocation
 
 ##### Example Request
 ```javascript
@@ -448,8 +454,8 @@
 *** ***
 
 ### <ins>Delete Location</ins>
-#### <em>PUT Request</em>
-### URL: /users/:user_id/deleteLocation
+### <em>PUT Request</em>
+#### URL: /users/:user_id/deleteLocation
 
 ##### Example Request
 ```javascript
@@ -484,8 +490,8 @@
 *** ***
 
 ### <ins>Get All Jobs</ins>
-#### <em>GET Request</em>
-### URL: /jobs
+### <em>GET Request</em>
+#### URL: /jobs
 
 ##### 201 (Success)
 
@@ -525,8 +531,8 @@
 *** ***
 
 ### <ins>Get Job</ins>
-#### <em>GET Request</em>
-### URL: /jobs/:datascience_id
+### <em>GET Request</em>
+#### URL: /jobs/:datascience_id
 
 ##### Checks if job has been saved into Users database from Datascience database
 
@@ -557,8 +563,8 @@
 *** ***
 
 ### <ins>Add Job</ins>
-#### <em>POST Request</em>
-### URL: /jobs
+### <em>POST Request</em>
+#### URL: /jobs
 
 ##### Example Request
 ```javascript
@@ -598,8 +604,8 @@
 *** ***
 
 ### <ins>Update Job</ins>
-#### <em>POST Request</em>
-### URL: /:job_id
+### <em>POST Request</em>
+#### URL: /:job_id
 
 #### example request
 ``` javascript
@@ -635,7 +641,7 @@
 *** ***
 
 ### <ins>Get Favorite User Jobs</ins>
-#### <em>GET Request</em>
+### <em>GET Request</em>
 #### URL: /users/:id/favorite_jobs/
 
 ##### Pass in user_id in the URL, job_id in POST request
@@ -674,7 +680,7 @@
 *** ***
 
 ### <ins>Save Favorite User Job</ins>
-#### <em>POST Request</em>
+### <em>POST Request</em>
 #### URL: /users/:id/favorite_jobs/
 
 ##### Pass in user_id in the URL, job_id in POST request
@@ -713,7 +719,7 @@
 *** ***
 
 ### <ins>Get Irrelevant User Jobs</ins>
-#### <em>GET Request</em>
+### <em>GET Request</em>
 #### URL: /users/:id/irrelevant_jobs/
 
 ##### Pass in user_id in the URL, job_id in POST request
