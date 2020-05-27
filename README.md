@@ -212,7 +212,7 @@
 #### URL: /users/:user_id
 
 ##### You can update single, or multiple fields at a time
-##### Updating [cities](#Add-City) and [skills](#Add-Skill) have their own endpoints 
+##### Updating [locations](#Add-Location) and [skills](#Add-Skill) have their own endpoints 
 
 ##### Example Request
 ```javascript
@@ -240,7 +240,7 @@
 ````
 
 ##### 404 (Bad Request)
-> Will recieve 404 response if you try to update "id", "email", "skills" or "cities"
+> Will recieve 404 response if you try to update "id", "email", "skills" or "locations"
 > Will receive a 404 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
