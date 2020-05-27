@@ -24,5 +24,3 @@ function updateJob(id, changes) {
   const updatedJob = db('jobs').where({ id }).update(changes);
   return updatedJob;
 }
-
-
