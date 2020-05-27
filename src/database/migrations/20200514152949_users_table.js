@@ -25,7 +25,7 @@ exports.up = function(knex) {
 
       .createTable('jobs', jobs => {
           jobs.increments('id')
-          jobs.string('datascience_id')
+          jobs.string('ds_id')
           jobs.string('source_url')
           jobs
             .string('title', 255)
@@ -34,7 +34,7 @@ exports.up = function(knex) {
             .string('description', 1000)
             .notNullable()
           jobs.date('date_published')
-          jobs.string('location_raw', 255)
+          jobs.string('locations', 255)
         })
 
       //joined table -- Relationship between Users and Jobs
