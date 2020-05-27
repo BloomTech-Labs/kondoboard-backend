@@ -31,6 +31,21 @@ router.get('/:user_id', async (req, res) => {
   }
 });
 
+// Get User By Email
+router.post('/email', async (req, res) => {
+  const {email} = req.body;
+  console.log(email);
+  try {
+    const user = await UserController.getUserByEmail(email);
+    if(!user) {
+      res.status(404).json({ message: 'there is no user with that email.' });
+    }
+    res.status(200).json(user);
+  } catch {
+    res.status(500).json({ error: 'Server Error' })
+  }
+})
+
 // Update User
 router.put('/:user_id', async (req, res) => {
   const { user_id } = req.params;

@@ -2,6 +2,7 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
   getById,
+  findUserBy,
   insert,
   update,
   remove,
@@ -23,6 +24,11 @@ module.exports = {
 
 function getById(id) {
   return db('users').where({ id });
+}
+
+function findUserBy(filter) {
+  return db("users")
+  .where(filter);
 }
 
 //Add new user -- not used yet
