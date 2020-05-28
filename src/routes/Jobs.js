@@ -1,7 +1,22 @@
 const router = require('express').Router();
 const JobsController = require('../controller/Jobs');
 
+//Get job by ID
+router.get('/:job_id', async (req, res) => {
+    const job_id = req.body;
+    try {
+        const job = await JobsController.addJob(new_job);
+        if(!job){
+            res.status(404).json({ message: 'Unable to add job' })
+        }
+    res.status(201).json({ message: 'New job added' })
+    } catch {
+        res.status(500).json({ error: 'Server Error' });
+    }
+})
+
 // Add Job
+// message for when the job already exists?
 router.post('/', async (req, res) => {
     const new_job = req.body;
     try {

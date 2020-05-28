@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get Single User Info
+// Get User by id
 router.get('/:user_id', async (req, res) => {
   const { user_id } = req.params;
   try {
@@ -75,114 +75,6 @@ router.delete('users/:user_id', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-
-// ~~~~~~~~~~~~~ Users Info ~~~~~~~~~~~~
-
-// Add Skill
-router.put('/:user_id/add_skill', async (req, res) => {
-  const { user_id } = req.params;
-  const skill = req.body.skill;
-
-  try {
-    const skills = await UserController.addSkill(user_id, skill);
-    if(!skills){
-      res.status(404).json({ message: 'Unable to add skill'})
-    }
-  res.status(201).json({ message: `${skill} has been added to skills`});
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
-// Delete Skill
-router.delete('/:user_id/delete_skill', async (req, res) => {
-  const { user_id } = req.params;
-  const skill = req.body.skill;
-  try {
-    const skills = await UserController.removeSkill(user_id, skill);
-    if (!skills) {
-      res.status(404).json({ message: 'Unable to remove skill' });
-    }
-    res.status(201).json(skills);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
-// Add Location
-router.put('/:user_id/add_location', async (req, res) => {
-  const { user_id } = req.params;
-  const location = req.body.location;
-
-  try {
-    const skills = await UserController.addLocation(user_id, location);
-    if(!skills){
-      res.status(404).json({ message: 'Unable to add location'})
-    }
-  res.status(201).json(skills);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
-// Delete Location
-router.delete('/:user_id/delete_location', async (req, res) => {
-  const { user_id } = req.params;
-  const location = req.body.location;
-  try {
-    const skills = await UserController.removeLocation(user_id, location);
-    if (!skills) {
-      res.status(404).json({ message: 'Unable to delete location'});
-    }
-    res.status(201).json(skills);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
-
-// ~~~~~~~~~~~ Users Saved Jobs ~~~~~~~~~~
-
-// Get Favorite User Jobs
-router.get('/:user_id/favorite', async (req, res) => {
-  const { user_id } = req.params;
-  //Check if job exists in jobs table, if not then create job
-
-  //try catch to get jobs 
-});
-
-// Save Favorite User Job
-router.post('/:user_id/favorite', async (req, res) => {
-  const { user_id } = req.params;
-  //Check if job exists in jobs table, if not then create job
-
-  //try catch to insert job
-});
-
-// Get Irrelevant User Jobs
-router.get('/:user_id/irrelevant', async (req, res) => {
-  const { user_id } = req.params;
-  //Check if job exists in jobs table, if not then create job
-
-  //try catch to get jobs 
-});
-
-// Save Irreleant User Jobs
-router.post('/:user_id/irrelevant', async (req, res) => {
-  const { user_id } = req.params;
-  //Check if job exists in jobs table, if not then create job
-
-  //try catch to insert job
-});
-
-// ~~~~~~~~~~~~~~~~ User Tags ~~~~~~~~~~~~~~~
-// View User Tag
-
-// Create User Tag
-
-// Update User Tag
-
-// Delete User Tag
 
 
 module.exports = router;
