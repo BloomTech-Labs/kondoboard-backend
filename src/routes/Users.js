@@ -13,9 +13,8 @@ router.get('/', async (req, res) => {
       res.status(404).json({ message: 'There is no user with that email.' });
     }
     res.status(200).json(user);
-  } catch(error) {
-    console.log(error.message)
-    res.status(500).json({ error: 'Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
   }
 });
 
@@ -28,8 +27,8 @@ router.get('/:user_id', async (req, res) => {
       res.status(404).json({ message: 'There is no user with that id.' });
     }
     res.status(200).json(user);
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
   }
 });
 
@@ -42,8 +41,8 @@ router.post('/', async (req, res) => {
       res.status(404).json({ message: 'Unable to create new user.' });
     }
     res.status(200).json({ message: 'User created successfully' });
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
   }
 })
 
@@ -57,13 +56,13 @@ router.put('/:user_id', async (req, res) => {
       res.status(404).json({ message:'Invalid request' });
     }
     res.status(201).json(await UserController.getUser(user_id));
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
   }
 });
 
 // Delete User
-router.delete('users/:user_id', async (req, res) => {
+router.delete('/:user_id', async (req, res) => {
   const { user_id } = req.params;
   try {
     const user = await UserController.deleteUser(user_id);
@@ -71,8 +70,38 @@ router.delete('users/:user_id', async (req, res) => {
       res.status(404).json({ message: 'User not found' });
     }
     res.status(201).json({ message: 'User deleted successfully' });
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
+  }
+});
+
+// ~~~~~~~~~~~ User Jobs ~~~~~~~~~~~
+
+// Get User Favorite
+router.get('/:user_id/favorite', async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const jobs = await UserController.getFavoriteJobs(user_id);
+    if (!jobs.length) {
+      res.status(400).json({ message: 'No favorite jobs found for that user' });
+    }
+    res.status(200).json(jobs);
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
+  }
+});
+
+// Get User Irrelevant
+router.get('/:user_id/irrelevant', async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const jobs = await UserController.getIrrelevantJobs(user_id, 'irrelevant');
+   if (!jobs.length) {
+      res.status(400).json({ message: 'No irrelevant jobs found for that user' });
+    }
+    res.status(200).json( jobs );
+  } catch (err) {
+    res.status(500).json({ error: `Server error`, type: err.code, message: err.message });
   }
 });
 

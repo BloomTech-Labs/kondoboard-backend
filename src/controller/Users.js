@@ -20,8 +20,17 @@ class Users {
       user[0].locations = JSON.parse(user[0].locations);
       return user[0];
     }
-
     return null;
+  }
+
+  static async getFavoriteJobs(user_id) {
+    const userJobs = await UserStore.getUserJobs(user_id, 'favorite');
+    return userJobs;
+  }
+
+  static async getIrrelevantJobs(user_id, type) {
+    const userJobs = await UserStore.getUserJobs(user_id, 'irrelevant');
+    return userJobs;
   }
 
   static async addUser(newUser) {
@@ -35,11 +44,10 @@ class Users {
     };
     if (changes.skills) {
       changes.skills = JSON.stringify(changes.skills);
-    }
+    };
     if (changes.locations) {
       changes.locations = JSON.stringify(changes.locations);
-    }
-    
+    };    
     const updatedUser = await UserStore.update(user_id, changes);
     return updatedUser;
   }
