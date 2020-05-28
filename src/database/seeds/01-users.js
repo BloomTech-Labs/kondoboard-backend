@@ -11,8 +11,8 @@ exports.seed = function(knex) {
           email: 'peterparker@newyork.com',
           profile_image: '',
           user_track: 'Web',
-          skills: JSON.stringify(["CSS",'React','HTML']),
-          locations: JSON.stringify(["Denver",'New York','San Francisco']),
+          skills: JSON.stringify(['CSS','React','HTML']),
+          locations: JSON.stringify(['Denver','New York','San Francisco']),
           remote: true
         }, 
         { // id: 2
@@ -21,8 +21,8 @@ exports.seed = function(knex) {
           email: 'tonystark@california.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: JSON.stringify([ "AWS", 'Python', 'C' ]), 
-          locations: JSON.stringify([ "New York", 'London', 'San Francisco' ]),
+          skills: JSON.stringify([ 'AWS', 'Python', 'C' ]), 
+          locations: JSON.stringify(['New York','London','San Francisco' ]),
           remote: true
         },  
         { // id: 3
@@ -32,7 +32,7 @@ exports.seed = function(knex) {
           profile_image: '',
           user_track: 'Data Science',
           skills: JSON.stringify([ "CSS", 'React', 'HTML' ]),
-          locations: JSON.stringify([ 'Washington DC', 'San Francisco', 'New York' ]),
+          locations: JSON.stringify(['Washington DC','San Francisco','New York' ]),
           remote: false
         },
         { // id: 4
@@ -41,8 +41,8 @@ exports.seed = function(knex) {
           email: 'batman@gmail.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: JSON.stringify([ "Neural Networks", 'AI', 'Robotics' ]),
-          locations: JSON.stringify([ 'Unknown' ]),
+          skills: JSON.stringify(['Neural Networks','AI','Robotics' ]),
+          locations: JSON.stringify(['Unknown']),
           remote: true
         }
 
