@@ -11,8 +11,8 @@ exports.seed = function(knex) {
           email: 'peterparker@newyork.com',
           profile_image: '',
           user_track: 'Web',
-          skills: 'HTML,CSS,JavaScript,React,Node,Express',
-          locations: 'New York,London,Los Angeles',
+          skills: JSON.stringify(['CSS','React','HTML']),
+          locations: JSON.stringify(['Denver','New York','San Francisco']),
           remote: true
         }, 
         { // id: 2
@@ -21,8 +21,8 @@ exports.seed = function(knex) {
           email: 'tonystark@california.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS,Python,Machine Learning,AI', 
-          locations: 'New York,Seattle,Denver,Los Angeles',
+          skills: JSON.stringify([ 'AWS', 'Python', 'C' ]), 
+          locations: JSON.stringify(['New York','London','San Francisco']),
           remote: true
         },  
         { // id: 3
@@ -31,8 +31,8 @@ exports.seed = function(knex) {
           email: 'superguy@america.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'AWS,Python,Machine Learning,AI', 
-          locations: 'San Francisco,Washington DC',
+          skills: JSON.stringify([ "CSS", 'React', 'HTML' ]),
+          locations: JSON.stringify(['Washington DC','San Francisco','New York']),
           remote: false
         },
         { // id: 4
@@ -41,11 +41,10 @@ exports.seed = function(knex) {
           email: 'batman@gmail.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: 'Neural Network, AI, Robotics',
-          locations: 'Unknown',
+          skills: JSON.stringify(['Neural Networks','AI','Robotics']),
+          locations: JSON.stringify(['Unknown']),
           remote: true
         }
-
       ]);
     });
 };
