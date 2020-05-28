@@ -19,8 +19,8 @@ exports.up = function(knex) {
             .index();
           users.string('profile_image', 255)
           users.string('user_track')
-          users.string('skills')
-          users.string('locations')
+          users.json('skills')
+          users.json('locations')
           users.boolean('remote')
       })
 
