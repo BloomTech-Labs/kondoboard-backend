@@ -4,6 +4,21 @@ const UserController = require('../controller/Users');
 
 // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
+// Get User By Email
+router.get('/', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await UserController.getUserByEmail(email);
+    if (!user) {
+      res.status(404).json({ message: 'There is no user with that email.' });
+    }
+    res.status(200).json(user);
+  } catch(error) {
+    console.log(error.message)
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
 // Get Single User Info
 router.get('/:user_id', async (req, res) => {
   const { user_id } = req.params;
@@ -17,21 +32,6 @@ router.get('/:user_id', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-
-// Get User By Email
-router.post('/email', async (req, res) => {
-  const {email} = req.body;
-  console.log(email);
-  try {
-    const user = await UserController.getUserByEmail(email);
-    if(!user) {
-      res.status(404).json({ message: 'there is no user with that email.' });
-    }
-    res.status(200).json(user);
-  } catch {
-    res.status(500).json({ error: 'Server Error' })
-  }
-})
 
 // Add New User
 router.post('/', async (req, res) => {
