@@ -5,13 +5,16 @@ class Users {
   // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
   static async getUser(user_id) {
-    const userQuery = await UserStore.getById(user_id);
-    return userQuery;
+    const user = await UserStore.getById(user_id);
+    return user;
   }
 
   static async getUserByEmail(email) {
-    const userQuery = await UserStore.getUserByEmail(email);
-    return userQuery;
+    const user = await UserStore.getUserByEmail(email);
+    if (user.length) {
+      return user[0];
+    }
+    return null;
   }
 
   static async addUser(newUser) {
