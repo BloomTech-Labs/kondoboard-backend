@@ -64,6 +64,23 @@ describe('create users POST /', function () {
         })
     });
 
+    describe('getUserByEmail', () => {
+        it('should return 200 OK', function () {
+            return request(server)
+                .get("/api/users")
+                .then(res => {
+                    expect(res.status).toBe(200);
+                });
+        });
+
+        it('should return JSON', function() {
+            return request(server).get('/api/users')
+                .then(res => {
+                    expect(res.type).toMatch(/json/i)
+                })
+        })
+    });
+
     describe('update user PUT/users/1', () => {
         it('should return 201 OK', function () {
             return request(server)
