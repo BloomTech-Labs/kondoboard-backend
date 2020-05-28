@@ -30,9 +30,16 @@ class Users {
   }  
 
   static async updateUser(user_id, changes) {
-    if(changes.id || changes.email){
+    if (changes.id || changes.email) {
       return null;
     };
+    if (changes.skills) {
+      changes.skills = JSON.stringify(changes.skills);
+    }
+    if (changes.locations) {
+      changes.locations = JSON.stringify(changes.locations);
+    }
+    
     const updatedUser = await UserStore.update(user_id, changes);
     return updatedUser;
   }

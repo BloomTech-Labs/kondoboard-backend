@@ -22,7 +22,7 @@ exports.seed = function(knex) {
           profile_image: '',
           user_track: 'Data Science',
           skills: JSON.stringify([ 'AWS', 'Python', 'C' ]), 
-          locations: JSON.stringify(['New York','London','San Francisco' ]),
+          locations: JSON.stringify(['New York','London','San Francisco']),
           remote: true
         },  
         { // id: 3
@@ -32,7 +32,7 @@ exports.seed = function(knex) {
           profile_image: '',
           user_track: 'Data Science',
           skills: JSON.stringify([ "CSS", 'React', 'HTML' ]),
-          locations: JSON.stringify(['Washington DC','San Francisco','New York' ]),
+          locations: JSON.stringify(['Washington DC','San Francisco','New York']),
           remote: false
         },
         { // id: 4
@@ -41,11 +41,10 @@ exports.seed = function(knex) {
           email: 'batman@gmail.com',
           profile_image: '',
           user_track: 'Data Science',
-          skills: JSON.stringify(['Neural Networks','AI','Robotics' ]),
+          skills: JSON.stringify(['Neural Networks','AI','Robotics']),
           locations: JSON.stringify(['Unknown']),
           remote: true
         }
-
       ]);
     });
 };
