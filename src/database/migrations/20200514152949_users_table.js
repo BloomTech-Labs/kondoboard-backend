@@ -26,15 +26,15 @@ exports.up = function(knex) {
 
       .createTable('jobs', jobs => {
           jobs.increments('id')
-          jobs.string('ds_id')
+          jobs.string('ds_id').unique()
           jobs.string('source_url')
           jobs
-            .string('title', 255)
+            .string('title', 125)
             .notNullable()
           jobs
             .string('description', 1000)
             .notNullable()
-          jobs.date('date_published')
+          jobs.date('date_published').notNullable()
           jobs.string('locations', 255)
         })
 

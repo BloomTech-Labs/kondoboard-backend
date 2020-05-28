@@ -28,6 +28,21 @@ module.exports = {
     },
   },
 
+  // db connection for testing
+  testing: {
+    client: "sqlite3",
+    connection: {
+      filename: "./src/database/test.db3",
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./src/database/migrations",
+    },
+    seeds: {
+      directory: "./src/database/seeds",
+    },
+  },
+
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL,

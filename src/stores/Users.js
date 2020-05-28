@@ -2,7 +2,7 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
   getById,
-  findUserByEmail,
+  getUserByEmail,
   insert,
   update,
   remove,
@@ -18,9 +18,8 @@ function getById(id) {
   return db('users').where({ id });
 }
 
-function findUserByEmail(email) {
-  return db("users")
-  .where('email', email);
+function getUserByEmail(email) {
+  return db("users").where({ email });
 }
 
 //Add new user

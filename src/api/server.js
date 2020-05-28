@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authenticationRequired = require('../utils/OktaAuth');
+// const authenticationRequired = require('../utils/OktaAuth');
 
 //Routes
 const UserRouter = require('../routes/Users');
@@ -22,7 +22,11 @@ server.use('/api/users', UserRouter);
 server.use('/api/ds', DSRouter);
 
 //Catch traffic
-server.get('/', (req, res) => res.send('Server is active'));
-server.get('/api', (req, res) => res.send('API is ready'));
+server.get('/', (req, res) => { 
+    res.status(200).json({ message: `hey! you've reached the '/' endpoint.`}) 
+});
+server.get('/api', (req, res) => {
+    res.status(200).json({ message: `API is ready!`}) 
+});
 
 module.exports = server;
