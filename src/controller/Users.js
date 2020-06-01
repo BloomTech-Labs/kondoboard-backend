@@ -11,8 +11,8 @@ class Users {
   }
 
   static async addUser(newUser) {
-    const formatedData = UserFunctions.userStringify(newUser);
-    const user = await UserStore.insert(formatedData);
+    UserFunctions.userStringify(newUser);
+    const user = await UserStore.insert(newUser);
     return user;
   } 
 
