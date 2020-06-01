@@ -6,7 +6,7 @@ const UserController = require('../controller/Users');
 
 // Get User By Email
 router.get('/', async (req, res) => {
-  const { email } = req.body;
+  const email = req.jwt.claims.sub;
   try {
     const user = await UserController.getUserByEmail(email);
     if (!user) {

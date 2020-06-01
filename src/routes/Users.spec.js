@@ -1,3 +1,4 @@
+require('dotenv').config();
 const request = require('supertest');
 const server = require('../api/server');
 const db = require('../database/dbConfig');
@@ -18,6 +19,14 @@ describe('Users router tests', () => {
     await db('users').truncate();
   });
 
+  describe('GET /', () => {
+    it('get non-exisiting user', async () => {
+      const res = await request(server).get('/api/users')
+      expect(res.status).toBe(404);
+      expect(res.text).toBe('{"message":"There is no user with that email."}');
+    });
+  });
+
   describe('POST /', () => {
     it('adds a new user', async () => {
       const res = await request(server).post('/api/users').send(userData);
@@ -29,23 +38,16 @@ describe('Users router tests', () => {
     it('add duplicate user email', async () => {
       const res = await request(server).post('/api/users').send(userData);
       expect(res.status).toBe(500);
-      expect(res.text).toBe('{"error":"Server Error"}');
     });
   });
 
   describe('GET /', () => {
     it('get existing user', async () => {
-      const res = await request(server).get('/api/users').send({ email: 'peterparker@newyork.com' });
+      const res = await request(server).get('/api/users');
       expect(res.status).toBe(200);
       expect(res.body.id).toBe(1);
       expect(res.body.first_name).toBe('Spider');
       expect(res.body.email).toBe('peterparker@newyork.com');
-    });
-
-    it('get non-exisiting user', async () => {
-      const res = await request(server).get('/api/users').send({ email: 'batman@thebatcave.com' });
-      expect(res.status).toBe(404);
-      expect(res.text).toBe('{"message":"There is no user with that email."}');
     });
   });
 
