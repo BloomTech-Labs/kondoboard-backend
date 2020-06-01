@@ -6,73 +6,46 @@ module.exports = {
   insert,
   update,
   remove,
-  getFavoriteJobs,
-  addFavoriteJob,
-  getIrrelevantJobs,
-  addIrrelevantJob,
+  getUserJobs,
+  saveJob,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
 
 function getById(id) {
-  return db('users').where({ id });
+  const user = db('users').where({ id });
+  return user;
 }
 
 function getUserByEmail(email) {
   return db("users").where({ email });
 }
 
-//Add new user
 async function insert(user) {
-  const id = await db('users').insert(user, 'id');
-  return getById(id);
+  const [id] = await db('users').insert(user, 'id');
+  const newUser = await getById(id);
+  return newUser;
 }
 
-function update(id, changes) {
-  const updatedUser = db('users').where({ id }).update(changes);
+async function update(id, changes) {
+  const updatedUser = await db('users').where({ id }).update(changes);
   return updatedUser;
 }
 
-function remove(user_id) {
-  return db('users').where({ user_id }).del();
+function remove(id) {
+  return db('users').where({ id }).del();
 }
 
-// ~~~~~~~~~~~ Jobs ~~~~~~~~~~
-
-function getFavoriteJobs(user_id) {
-  return db('users');
+async function getUserJobs(user_id, type) {
+  const userJobs = await db('jobs.*, users_jobs.status')
+    .from('users_jobs')
+    .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
+    .where('users_jobs.user_id', user_id)
+    .andWhere('users_jobs.status', type)
+  return userJobs;
 }
 
-function addFavoriteJob(user_id, favorited) {
-  return db('user_saved_jobs'); //insert user.id, job.id, and status="favorite"
-}
-
-function getIrrelevantJobs(user_id) {
-  return db('users');
-}
-
-function addIrrelevantJob(user_id, favorited) {
-  return db('user_saved_jobs'); //insert user.id, job.id, and status="irrelevant"
-}
-
-function archiveUserJob(user_id, saved_job_id) {
-  return db('user_saved_jobs'); //change archived boolean to true
-}
-
-// ~~~~~~~~~~~ User Tags ~~~~~~~~~~~
-
-function getUserTags(user_id) {
-  return db('user_tags');
-}
-
-function addUserTag(userTag) {
-  return db('user_tags'); //insert user.id, name, and color
-}
-
-function updateUserTag(tag_id, changes) {
-  return db('user_tags'); //update changes
-}
-
-function removeUserTag(tag_id) {
-  return db('user_tags'); //delete where id=tag_id
+async function saveJob(data) {
+  const userJob = await db('users_jobs').insert(data);
+  return userJob;
 }

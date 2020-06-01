@@ -3,15 +3,10 @@ exports.up = function(knex) {
   return(
     knex.schema
 
-      // users
       .createTable('users', users => {
           users.increments('id')
-          users
-            .string('first_name', 255)
-            .notNullable()
-          users
-            .string('last_name', 255)
-            .notNullable();
+          users.string('first_name', 255).notNullable()
+          users.string('last_name', 255).notNullable();
           users
             .string('email', 255)
             .unique()
@@ -19,8 +14,8 @@ exports.up = function(knex) {
             .index();
           users.string('profile_image', 255)
           users.string('user_track')
-          users.string('skills')
-          users.string('locations')
+          users.json('skills')
+          users.json('locations')
           users.boolean('remote')
       })
 
@@ -28,14 +23,13 @@ exports.up = function(knex) {
           jobs.increments('id')
           jobs.string('ds_id').unique()
           jobs.string('source_url')
-          jobs
-            .string('title', 125)
-            .notNullable()
-          jobs
-            .string('description', 1000)
-            .notNullable()
+          jobs.string('title', 92).notNullable()
+          jobs.string('company', 92).notNullable()
+          jobs.string('description', 3096).notNullable()
           jobs.date('date_published').notNullable()
-          jobs.string('locations', 255)
+          jobs.string('location_city', 92)
+          jobs.string('location_state', 92)
+          jobs.string('geo_locat', 28)
         })
 
       //joined table -- Relationship between Users and Jobs
@@ -53,12 +47,8 @@ exports.up = function(knex) {
           .references('jobs.id')
           .onDelete('CASCADE')
           .onUpdate('CASCADE')
-        saved
-          .string('status', 32)
-          .notNullable()
-        saved
-          .boolean('archived')
-          .defaultTo(false)
+        saved.string('status', 32).notNullable()
+        saved.boolean('archived').defaultTo(false)
       })
 
       // .createTable('user_tags', tag =>{
