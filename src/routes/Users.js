@@ -6,13 +6,14 @@ const UserController = require('../controller/Users');
 
 // Get User By Email
 router.get('/', async (req, res) => {
-  const { email } = req.body;
+  const email = req.jwt.claims.sub;
   try {
     const user = await UserController.getUserByEmail(email);
     if (!user) {
       res.status(404).json({ message: 'There is no user with that email.' });
+    } else {
+      res.status(200).json(user);
     }
-    res.status(200).json(user);
   } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: `Server error`});
@@ -26,8 +27,9 @@ router.get('/:user_id', async (req, res) => {
     const user = await UserController.getUser(user_id);
     if (!user) {
       res.status(404).json({ message: 'There is no user with that id.' });
+    } else {
+      res.status(200).json(user);
     }
-    res.status(200).json(user);
   } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: `Server error`});
@@ -42,7 +44,7 @@ router.post('/', async (req, res) => {
     if (!user) {
       res.status(404).json({ message: 'Unable to create new user.' });
     } else {
-      res.status(200).json({ message: `Account for ${newUser.first_name} created successfully` });
+      res.status(201).json(user);
     }
   } catch (err) {
     console.log(err.message); //err.code
@@ -55,11 +57,13 @@ router.put('/:user_id', async (req, res) => {
   const { user_id } = req.params;
   const changes = req.body;
   try {
-    const updatedUser = await UserController.updateUser(user_id, changes);
-    if (!updatedUser) {
+    const updatedCount = await UserController.updateUser(user_id, changes);
+    if (!updatedCount) {
       res.status(404).json({ message:'Invalid request' });
+    } else {
+      const updatedUser = await UserController.getUser(user_id);
+      res.status(201).json(updatedUser);
     }
-    res.status(201).json(await UserController.getUser(user_id));
   } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: `Server error`});
@@ -67,14 +71,15 @@ router.put('/:user_id', async (req, res) => {
 });
 
 // Delete User
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
+router.delete('/:user_id', async (req, res) => {
+  const { user_id } = req.params;
   try {
-    const user = await UserController.deleteUser(id);
-    if (!user) {
+    const deletedCount = await UserController.deleteUser(user_id);
+    if (!deletedCount) {
       res.status(404).json({ message: 'User not found' });
+    } else {
+      res.status(200).json({ message: 'User deleted successfully' });
     }
-    res.status(201).json({ message: 'User deleted successfully' });
   } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ "error": `Server error`});
