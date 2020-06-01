@@ -5,7 +5,6 @@
 *** ***
 
 #### Endpoints
-###### ** = not currently working
 
 ##### Users
 - [Get All User Data](#Get-All-User-Data)
@@ -15,22 +14,15 @@
 - [Update User](#Update-User)
 - [Delete User](#Delete-User)
 
-##### Users Info
-- [Add Skill](#Add-Skill)
-- [Delete Skill](#Delete-Skill) **
-- [Add Location](#Add-Location) **
-- [Delete Location](#Delete-Location) **
-
 ##### Jobs
-- [Get Job](#Get-Job) **
+- [Get Job](#Get-Job) 
 - [Add Job](#Add-Job)
-- [Update Job](#Update-Job)
 
 ##### Users Saved Jobs
-- [Get Favorite User Jobs](#Get-Favorite-User-Jobs) **
-- [Save Favorite User Job](#Save-Favorite-User-Job) **
-- [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs) **
-- [Save Irrelevant User Job](#Save-Irrelevant-User-Job) **
+- [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
+- [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
+- [Save Favorite User Job](#Save-Favorite-User-Job)
+- [Save Irrelevant User Job](#Save-Irrelevant-User-Job)
 
 *** ***
 
@@ -38,7 +30,7 @@
 ### <em>GET Request</em> 
 #### URL: /ds 
 
-##### Will return every user and their jobs (This is for Data Science)
+##### Will return every user and their jobs (Data Science endpoint)
 ##### https://kondo-board-api.herokuapp.com/api/ds
 
 ##### 200 (Success) 
@@ -52,39 +44,56 @@
       "email": "peterparker@newyork.com",
       "profile_image": "",
       "user_track": "Web",
-      "skills": "HTML,CSS,JavaScript,React,Node,Express,postgres",
-      "locations": "New York,London,Los Angeles",
+      "skills": [
+        "CSS",
+        "React",
+        "HTML"
+      ],
+      "locations": [
+        "Denver",
+        "New York",
+        "San Francisco"
+      ],
       "remote": 1
     },
     "savedJobs": [
       {
         "id": 1,
-        "datascience_id": "A1521288337",
-        "source_url": "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
+        "ds_id": "A1549335342",
+        "source_url": "[application url]",
         "title": "Data Engineer",
-        "description": "Description We are seeking a highly talented Data Engineer (DE) within the Data Engineering group. We need your help to build systems to enable data-driven decision-making. Our ...  Data Engineering team owns and develops the technology platform that offers decision makers both performance metrics and analysis as well as the self-service capability to perform ...",
-        "date_published": "2020-04-14",
-        "location_raw": "Newark"
+        "company": "capital_one",
+        "description": "... innovate leveraging ...",
+        "date_published": "2020-05-19",
+        "location_city": "Illinois Medical District",
+        "location_state": "Illinois",
+        "geo_locat": "41.868494,-87.673975"
       },
       {
         "id": 3,
-        "datascience_id": "A1550551",
-        "source_url": "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
+        "ds_id": "A1533100037",
+        "source_url": "[application url]",
         "title": "Data Engineer",
-        "description": "Hi, Please find the below requirements: Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python ...",
-        "date_published": "2020-05-22",
-        "location_raw": "Redmond"
+        "company": "mouri_tech",
+        "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
+        "date_published": "2020-04-30",
+        "location_city": "Wilmington",
+        "location_state": "Delaware",
+        "geo_locat": "39.73126,-75.545138"
       }
     ],
     "irrelevantJobs": [
       {
         "id": 2,
-        "datascience_id": "A1550124138",
-        "source_url": "https://www.adzuna.com/land/ad/1550124138?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=F9032DFA855E78FC254649635160B39FEC3E207E",
-        "title": "Data Engineer",
-        "description": "Hi, Please find the below requirements. You can respond back with an updated resume to praveenrajpvkc.com Title Data Engineer (Azure Data Engineer )Location Redmond, WAClient ...  Microsoft Note We are looking for a Data Engineer with Azure functions, azure pipelines design, ADF, ADLS and problem solving using C or python Responsibilities bull Build and maintain ETL ...",
-        "date_published": "2020-05-20",
-        "location_raw": "Redmond"
+        "ds_id": "A1556216004",
+        "source_url": "[application url]",
+        "title": "Data Engineer or Big Data Engineer",
+        "company": "katalyst_technologies_inc.",
+        "description": "... Big Data Engineer ...",
+        "date_published": "2020-05-27",
+        "location_city": "San Francisco",
+        "location_state": "California",
+        "geo_locat": "37.798085,-122.466538"
       }
     ]
   },
@@ -115,21 +124,25 @@
 #### URL: /users/:user_id
 
 ##### 200 (Success) 
-##### https://kondo-board-api.herokuapp.com/api/users/2
+##### https://kondo-board-api.herokuapp.com/api/users/4
 ```javascript
-[
-  {
-    "id": 2,
-    "first_name": "Iron",
+{
+    "id": 4,
+    "first_name": "Bat",
     "last_name": "Man",
-    "email": "tonystark@california.com",
+    "email": "batman@gmail.com",
     "profile_image": "",
     "user_track": "Data Science",
-    "skills": "AWS,Python,Machine Learning,AI",
-    "locations": "New York,Seattle,Denver,Los Angeles",
-    "remote": 0
-  }
-]
+    "skills": [
+        "Neural Networks",
+        "AI",
+        "Robotics"
+    ],
+    "locations": [
+        "Unknown"
+    ],
+    "remote": 1
+}
 ``` 
 
 ##### 404 (Bad Request)
@@ -154,25 +167,44 @@
 ### <em>GET Request</em>
 #### URL: /email
 
-##### Example Request
+##### Example Request Body
+##### https://kondo-board-api.herokuapp.com/api/users/email
 ```javascript
 {
-  "email": "spiderman@newyork.com",
+  "email": "peterparker@newyork.com"
 }
 ```
 ##### 201 (Success) 
 ###### Provides Authentication key to client localStorage
 ```javascript
 {
-  "login": "Logged in successfully." 
+  {
+      "id": 1,
+      "first_name": "Spider",
+      "last_name": "Man",
+      "email": "peterparker@newyork.com",
+      "profile_image": "",
+      "user_track": "Web",
+      "skills": [
+          "CSS",
+          "React",
+          "HTML"
+      ],
+      "locations": [
+          "Denver",
+          "New York",
+          "San Francisco"
+      ],
+      "remote": 1
+  }
 }
 ````
 
 ##### 404 (Bad Request)
-> Will receive a 404 response if invalid login info
+> Will receive a 404 response if invalid request
 ```javascript
 {
-  "login": "Failed to login"
+  "message": "No user found with that email"
 }
 ```
 
@@ -207,7 +239,7 @@
 ##### 201 (Success)
 ```javascript
 {
-  "message": "User created succesfully!"
+  "message": "User [first_name] created successfully!"
 }
 ````
 
@@ -234,9 +266,8 @@
 #### URL: /users/:user_id
 
 ##### You can update single, or multiple fields at a time
-##### Skills and Locations are stored as a string, in CSV format (Boston,New York,Denver)
-##### Currently these fields can be updated through this endpoint, but you need to pull previous skills/locations, add new skill/location onto existing string, and then upload the whole string of skills/locations
-##### If needed, we can do these fields separately with these endpoints: [locations](#Add-Location) and [skills](#Add-Skill) -- This is not fully added yet
+##### Can't change user id or email
+
 
 ##### Example Request
 ```javascript
@@ -248,23 +279,31 @@
 }
 ```
 
-##### 201 (Success)
+##### 201 (Success - returns updated user object)
 ```javascript
 {
-  "id": 1,
-  "first_name": "Frodo",
-  "last_name": "Baggins",
-  "email": "peterparker@newyork.com",
-  "profile_image": "https://image.flaticon.com/icons/svg/188/188987.svg",
-  "user_track": "Web",
-  "skills": "HTML,CSS,JavaScript,React,Node,Express",
-  "locations": "New York,London,Los Angeles",
-  "remote": 1
+    "id": 3,
+    "first_name": "Frodo",
+    "last_name": "Baggins",
+    "email": "superguy@america.com",
+    "profile_image": "[profilePicUrl]",
+    "user_track": "Data Science",
+    "skills": [
+        "CSS",
+        "React",
+        "HTML"
+    ],
+    "locations": [
+        "Washington DC",
+        "San Francisco",
+        "New York"
+    ],
+    "remote": 1
 }
 ```
 
 ##### 404 (Bad Request)
-> Will recieve 404 response if you try to update "id", "email", "skills" or "locations"
+> Will receive 404 response if you try to update "id" or "email"
 > Will receive a 404 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
@@ -311,168 +350,28 @@
 
 *** ***
 
-### <ins>Add Skill</ins>
-### <em>PUT Request</em>
-#### URL: /users/:user_id/add_skill
-
-##### Example Request
-```javascript
-{
-    "skill": "postgres"
-}
-```
-
-##### 201 (Success)
-```javascript
-{
-  "message": "postgres has been added to skills"  
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "Error adding skill"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
-### <ins>Delete Skill</ins>
-### <em>PUT Request</em>
-#### URL: /users/:user_id/delete_skill
-
-##### Example Request
-```javascript
-{
-    "skill": "React"
-}
-```
-
-##### 201 (Success)
-```javascript
-{
-  "message": "React has been deleted from skills"
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no skill exists
-```javascript
-{
-  "message": "Error deleting skill"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
-### <ins>Add Location</ins>
-### <em>PUT Request</em>
-#### URL: /users/:user_id/add_location
-
-##### Example Request
-```javascript
-{
-    "location": "Boston"
-}
-```
-
-##### 201 (Success)
-```javascript
-{
-  "message": "Boston has been added to location"
-}
-```
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "Error adding location"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
-### <ins>Delete Location</ins>
-### <em>PUT Request</em>
-#### URL: /users/:user_id/delete_location
-
-##### Example Request
-```javascript
-{
-    "location": "Los Angeles"
-}
-```
-
-##### 201 (Success)
-```javascript
-{
-  "message": "Los Angeles has been removed from locations"
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "Error deleting location"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
-
-*** ***
-
 ### <ins>Get Job</ins>
 ### <em>GET Request</em>
-#### URL: /jobs/:datascience_id
-
-##### Use to check if job has been saved into Users database from Datascience database
+#### URL: /jobs/:job_id
 
 ##### 201 (Success)
 
-###### If job exists:
+###### If job exists, returns job object
 ```javascript
 {
-  "message": "Job already exists"
+  "id": 1,
+  "ds_id": "A1521288337",
+  "source_url": "[link-to-apply]",
+  "title": "Data Engineer",
+  "description": "Data Engineering team owns and develops the technology platform that offers decision makers both performance metrics and analysis as well as the self-service capability to perform ...",
+  "date_published": "2020-04-14",
+  "locations": "Newark"
 }
 ```
-###### If job doesn't exist:
+###### If job doesn't exist, it returns an empty array
 ```javascript
 {
-  "message": "Job does not exist"
+  []
 }
 ````
 
@@ -495,7 +394,7 @@
 ```javascript
 {
   "datascience_id": "A1521288447",
-  "source_url": "https://www.adzuna.com/land/ad/1521288337?se=wGHBDnif6hGCPf0B37M_Tg&utm_medium=api&utm_source=da871bdc&v=3850D5181972D3577432AB845ACE7A684586D6DB",
+  "source_url": "[link-to-apply]",
   "title": "New Engineer",
   "description": "Description We are seeking a highlye capability to perform ...",
   "date_published": "2020-04-20",
@@ -528,56 +427,11 @@
 
 *** ***
 
-### <ins>Update Job</ins>
-### <em>POST Request</em>
-#### URL: /:job_id
-
-#### example request
-``` javascript
-{
-  "message": "not sure if we need this endpoint?"
-}
-```
-
-
-##### 201 (Success)
-```javascript
-{
-  "message": ""
-}
-````
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": ""
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": ""
-}
-```
-
-*** ***
-
 ### <ins>Get Favorite User Jobs</ins>
 ### <em>GET Request</em>
 #### URL: /users/:id/favorite_jobs/
 
 ##### Pass in user_id in the URL, job_id in POST request
-##### Instead of deleting a user job, use [Archive User Job](#Archive-User-Job)
-
-##### Example Request
-```javascript
-{
-  "job_id": 1,
-}
-```
 
 ##### 201 (Success)
 ```javascript
@@ -609,7 +463,6 @@
 #### URL: /users/:id/favorite_jobs/
 
 ##### Pass in user_id in the URL, job_id in POST request
-##### Instead of deleting a user's saved job, use [Archive User Job](#Archive-User-Job)
 
 ##### Example Request
 ```javascript
@@ -679,6 +532,3 @@
   "error": ""
 }
 ```
-
-*** ***
-
