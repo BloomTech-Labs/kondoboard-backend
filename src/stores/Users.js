@@ -21,17 +21,18 @@ function getUserByEmail(email) {
 }
 
 async function insert(user) {
-  const id = await db('users').insert(user, 'id');
-  return getById(id);
+  const [id] = await db('users').insert(user, 'id');
+  const newUser = await getById(id);
+  return newUser;
 }
 
-function update(id, changes) {
-  const updatedUser = db('users').where({ id }).update(changes);
+async function update(id, changes) {
+  const updatedUser = await db('users').where({ id }).update(changes);
   return updatedUser;
 }
 
-function remove(user_id) {
-  return db('users').where({ user_id }).del();
+function remove(id) {
+  return db('users').where({ id }).del();
 }
 
 async function getUserJobs(user_id, type) {
