@@ -6,7 +6,8 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 
 const authenticationRequired = async (req, res, next) => {
   if (process.env.TESTING) {
-    next();
+    req.jwt = { claims: { sub: 'peterparker@newyork.com' } };
+    return next();
   }
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
