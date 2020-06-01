@@ -14,8 +14,7 @@
 - [Update User](#Update-User)
 - [Delete User](#Delete-User)
 
-##### Jobs
-- [Get Job](#Get-Job) 
+##### Jobs 
 - [Add Job](#Add-Job)
 
 ##### Users Saved Jobs
