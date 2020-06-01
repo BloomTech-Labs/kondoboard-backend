@@ -6,7 +6,8 @@ module.exports = {
   insert,
   update,
   remove,
-  getUserJobs
+  getUserJobs,
+  saveJob,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -36,8 +37,7 @@ function remove(id) {
 }
 
 async function getUserJobs(user_id, type) {
-  const userJobs = await 
-    db('jobs.*, users_jobs.status')
+  const userJobs = await db('jobs.*, users_jobs.status')
     .from('users_jobs')
     .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
     .where('users_jobs.user_id', user_id)
@@ -45,11 +45,7 @@ async function getUserJobs(user_id, type) {
   return userJobs;
 }
 
-// async function getUserJobs(user_id, type) {
-//   const userJobs = await db.select('jobs.*')
-//     .from('users_jobs')
-//     .join('jobs', 'user_jobs.jobs_id', 'jobs.id')
-//     .where('users_jobs.user_id', user_id)
-//     .andWhere('user_jobs.status', type)
-//   return userJobs
-// }
+async function saveJob(data) {
+  const userJob = await db('users_jobs').insert(data);
+  return userJob;
+}
