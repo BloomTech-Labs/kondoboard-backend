@@ -5,27 +5,21 @@ class Users {
   // ~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~
 
   static async getUser(user_id) {
-    const user = await UserStore.getById(user_id);
+    const [user] = await UserStore.getById(user_id);
     return user;
   }
 
   static async getUserByEmail(email) {
-    const user = await UserStore.getUserByEmail(email);
-    if (user.length) {
-      return user[0];
-    }
-    return null;
+    const [user] = await UserStore.getUserByEmail(email);
+    return user;
   }
 
   static async addUser(newUser) {
-    const user = await UserStore.insert(newUser)
+    const [user] = await UserStore.insert(newUser);
     return user;
   }  
 
   static async updateUser(user_id, changes) {
-    if(changes.id || changes.email){
-      return null;
-    };
     const updatedUser = await UserStore.update(user_id, changes);
     return updatedUser;
   }
