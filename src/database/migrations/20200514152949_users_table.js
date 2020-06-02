@@ -21,7 +21,7 @@ exports.up = function(knex) {
 
       .createTable('jobs', jobs => {
           jobs.increments('id')
-          jobs.string('ds_id').unique()
+          jobs.string('ds_id').unique().index()
           jobs.string('source_url')
           jobs.string('title', 92).notNullable()
           jobs.string('company', 92).notNullable()

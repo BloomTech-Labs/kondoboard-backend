@@ -15,13 +15,12 @@
 - [Delete User](#Delete-User)
 
 ##### Jobs 
+- [Save Job to User](#Save-Job-to-User)
 - [Add Job](#Add-Job)
 
 ##### Users Saved Jobs
 - [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
 - [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
-- [Save Favorite User Job](#Save-Favorite-User-Job)
-- [Save Irrelevant User Job](#Save-Irrelevant-User-Job)
 
 *** ***
 
@@ -68,18 +67,7 @@
         "location_state": "Illinois",
         "geo_locat": "41.868494,-87.673975"
       },
-      {
-        "id": 3,
-        "ds_id": "A1533100037",
-        "source_url": "[application url]",
-        "title": "Data Engineer",
-        "company": "mouri_tech",
-        "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
-        "date_published": "2020-04-30",
-        "location_city": "Wilmington",
-        "location_state": "Delaware",
-        "geo_locat": "39.73126,-75.545138"
-      }
+      ...
     ],
     "irrelevantJobs": [
       {
@@ -99,9 +87,8 @@
   ...
 ]
 ``` 
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user(s) found.
+##### 400 (Bad Request)
+> Will receive a 400 response if no user(s) found.
 ```javascript
 {
   "message": "No users found"
@@ -144,8 +131,8 @@
 }
 ``` 
 
-##### 404 (Bad Request)
-> Will receive a 404 response if no user(s) found.
+##### 400 (Bad Request)
+> Will receive a 400 response if no user(s) found.
 ```javascript
 {
   "message": "No users found"
@@ -166,13 +153,10 @@
 ### <em>GET Request</em>
 #### URL: /email
 
-##### Example Request Body
+##### Example Request
 ##### https://kondo-board-api.herokuapp.com/api/users/email
-```javascript
-{
-  "email": "peterparker@newyork.com"
-}
-```
+##### Pass Okta Bearer Token in Authorization Header
+
 ##### 201 (Success) 
 ###### Provides Authentication key to client localStorage
 ```javascript
@@ -199,8 +183,8 @@
 }
 ````
 
-##### 404 (Bad Request)
-> Will receive a 404 response if invalid request
+##### 400 (Bad Request)
+> Will receive a 400 response if invalid request
 ```javascript
 {
   "message": "No user found with that email"
@@ -242,8 +226,8 @@
 }
 ````
 
-##### 404 (Bad Request)
-> Will receive a 404 response if there are missing/invalid fields.
+##### 400 (Bad Request)
+> Will receive a 400 response if there are missing/invalid fields.
 ```javascript
 {
   "message": "Unable to create new user"
@@ -301,9 +285,9 @@
 }
 ```
 
-##### 404 (Bad Request)
-> Will receive 404 response if you try to update "id" or "email"
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+##### 400 (Bad Request)
+> Will receive 400 response if you try to update "id" or "email"
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
   "message": "Invalid request"
@@ -331,8 +315,8 @@
 }
 ````
 
-##### 404 (Bad Request)
-> Will receive a 404 response if there is a problem with the server
+##### 400 (Bad Request)
+> Will receive a 400 response if there is a problem with the server
 ```javascript
 {
   "message": "User not found"
@@ -349,37 +333,52 @@
 
 *** ***
 
-### <ins>Get Job</ins>
-### <em>GET Request</em>
-#### URL: /jobs/:job_id
+### <ins>Save Job to User</ins>
+### <em>POST Request</em>
+#### URL: /jobs/:user_id
 
-##### 201 (Success)
+##### The user_id passed in url, job object and status passed in request
+##### Status should be "favorite" or "irrelevant"
+##### If job doesn't exist (no job has matching ds_id), then it'll create the job before saving to user.
 
-###### If job exists, returns job object
+##### Example Request
 ```javascript
 {
-  "id": 1,
-  "ds_id": "A1521288337",
-  "source_url": "[link-to-apply]",
-  "title": "Data Engineer",
-  "description": "Data Engineering team owns and develops the technology platform that offers decision makers both performance metrics and analysis as well as the self-service capability to perform ...",
-  "date_published": "2020-04-14",
-  "locations": "Newark"
+  "job": {
+    "ds_id": "A1549335342",
+    "source_url": "[application url]",
+    "title": "Data Engineer",
+    "company": "capital_one",
+    "description": "... innovate leveraging ...",
+    "date_published": "2020-05-19",
+    "location_city": "Illinois Medical District",
+    "location_state": "Illinois",
+    "geo_locat": "41.868494,-87.673975"
+  },
+  "status": "favorite"
 }
 ```
-###### If job doesn't exist, it returns an empty array
+
+##### 201 (Success)
 ```javascript
 {
-  []
+  "message": "Saved job as [status]"
 }
-````
+```
 
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": ""
+  "message": "Invalid Request"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server error"
 }
 ```
 
@@ -389,15 +388,21 @@
 ### <em>POST Request</em>
 #### URL: /jobs
 
+##### Not sure if needed, jobs are added when a user favorite or marks as irrelevant
+##### https://kondo-board-api.herokuapp.com/api/jobs/
+
 ##### Example Request
 ```javascript
 {
-  "datascience_id": "A1521288447",
-  "source_url": "[link-to-apply]",
-  "title": "New Engineer",
-  "description": "Description We are seeking a highlye capability to perform ...",
-  "date_published": "2020-04-20",
-  "location_raw": "Newark" 
+  ds_id: "A1549335342",
+  source_url: "[application url]",
+  title: "Data Engineer",
+  company: "capital_one",
+  description: "... innovate leveraging ...",
+  date_published: "2020-05-19",
+  location_city: "Illinois Medical District",
+  location_state: "Illinois",
+  geo_locat: "41.868494,-87.673975"
 }
 ```
 
@@ -408,8 +413,8 @@
 }
 ````
 
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
   "message": "Unable to add job"
@@ -428,60 +433,39 @@
 
 ### <ins>Get Favorite User Jobs</ins>
 ### <em>GET Request</em>
-#### URL: /users/:id/favorite_jobs/
+#### URL: /users/:id/favorite
 
-##### Pass in user_id in the URL, job_id in POST request
-
-##### 201 (Success)
-```javascript
-{
-  "message": "Added job to liked"
-}
-```
-
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": ""
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": ""
-}
-```
-
-*** ***
-
-### <ins>Save Favorite User Job</ins>
-### <em>POST Request</em>
-#### URL: /users/:id/favorite_jobs/
-
-##### Pass in user_id in the URL, job_id in POST request
-
-##### Example Request
-```javascript
-{
-  "job_id": 1,
-}
-```
+##### Pass in user_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/user/2/favorite
 
 ##### 201 (Success)
 ```javascript
-{
-  "message": "Saved job as liked"
-}
+[
+    {
+        "id": 7,
+        "user_id": 2,
+        "jobs_id": 7,
+        "status": "favorite",
+        "archived": 0,
+        "ds_id": "A1552121",
+        "source_url": "[application url]",
+        "title": "Data Engineers",
+        "company": "digital_intelligence_systems,_llc",
+        "description": "Hi, This is Surya with DISYS, One of our direct client ...",
+        "date_published": "2020-05-22",
+        "location_city": "Richmond",
+        "location_state": "Virginia",
+        "geo_locat": "37.959676,-76.711917"
+    },
+    ...
+]
 ```
 
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": ""
+  "message": "No favorite jobs found for that user"
 }
 ```
 
@@ -497,30 +481,38 @@
 
 ### <ins>Get Irrelevant User Jobs</ins>
 ### <em>GET Request</em>
-#### URL: /users/:id/irrelevant_jobs/
+#### URL: /users/:id/irrelevant
 
-##### Pass in user_id in the URL, job_id in POST request
-##### Instead of deleting a user's saved job, use [Archive User Job](#Archive-User-Job)
-
-##### Example Request
-```javascript
-{
-  "job_id": 1,
-}
-```
+##### Pass in user_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/user/2/irrelevant
 
 ##### 201 (Success)
 ```javascript
-{
-  "message": "Saved job as irrelevant"
-}
+[
+    {
+        "id": 1,
+        "user_id": 2,
+        "jobs_id": 1,
+        "status": "irrelevant",
+        "archived": 0,
+        "ds_id": "A1549335342",
+        "source_url": "[application url]",
+        "title": "Data Engineer",
+        "company": "capital_one",
+        "description": "... innovate leveraging ...",
+        "date_published": "2020-05-19",
+        "location_city": "Illinois Medical District",
+        "location_state": "Illinois",
+        "geo_locat": "41.868494,-87.673975"
+    }
+]
 ```
 
-##### 404 (Bad Request)
-> Will receive a 404 response if no user id, if unmatching field, or no fields exist
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": ""
+  "message": "No irrelevant jobs found for that user"
 }
 ```
 
@@ -528,6 +520,9 @@
 > Will receive a 500 response if there is a problem with the server
 ```javascript
 {
-  "error": ""
+  "error": "Server error"
 }
 ```
+
+
+

@@ -119,21 +119,5 @@ router.get('/:user_id/irrelevant', async (req, res) => {
   }
 });
 
-// Save new user_job
-router.post('/savejob', async (req, res) => {
-  const data = req.body;
-  try {
-    const newJob = await UserController.saveJob(data);
-    if (!newJob.length) {
-      res.status(404).json({ message: 'No job found' })
-    } else {
-      res.status(200).json({ message: `Job saved as ${data.status}`});
-    }
-  } catch(err) {
-    console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
-  }
-});
-
 
 module.exports = router;
