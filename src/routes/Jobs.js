@@ -7,7 +7,11 @@ router.get('/:job_id', async (req, res) => {
     const { job_id } = req.params;
     try {
         const job = await JobsController.getById(job_id);    
-        res.status(201).json(job)
+        if (!job.length){
+            res.status(404).json({ message: 'Unable to get job' })
+        } else {
+            res.status(201).json(job)
+        }
     } catch {
         res.status(500).json({ error: 'Server Error' });
     }
@@ -20,8 +24,9 @@ router.post('/', async (req, res) => {
         const job = await JobsController.addJob(new_job);
         if(!job){
             res.status(404).json({ message: 'Unable to add job' })
+        } else {
+            res.status(201).json(job);
         }
-        res.status(201).json({ message: 'New job added' })
     } catch {
         res.status(500).json({ error: 'Server Error' });
     }
@@ -35,8 +40,9 @@ router.put('/:job_id', async (req, res) => {
         const updatedJob = await JobsController.updateJob(job_id, changes);
         if(!updatedJob){
             res.status(404).json({ message: 'Invalid request' })
+        } else {
+            res.status(201).json(await JobsController.getById(job_id));
         }
-        res.status(201).json(await JobsController.getById(job_id));
     } catch {
         res.status(500).json({ error: 'Server Error' })
     }

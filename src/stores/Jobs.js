@@ -11,8 +11,9 @@ function getJobById(id) {
 }
 
 async function addJob(jobData) {
-  const id = await db('jobs').insert(jobData, 'id')
-  return getJobById(id);
+  const [id] = await db('jobs').insert(jobData, 'id');
+  const newJob = await getJobById(id);
+  return newJob;
 }
 
 function updateJob(id, changes) {
