@@ -337,9 +337,8 @@
 ### <em>POST Request</em>
 #### URL: /jobs/:user_id
 
-##### The user_id passed in url, job object and status passed in request
+##### User_id passed in URL, request contains job object and status for users_jobs table
 ##### Status should be "favorite" or "irrelevant"
-##### If job doesn't exist (no job has matching ds_id), then it'll create the job before saving to user.
 
 ##### Example Request
 ```javascript
@@ -436,7 +435,7 @@
 #### URL: /users/:id/favorite
 
 ##### Pass in user_id in the URL
-##### https://kondo-board-api.herokuapp.com/api/user/2/favorite
+##### https://kondo-board-api.herokuapp.com/api/users/2/favorite
 
 ##### 201 (Success)
 ```javascript
@@ -484,7 +483,7 @@
 #### URL: /users/:id/irrelevant
 
 ##### Pass in user_id in the URL
-##### https://kondo-board-api.herokuapp.com/api/user/2/irrelevant
+##### https://kondo-board-api.herokuapp.com/api/users/2/irrelevant
 
 ##### 201 (Success)
 ```javascript
