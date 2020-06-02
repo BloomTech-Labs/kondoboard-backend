@@ -1,4 +1,12 @@
 require('dotenv').config();
+const localPg = {
+  host: 'localhost',
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+}
+
+const dbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
   development: {
@@ -40,11 +48,10 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     migrations: {
       directory: './src/database/migrations',
+      tableName: 'knex_migrations'
     },
     seeds: {
       directory: './src/database/seeds',
     },
-    useNullAsDefault: true
   }
-
 };
