@@ -50,10 +50,10 @@ class Users {
     return userJobs;
   }
   
-  static async saveJob(data) {
-    const favoriteJob = await UserStore.saveJob(data);
-    return favoriteJob;
-  }
+  // static async saveJob(data) {
+  //   const favoriteJob = await UserStore.saveJob(data);
+  //   return favoriteJob;
+  // }
 }
 
 module.exports = Users;

@@ -7,7 +7,7 @@ module.exports = {
   update,
   remove,
   getUserJobs,
-  saveJob,
+  // saveJob,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -45,7 +45,7 @@ async function getUserJobs(user_id, type) {
   return userJobs;
 }
 
-async function saveJob(data) {
-  const userJob = await db('users_jobs').insert(data);
-  return userJob;
-}
+// async function saveJob(data) {
+//   const userJob = await db('users_jobs').insert(data);
+//   return userJob;
+// }

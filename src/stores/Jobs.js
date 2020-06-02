@@ -4,6 +4,8 @@ module.exports = {
   getJobById,
   updateJob,
   addJob,
+  saveJob,
+  getJobByDsId
 };
 
 function getJobById(id) {
@@ -19,4 +21,13 @@ async function addJob(jobData) {
 function updateJob(id, changes) {
   const updatedJob = db('jobs').where({ id }).update(changes);
   return updatedJob;
+}
+
+async function saveJob(data) {
+  const userJob = await db('users_jobs').insert(data);
+  return userJob;
+}
+
+function getJobByDsId(ds_id) {
+  return db('jobs').where({ ds_id });
 }
