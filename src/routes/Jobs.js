@@ -51,20 +51,19 @@ router.put('/:job_id', async (req, res) => {
 // Save new user_job
 router.post('/:user_id/save_job', async (req, res) => {
     const data = req.body;
-    const userId = req.params.user_id;
+    const userId = req.params.user_id;    
     try {
-      const newJob = await JobsController.saveJob(data, userId);
-      if (!newJob.length) {
-        res.status(404).json({ message: 'No job found' })
-      } else {
-        res.status(200).json({ message: `Job saved as ${data.status}`});
-      }
+        const newJob = await JobsController.saveJob(data, userId);
+        if (!newJob.length) {
+            res.status(400).json({ message: 'Invalid Request' })
+        } else {
+            res.status(200).json({ message: `Job saved as ${data.status}`});
+        }
     } catch(err) {
-      console.log(err.message); //err.code
-      res.status(500).json({ error: `Server error` });
+        console.log(err.message); //err.code
+        res.status(500).json({ error: `Server error` });
     }
-  });
-  
+});
 
 
 module.exports = router;

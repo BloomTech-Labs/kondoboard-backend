@@ -103,7 +103,7 @@ describe('Jobs router tests', () => {
     it('get non-existing job', async() => {
       const res = await request(server).get('/api/jobs/50');
       console.log(res.body);
-      expect(res.status).toBe(404);
+      expect(res.status).toBe(400);
       expect(res.text).toBe('{"message":"Unable to get job"}');
     });
   });
@@ -119,7 +119,7 @@ describe('Jobs router tests', () => {
 
     it('edit non-existing job', async () => {
       const res = await request(server).put('/api/jobs/2').send({ title: 'UX Designer' });
-      expect(res.status).toBe(404);
+      expect(res.status).toBe(400);
       expect(res.text).toBe('{"message":"Invalid request"}');
     });
   });

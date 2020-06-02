@@ -18,19 +18,17 @@ class Jobs {
     }
 
     static async saveJob(data, userId) {
-        console.log(userId);
-        const DS_id = data.job.ds_id;
-        // console.log(DS_id);
-        const [jobId] = await JobStore.getJobByDsId(DS_id);
-        console.log(jobId, "~");
-        if (!jobId) {
-            const [newjobId] = await JobStore.addJob(data.job)
-            console.log(jobId);
+        let jobId;
+        const [getJob] = await JobStore.getJobByDsId(data.job.ds_id);
+        if (!getJob) {
+            const [newJob] = await JobStore.addJob(data.job);
+            jobId = newJob.id;
+        } else {
+            jobId = getJob.id;
         }
-        const userJob = {user_id: userId, jobs_id: jobId.id, status: data.status};
-        console.log(userJob);
-        const favoriteJob = await JobStore.saveJob(userJob);
-        return favoriteJob;
+        const userJob = {user_id: userId, jobs_id: jobId, status: data.status};
+        const savedUserJob = await JobStore.saveJob(userJob);
+        return savedUserJob;
     }
 }
 
