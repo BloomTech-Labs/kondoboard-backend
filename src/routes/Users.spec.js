@@ -9,8 +9,8 @@ const userData = {
   email: 'peterparker@newyork.com',
   profile_image: '',
   user_track: 'DS',
-  skills: 'HTML,CSS,JavaScript,React,Node,Express',
-  locations: 'New York,London,Los Angeles',
+  skills: JSON.stringify(['HTML','CSS','JavaScript','React,Node','Express']),
+  locations: JSON.stringify(['New York','London','Los Angeles']),
   remote: true,
 };
 
