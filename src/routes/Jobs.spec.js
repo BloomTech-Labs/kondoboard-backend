@@ -102,6 +102,7 @@ describe('Jobs router tests', () => {
 
     it('get non-existing job', async() => {
       const res = await request(server).get('/api/jobs/50');
+      console.log(res.body);
       expect(res.status).toBe(404);
       expect(res.text).toBe('{"message":"Unable to get job"}');
     });
@@ -111,9 +112,9 @@ describe('Jobs router tests', () => {
     it('edit existing job', async () => {
       const res = await request(server).put('/api/jobs/1').send({ title: 'Web Developer', company: "visa" });
       expect(res.status).toBe(201);
-      expect(res.body.id).toBe(1);
-      expect(res.body.title).toBe('Web Developer');
-      expect(res.body.company).toBe('visa');
+      expect(res.body[0].id).toBe(1);
+      expect(res.body[0].title).toBe('Web Developer');
+      expect(res.body[0].company).toBe('visa');
     });
 
     it('edit non-existing job', async () => {

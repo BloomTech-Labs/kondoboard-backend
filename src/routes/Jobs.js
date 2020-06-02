@@ -7,7 +7,7 @@ router.get('/:job_id', async (req, res) => {
     const { job_id } = req.params;
     try {
         const job = await JobsController.getById(job_id);    
-        if (!job){
+        if (!job.length){
             res.status(404).json({ message: 'Unable to get job' })
         } else {
             res.status(201).json(job)
@@ -40,8 +40,9 @@ router.put('/:job_id', async (req, res) => {
         const updatedJob = await JobsController.updateJob(job_id, changes);
         if(!updatedJob){
             res.status(404).json({ message: 'Invalid request' })
+        } else {
+            res.status(201).json(await JobsController.getById(job_id));
         }
-        res.status(201).json(await JobsController.getById(job_id));
     } catch {
         res.status(500).json({ error: 'Server Error' })
     }
