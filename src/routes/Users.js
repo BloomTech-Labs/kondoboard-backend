@@ -97,6 +97,7 @@ router.get('/:user_id/favorite', async (req, res) => {
       res.status(200).json({ message: 'No favorite jobs found for that user' });
     } else {
       res.status(200).json(jobs);
+    }
   } catch (err) {
     //console.log(err.message); //err.code
     res.status(500).json({ error: `Server error`});
