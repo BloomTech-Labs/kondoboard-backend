@@ -63,7 +63,7 @@ router.put('/:user_id', async (req, res) => {
 });
 
 // Delete User
-router.delete('users/:user_id', async (req, res) => {
+router.delete('/:user_id', async (req, res) => {
   const { user_id } = req.params;
   try {
     const user = await UserController.deleteUser(user_id);
