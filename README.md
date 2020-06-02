@@ -151,14 +151,13 @@
 
 ### <ins>Get User by Email</ins> 
 ### <em>GET Request</em>
-#### URL: /email
+#### URL: /users
 
 ##### Example Request
-##### https://kondo-board-api.herokuapp.com/api/users/email
 ##### Pass Okta Bearer Token in Authorization Header
+##### https://kondo-board-api.herokuapp.com/api/users/
 
 ##### 201 (Success) 
-###### Provides Authentication key to client localStorage
 ```javascript
 {
   {
@@ -335,7 +334,7 @@
 
 ### <ins>Save Job to User</ins>
 ### <em>POST Request</em>
-#### URL: /jobs/:user_id
+#### URL: /jobs/:user_id/save_job
 
 ##### User_id passed in URL, request contains job object and status for users_jobs table
 ##### Status should be "favorite" or "irrelevant"
