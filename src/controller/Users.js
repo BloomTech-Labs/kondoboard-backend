@@ -20,7 +20,7 @@ class Users {
     if (changes.id || changes.email) { 
       return null; 
     }
-    const formatedChanges = UserFunctions.userStringify(changes);
+    const formatedChanges = await UserFunctions.userStringify(changes);
     const updatedUser = await UserStore.update(user_id, formatedChanges);
     return updatedUser;
   }

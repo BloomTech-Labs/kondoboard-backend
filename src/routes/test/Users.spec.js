@@ -1,7 +1,7 @@
 require('dotenv').config();
 const request = require('supertest');
-const server = require('../api/server');
-const db = require('../database/dbConfig');
+const server = require('../../api/server');
+const db = require('../../database/dbConfig');
 
 const userData = {
   first_name: 'Spider',
@@ -31,8 +31,8 @@ describe('Users router tests', () => {
     it('adds a new user', async () => {
       const res = await request(server).post('/api/users').send(userData);
       expect(res.status).toBe(201);
-      expect(res.body.id).toBe(1);
-      expect(res.body.email).toBe('peterparker@newyork.com');
+      expect(res.body[0].id).toBe(1);
+      expect(res.body[0].email).toBe('peterparker@newyork.com');
     });
 
     it('add duplicate user email', async () => {
@@ -69,11 +69,10 @@ describe('Users router tests', () => {
 
   describe('PUT /:user_id', () => {
     it('edit existing user', async () => {
-      const res = await request(server).put('/api/users/1').send({ first_name: 'Super', email: 'superman@krypton.com' });
+      const res = await request(server).put('/api/users/1').send({ first_name: 'Super' });
       expect(res.status).toBe(201);
       expect(res.body.id).toBe(1);
       expect(res.body.first_name).toBe('Super');
-      expect(res.body.email).toBe('superman@krypton.com');
     });
 
     it('edit non-existing user', async () => {

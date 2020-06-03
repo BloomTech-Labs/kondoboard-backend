@@ -8,7 +8,7 @@ router.get('/:job_id', async (req, res) => {
     try {
         const job = await JobsController.getById(job_id);    
         if (!job.length){
-            res.status(404).json({ message: 'Unable to get job' })
+            res.status(400).json({ message: 'Unable to get job' })
         } else {
             res.status(201).json(job)
         }
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     try {
         const job = await JobsController.addJob(new_job);
         if(!job){
-            res.status(404).json({ message: 'Unable to add job' })
+            res.status(400).json({ message: 'Unable to add job' })
         } else {
             res.status(201).json(job);
         }
@@ -39,7 +39,7 @@ router.put('/:job_id', async (req, res) => {
     try{
         const updatedJob = await JobsController.updateJob(job_id, changes);
         if(!updatedJob){
-            res.status(404).json({ message: 'Invalid request' })
+            res.status(400).json({ message: 'Invalid request' })
         } else {
             res.status(201).json(await JobsController.getById(job_id));
         }
