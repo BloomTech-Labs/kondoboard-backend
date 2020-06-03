@@ -11,7 +11,7 @@
 - [Get Single User Info](#Get-Single-User-Info)
 - [Get User by Email](#Get-User-by-Email) 
 - [Add New User](#Add-New-User)
-- [Update User](#Update-User)
+- [Update User](#Update-User)upda
 - [Delete User](#Delete-User)
 
 ##### Jobs 
