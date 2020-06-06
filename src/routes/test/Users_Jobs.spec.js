@@ -17,33 +17,33 @@ const userData = {
 // POST URL: api/jobs/:user_id/save_job
 const userFaveJobs = {
   job: {
-    ds_id: "A1549335999",
-    source_url: "[application url]",
-    title: "Data Engineer",
-    company: "capital_one",
-    description: "... innovate leveraging ...",
-    date_published: "2020-05-19",
-    location_city: "Illinois Medical District",
-    location_state: "Illinois",
-    geo_locat: "41.868494,-87.673975"
+    ds_id: 'A1549335999',
+    source_url: '[application url]',
+    title: 'Data Engineer',
+    company: 'capital_one',
+    description: '... innovate leveraging ...',
+    date_published: '2020-05-19',
+    location_city: 'Illinois Medical District',
+    location_state: 'Illinois',
+    geo_locat: '41.868494,-87.673975',
   },
-  status: "favorite"
+  status: 'favorite',
 };
 
 // POST URL: api/jobs/:user_id/save_job
 const userIrrelevantJob = {
   job: {
-    ds_id: "A1549335666",
-    source_url: "[application url]",
-    title: "Data Engineer",
-    company: "chase",
-    description: "... work for a boss all day ...",
-    date_published: "2020-05-31",
-    location_city: "Illinois Medical District",
-    location_state: "Illinois",
-    geo_locat: "41.868494,-87.673975"
+    ds_id: 'A1549335666',
+    source_url: '[application url]',
+    title: 'Data Engineer',
+    company: 'chase',
+    description: '... work for a boss all day ...',
+    date_published: '2020-05-31',
+    location_city: 'Illinois Medical District',
+    location_state: 'Illinois',
+    geo_locat: '41.868494,-87.673975',
   },
-  status: "irrelevant"
+  status: 'irrelevant',
 };
 
 describe('Users router tests', () => {
@@ -53,7 +53,7 @@ describe('Users router tests', () => {
 
   describe('Testing test', () => {
     it('get non-exisiting user', async () => {
-      const res = await request(server).get('/api/users')
+      const res = await request(server).get('/api/users');
       expect(res.status).toBe(404);
     });
   });

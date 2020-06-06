@@ -2,8 +2,8 @@ const DSStore = require('../stores/DataScience');
 
 class DataScience {
   static async getAllData() {
-    const data = [];
     const users = await DSStore.getAllUsers();
+    const data = [];
     for (let user of users) {
       const dataPoint = {};
       dataPoint.user = user;

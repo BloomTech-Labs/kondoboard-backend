@@ -30,9 +30,10 @@ describe('Users router tests', () => {
   describe('POST /', () => {
     it('adds a new user', async () => {
       const res = await request(server).post('/api/users').send(userData);
+      const [user] = res.body;
       expect(res.status).toBe(201);
-      expect(res.body[0].id).toBe(1);
-      expect(res.body[0].email).toBe('peterparker@newyork.com');
+      expect(user.id).toBe(1);
+      expect(user.email).toBe('peterparker@newyork.com');
     });
 
     it('add duplicate user email', async () => {
@@ -44,20 +45,22 @@ describe('Users router tests', () => {
   describe('GET /', () => {
     it('get existing user', async () => {
       const res = await request(server).get('/api/users');
+      const user = res.body;
       expect(res.status).toBe(200);
-      expect(res.body.id).toBe(1);
-      expect(res.body.first_name).toBe('Spider');
-      expect(res.body.email).toBe('peterparker@newyork.com');
+      expect(user.id).toBe(1);
+      expect(user.first_name).toBe('Spider');
+      expect(user.email).toBe('peterparker@newyork.com');
     });
   });
 
   describe('GET /:user_id', () => {
     it('get existing user', async () => {
       const res = await request(server).get('/api/users/1');
+      const user = res.body;
       expect(res.status).toBe(200);
-      expect(res.body.id).toBe(1);
-      expect(res.body.first_name).toBe('Spider');
-      expect(res.body.email).toBe('peterparker@newyork.com');
+      expect(user.id).toBe(1);
+      expect(user.first_name).toBe('Spider');
+      expect(user.email).toBe('peterparker@newyork.com');
     });
 
     it('get non-existing user', async() => {
@@ -70,9 +73,10 @@ describe('Users router tests', () => {
   describe('PUT /:user_id', () => {
     it('edit existing user', async () => {
       const res = await request(server).put('/api/users/1').send({ first_name: 'Super' });
+      const user = res.body;
       expect(res.status).toBe(201);
-      expect(res.body.id).toBe(1);
-      expect(res.body.first_name).toBe('Super');
+      expect(user.id).toBe(1);
+      expect(user.first_name).toBe('Super');
     });
 
     it('edit non-existing user', async () => {

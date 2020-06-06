@@ -4,15 +4,15 @@ const server = require('../../api/server');
 const db = require('../../database/dbConfig');
 
 const jobData = {
-  ds_id: "A1549335999",
-  source_url: "[application url]",
-  title: "Data Engineer",
-  company: "capital_one",
-  description: "... innovate leveraging ...",
-  date_published: "2020-05-19",
-  location_city: "Illinois Medical District",
-  location_state: "Illinois",
-  geo_locat: "41.868494,-87.673975"
+  ds_id: 'A1549335999',
+  source_url: '[application url]',
+  title: 'Data Engineer',
+  company: 'capital_one',
+  description: '... innovate leveraging ...',
+  date_published: '2020-05-19',
+  location_city: 'Illinois Medical District',
+  location_state: 'Illinois',
+  geo_locat: '41.868494,-87.673975',
 };
 
 describe('Jobs router tests', () => {
@@ -23,9 +23,10 @@ describe('Jobs router tests', () => {
   describe('POST /', () => {
     it('adds a new jobs', async () => {
       const res = await request(server).post('/api/jobs').send(jobData);
+      const [job] = res.body;
       expect(res.status).toBe(201);
-      expect(res.body[0].id).toBe(1);
-      expect(res.body[0].title).toBe('Data Engineer');
+      expect(job.id).toBe(1);
+      expect(job.title).toBe('Data Engineer');
     });
 
     it('add duplicate ds_id', async () => {
@@ -37,10 +38,11 @@ describe('Jobs router tests', () => {
   describe('GET /:job_id', () => {
     it('get existing job', async () => {
       const res = await request(server).get('/api/jobs/1');
+      const [job] = res.body;
       expect(res.status).toBe(201);
-      expect(res.body[0].id).toBe(1);
-      expect(res.body[0].title).toBe('Data Engineer');
-      expect(res.body[0].ds_id).toBe('A1549335999');
+      expect(job.id).toBe(1);
+      expect(job.title).toBe('Data Engineer');
+      expect(job.ds_id).toBe('A1549335999');
     });
 
     it('get non-existing job', async() => {
@@ -53,10 +55,11 @@ describe('Jobs router tests', () => {
   describe('PUT /:job_id', () => {
     it('edit existing job', async () => {
       const res = await request(server).put('/api/jobs/1').send({ title: 'Web Developer', company: "visa" });
+      const [job] = res.body;
       expect(res.status).toBe(201);
-      expect(res.body[0].id).toBe(1);
-      expect(res.body[0].title).toBe('Web Developer');
-      expect(res.body[0].company).toBe('visa');
+      expect(job.id).toBe(1);
+      expect(job.title).toBe('Web Developer');
+      expect(job.company).toBe('visa');
     });
 
     it('edit non-existing job', async () => {

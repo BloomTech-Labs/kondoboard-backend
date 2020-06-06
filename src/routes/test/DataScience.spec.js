@@ -6,15 +6,12 @@ const db = require('../../database/dbConfig');
 describe('DSRouter', () => {
   beforeEach(async () => {
     await db('users').truncate();
-  })
+  });
 
   describe('GET /', () => {
-    it('should return 200 OK', function () {
-      return request(server)
-        .get("/")
-        .then(res => {
-          expect(res.status).toBe(200);
-        });
+    it('should return 200 OK', async () => {
+      const res = await request(server).get("/");
+      expect(res.status).toBe(200);
     });
   });
 });

@@ -8,8 +8,9 @@ module.exports = {
   getJobByDsId
 };
 
-function getJobById(id) {
-  return db('jobs').where({ id });
+async function getJobById(id) {
+  const job = await db('jobs').where({ id });
+  return job;
 }
 
 async function addJob(jobData) {
@@ -18,8 +19,8 @@ async function addJob(jobData) {
   return newJob;
 }
 
-function updateJob(id, changes) {
-  const updatedJob = db('jobs').where({ id }).update(changes);
+async function updateJob(id, changes) {
+  const updatedJob = await db('jobs').where({ id }).update(changes);
   return updatedJob;
 }
 
@@ -28,6 +29,7 @@ async function saveJob(data) {
   return userJob;
 }
 
-function getJobByDsId(ds_id) {
-  return db('jobs').where({ ds_id });
+async function getJobByDsId(ds_id) {
+  const job = await db('jobs').where({ ds_id });
+  return job;
 }
