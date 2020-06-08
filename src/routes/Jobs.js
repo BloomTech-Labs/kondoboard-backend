@@ -1,8 +1,8 @@
-//Job Router (All start with /api/jobs)
+// Job Router (/api/jobs)
 const router = require('express').Router();
 const JobsController = require('../controller/Jobs');
 
-//Get job by ID
+// Get job by ID
 router.get('/:job_id', async (req, res) => {
   const jobId = req.params.job_id;
   try {
@@ -32,23 +32,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update Job -- probably not working, might not need
-router.put('/:job_id', async (req, res) => {
-  const jobId = req.params.job_id;
-  const changes = req.body;
-  try {
-    const updatedJob = await JobsController.updateJob(jobId, changes);
-    if (!updatedJob) {
-      res.status(400).json({ message: 'Invalid request' });
-    } else {
-      res.status(201).json(await JobsController.getById(jobId));
-    }
-  } catch {
-    res.status(500).json({ error: 'Server Error' });
-  }
-});
-
-// Save new user_job
+// Save as favorite 
 router.post('/:user_id/save_job', async (req, res) => {
   const data = req.body;
   const userId = req.params.user_id;    
@@ -57,7 +41,24 @@ router.post('/:user_id/save_job', async (req, res) => {
     if (!newJob.length) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ message: `Job saved as ${data.status}` });
+      res.status(200).json({ message: `Job saved as favorite` });
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: `Server error` });
+  }
+});
+
+// Save as irrelevant
+router.post('/:user_id/irrelevant_job', async (req, res) => {
+  const data = req.body;
+  const userId = req.params.user_id;    
+  try {
+    const newJob = await JobsController.irrelevantJob(data, userId);
+    if (!newJob.length) {
+      res.status(400).json({ message: 'Invalid Request' });
+    } else {
+      res.status(200).json({ message: `Job saved as irrelevant` });
     }
   } catch(err) {
     console.log(err.message); //err.code
