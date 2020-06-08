@@ -7,26 +7,25 @@ module.exports = {
 };
 
 async function getAllUsers() {
-  //const users = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users');
-  const users = await db.select('*').from('users');
+  const users = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users');
   return users;
-}
+};
 
-async function getUserSavedJobs(user_id) {
-  const jobs = await _getUserJobs(user_id, 'favorite');
+async function getUserSavedJobs(userId) {
+  const jobs = await _getUserJobs(userId, 'favorite');
   return jobs;
 }
 
-async function getUserIrrelevantJobs(user_id) {
-  const jobs = await _getUserJobs(user_id, 'irrelevant');
+async function getUserIrrelevantJobs(userId) {
+  const jobs = await _getUserJobs(userId, 'irrelevant');
   return jobs;
 }
 
-async function _getUserJobs(user_id, type) {
+async function _getUserJobs(userId, type) {
   const jobs = await db.select('jobs.*')
     .from('users_jobs')
     .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
-    .where('users_jobs.user_id', user_id)
+    .where('users_jobs.user_id', userId)
     .andWhere('users_jobs.status', type);
   return jobs;
 }

@@ -2,8 +2,8 @@ const UserStore = require('../stores/Users');
 const UserFunctions = require('../utils/UserFunctions');
 
 class Users {
-  static async getUser(user_id) {
-    const [user] = await UserStore.getById(user_id);
+  static async getUser(userId) {
+    const [user] = await UserStore.getById(userId);
     if (user) {      
       return UserFunctions.userParse(user);
     }
@@ -11,42 +11,43 @@ class Users {
   }
 
   static async addUser(newUser) {
-    UserFunctions.userStringify(newUser);
-    const user = await UserStore.insert(newUser);
+    const formattedUser = UserFunctions.userStringify(newUser);
+    const user = await UserStore.insert(formattedUser);
     return user;
   } 
 
-  static async updateUser(user_id, changes) {
+  static async updateUser(userId, changes) {
     if (changes.id || changes.email) { 
       return null; 
     }
-    const formatedChanges = await UserFunctions.userStringify(changes);
-    const updatedUser = await UserStore.update(user_id, formatedChanges);
+    const formattedChanges = await UserFunctions.userStringify(changes);
+    const updatedUser = await UserStore.update(userId, formattedChanges);
     return updatedUser;
   }
 
-  static async deleteUser(user_id){
-    const user = await UserStore.remove(user_id);
+  static async deleteUser(userId){
+    const user = await UserStore.remove(userId);
     return user;
   } 
 
   static async getUserByEmail(email) {
     const [user] = await UserStore.getUserByEmail(email);
     if (user) {      
-      return UserFunctions.userParse(user);
+      const formattedUser = UserFunctions.userParse(user);
+      return formattedUser;
     }
     return null;
   }
 
   // V User to Jobs V
 
-  static async getFavoriteJobs(user_id) {
-    const userJobs = await UserStore.getUserJobs(user_id, 'favorite');
+  static async getFavoriteJobs(userId) {
+    const userJobs = await UserStore.getUserJobs(userId, 'favorite');
     return userJobs;
   }
 
-  static async getIrrelevantJobs(user_id) {
-    const userJobs = await UserStore.getUserJobs(user_id, 'irrelevant');
+  static async getIrrelevantJobs(userId) {
+    const userJobs = await UserStore.getUserJobs(userId, 'irrelevant');
     return userJobs;
   }
   

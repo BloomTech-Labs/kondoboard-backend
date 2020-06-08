@@ -12,13 +12,14 @@ module.exports = {
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
 
-function getById(id) {
-  const user = db('users').where({ id });
+async function getById(id) {
+  const user = await db('users').where({ id });
   return user;
 }
 
-function getUserByEmail(email) {
-  return db("users").where({ email });
+async function getUserByEmail(email) {
+  const user = await db("users").where({ email });
+  return user;
 }
 
 async function insert(user) {
@@ -32,8 +33,9 @@ async function update(id, changes) {
   return updatedUser;
 }
 
-function remove(id) {
-  return db('users').where({ id }).del();
+async function remove(id) {
+  const res = await db('users').where({ id }).del();
+  return res;
 }
 
 async function getUserJobs(user_id, type) {

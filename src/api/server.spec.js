@@ -2,42 +2,34 @@ require('dotenv').config();
 const request = require('supertest');
 const server = require('./server.js');
 
-describe('server', function() {
-  it('should run tests', function() {
+describe('server', () => {
+  it('should run tests', () => {
     expect(true).toBe(true);
   });
 
-  describe('GET /', function() {
-    it('should return 200 ok', function() {
-      return request(server).get('/')
-        .then(res => {
-          expect(res.status).toBe(200);
-        });
+  describe('GET /', () => {
+    it('should return 200 ok', async () => {
+      const res = await request(server).get('/');
+      expect(res.status).toBe(200);
     });
 
-    it('should return JSON', function() {
-      return request(server).get('/')
-        .then(res => {
-          expect(res.type).toMatch(/json/i);
-        });
+    it('should return JSON', async () => {
+      const res = await request(server).get('/');
+      expect(res.type).toMatch(/json/i);
     });
   });
 });
 
-describe('server', function() {
-  describe('GET /api', function() {
-  it('should return 200', function() {
-      return request(server).get('/api')
-        .then(res => {
-          expect(res.status).toBe(200);
-        });
+describe('server', () => {
+  describe('GET /api', () => {
+  it('should return 200', async () => {
+      const res = await request(server).get('/api');
+      expect(res.status).toBe(200);
     });
 
-    it('should return JSON', function() {
-      return request(server).get('/api')
-        .then(res => {
-          expect(res.type).toMatch(/json/i);
-        });
+    it('should return JSON', async () => {
+      const res = await request(server).get('/api');
+      expect(res.type).toMatch(/json/i);
     });
   });
 });

@@ -23,10 +23,10 @@ server.use('/api/ds', DSRouter);
 
 //Catch traffic
 server.get('/', (req, res) => { 
-    res.status(200).json({ message: `hey! you've reached the '/' endpoint.`}) 
+	res.status(200).json({ message: `hey! you've reached the '/' endpoint.`}) 
 });
 server.get('/api', (req, res) => {
-    res.status(200).json({ message: `API is ready!`}) 
+	res.status(200).json({ message: `API is ready!`}) 
 });
 
 module.exports = server;
