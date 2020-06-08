@@ -15,7 +15,8 @@
 - [Delete User](#Delete-User)
 
 ##### Jobs 
-- [Save Job to User](#Save-Job-to-User)
+- [Save Favorite](#Save-Favorite)
+- [Save Irrelevant](#Save-Irrelevant)
 - [Add Job](#Add-Job)
 
 ##### Users Saved Jobs
@@ -333,35 +334,31 @@
 
 *** ***
 
-### <ins>Save Job to User</ins>
+### <ins>Save Favorite</ins>
 ### <em>POST Request</em>
-#### URL: /jobs/:user_id
+#### URL: /jobs/:user_id/save_job
 
-##### User_id passed in URL, request contains job object and status for users_jobs table
-##### Status should be "favorite" or "irrelevant"
+##### User_id passed in URL, request contains job
 
 ##### Example Request
 ```javascript
 {
-  "job": {
-    "ds_id": "A1549335342",
-    "source_url": "[application url]",
-    "title": "Data Engineer",
-    "company": "capital_one",
-    "description": "... innovate leveraging ...",
-    "date_published": "2020-05-19",
-    "location_city": "Illinois Medical District",
-    "location_state": "Illinois",
-    "geo_locat": "41.868494,-87.673975"
-  },
-  "status": "favorite"
+  "ds_id": "A1549335342",
+  "source_url": "[application url]",
+  "title": "Data Engineer",
+  "company": "capital_one",
+  "description": "... innovate leveraging ...",
+  "date_published": "2020-05-19",
+  "location_city": "Illinois Medical District",
+  "location_state": "Illinois",
+  "geo_locat": "41.868494,-87.673975"
 }
 ```
 
 ##### 201 (Success)
 ```javascript
 {
-  "message": "Saved job as [status]"
+  "message": "Saved job as favorite"
 }
 ```
 
@@ -383,40 +380,39 @@
 
 *** ***
 
-### <ins>Add Job</ins>
+### <ins>Save Irrelevant</ins>
 ### <em>POST Request</em>
-#### URL: /jobs
+#### URL: /jobs/:user_id/irrelevant_job
 
-##### Not sure if needed, jobs are added when a user favorite or marks as irrelevant
-##### https://kondo-board-api.herokuapp.com/api/jobs/
+##### User_id passed in URL, request contains job
 
 ##### Example Request
 ```javascript
 {
-  ds_id: "A1549335342",
-  source_url: "[application url]",
-  title: "Data Engineer",
-  company: "capital_one",
-  description: "... innovate leveraging ...",
-  date_published: "2020-05-19",
-  location_city: "Illinois Medical District",
-  location_state: "Illinois",
-  geo_locat: "41.868494,-87.673975"
+  "ds_id": "A1549335342",
+  "source_url": "[application url]",
+  "title": "Data Engineer",
+  "company": "capital_one",
+  "description": "... innovate leveraging ...",
+  "date_published": "2020-05-19",
+  "location_city": "Illinois Medical District",
+  "location_state": "Illinois",
+  "geo_locat": "41.868494,-87.673975"
 }
 ```
 
 ##### 201 (Success)
 ```javascript
 {
-  "message": "New job added"
+  "message": "Saved job as irrelevant"
 }
-````
+```
 
 ##### 400 (Bad Request)
 > Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": "Unable to add job"
+  "message": "Invalid Request"
 }
 ```
 
@@ -424,7 +420,7 @@
 > Will receive a 500 response if there is a problem with the server
 ```javascript
 {
-  "error": "Server Error"
+  "error": "Server error"
 }
 ```
 
