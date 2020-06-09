@@ -8,7 +8,7 @@ const localPg = {
 
 module.exports = {
   development: {
-    client: 'pg',
+    client: 'postgresql',
     connection: localPg,
     migrations: {
       directory: './src/database/migrations',
@@ -20,9 +20,9 @@ module.exports = {
 
   // db connection for testing
   testing: {
-    client: "pg",
-    connection: process.env.DB_URL,
-    // useNullAsDefault: true,
+    client: "sqlite3",
+    connection: "./src/database/test.db3",
+    useNullAsDefault: true,
     migrations: {
       directory: "./src/database/migrations",
     },
@@ -32,11 +32,10 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: 'postgresql',
     connection: process.env.DB_URL,
     migrations: {
       directory: './src/database/migrations',
-      tableName: 'knex_migrations'
     },
     seeds: {
       directory: './src/database/seeds',
