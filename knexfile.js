@@ -8,7 +8,7 @@ const localPg = {
 
 module.exports = {
   development: {
-    client: 'postgresql',
+    client: 'pg',
     connection: localPg,
     migrations: {
       directory: './src/database/migrations',
@@ -32,8 +32,8 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
-    connection: process.env.DB_URL,
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: './src/database/migrations',
     },
