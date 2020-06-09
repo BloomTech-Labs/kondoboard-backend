@@ -2,6 +2,7 @@ const db = require('../database/dbConfig');
 
 module.exports = {
   getAllUsers,
+  getSingleUser,
   getUserSavedJobs,
   getUserIrrelevantJobs,
 };
@@ -10,6 +11,11 @@ async function getAllUsers() {
   const users = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users');
   return users;
 };
+
+async function getSingleUser(userId) {
+  const user = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users').where("id", userId);
+  return user;
+}
 
 async function getUserSavedJobs(userId) {
   const jobs = await _getUserJobs(userId, 'favorite');

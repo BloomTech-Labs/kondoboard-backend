@@ -3,11 +3,8 @@ const UserFunctions = require('../utils/UserFunctions');
 
 class Users {
   static async getUser(userId) {
-    const [user] = await UserStore.getById(userId);
-    if (user) {      
-      return UserFunctions.userParse(user);
-    }
-    return null;
+    const [user] = await UserStore.getById(userId);    
+    return user;
   }
 
   static async addUser(newUser) {
@@ -32,11 +29,7 @@ class Users {
 
   static async getUserByEmail(email) {
     const [user] = await UserStore.getUserByEmail(email);
-    if (user) {      
-      const formattedUser = UserFunctions.userParse(user);
-      return formattedUser;
-    }
-    return null;
+    return user;
   }
 
   // V User to Jobs V

@@ -3,21 +3,13 @@ const localPg = {
   host: 'localhost',
   database: process.env.DB_NAME,
   user: "postgres",
-  password: "User_Password",
+  password: process.env.DB_PASS,
 }
-
-// const dbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
   development: {
     client: 'pg',
-    // useNullAsDefault: true,
     connection: localPg,
-    // pool: {
-    //   afterCreate: (conn, done) => {
-    //     conn.run('PRAGMA foreign_keys = ON', done)
-    //   },
-    // },
     migrations: {
       directory: './src/database/migrations',
     },
