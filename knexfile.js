@@ -2,24 +2,22 @@ require('dotenv').config();
 const localPg = {
   host: 'localhost',
   database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
+  user: "postgres",
+  password: "User_Password",
 }
 
-const dbConnection = process.env.DATABASE_URL || localPg;
+// const dbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
   development: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: './src/database/kondoboard_backend.db3'
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done)
-      },
-    },
+    client: 'pg',
+    // useNullAsDefault: true,
+    connection: localPg,
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run('PRAGMA foreign_keys = ON', done)
+    //   },
+    // },
     migrations: {
       directory: './src/database/migrations',
     },
@@ -30,11 +28,9 @@ module.exports = {
 
   // db connection for testing
   testing: {
-    client: "sqlite3",
-    connection: {
-      filename: "./src/database/test.db3",
-    },
-    useNullAsDefault: true,
+    client: "pg",
+    connection: process.env.DB_URL,
+    // useNullAsDefault: true,
     migrations: {
       directory: "./src/database/migrations",
     },
@@ -45,7 +41,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DB_URL,
     migrations: {
       directory: './src/database/migrations',
       tableName: 'knex_migrations'
