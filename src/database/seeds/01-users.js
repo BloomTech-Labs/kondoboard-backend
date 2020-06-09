@@ -10,7 +10,8 @@ exports.seed = async knex => {
       profile_image: '',
       user_track: 'Web',
       skills: JSON.stringify(['CSS','React','HTML']),
-      locations: JSON.stringify(['Denver','New York','San Francisco']),
+      states: JSON.stringify(['Colorado','New York']),
+      cities: JSON.stringify(['Denver','San Francisco']),
       remote: true,
     }, 
     { // id: 2
@@ -20,7 +21,8 @@ exports.seed = async knex => {
       profile_image: '',
       user_track: 'Data Science',
       skills: JSON.stringify([ 'AWS', 'Python', 'C' ]), 
-      locations: JSON.stringify(['New York','London','San Francisco']),
+      states: JSON.stringify(['California']),
+      cities: JSON.stringify(['San Francisco']),
       remote: true,
     },  
     { // id: 3
@@ -30,18 +32,14 @@ exports.seed = async knex => {
       profile_image: '',
       user_track: 'Data Science',
       skills: JSON.stringify([ "CSS", 'React', 'HTML' ]),
-      locations: JSON.stringify(['Washington DC','San Francisco','New York']),
+      states: JSON.stringify(['Maryland']),
+      cities: JSON.stringify(['Washington DC']),
       remote: false,
     },
     { // id: 4
       first_name: 'Bat',
       last_name: 'Man',
       email: 'batman@gmail.com',
-      profile_image: '',
-      user_track: 'Data Science',
-      skills: JSON.stringify(['Neural Networks','AI','Robotics']),
-      locations: JSON.stringify(['Unknown']),
-      remote: true,
     },
   ]);
 };

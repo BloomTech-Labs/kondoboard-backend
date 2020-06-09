@@ -5,16 +5,13 @@ exports.up = function(knex) {
       users.increments('id')
       users.string('first_name', 255).notNullable()
       users.string('last_name', 255).notNullable();
-      users
-        .string('email', 255)
-        .unique()
-        .notNullable()
-        .index();
-      users.string('profile_image', 255)
-      users.string('user_track')
-      users.json('skills')
-      users.json('locations')
-      users.boolean('remote')
+      users.string('email', 255).unique().notNullable().index();
+      users.string('profile_image', 255).defaultTo("")
+      users.string('user_track').defaultTo("")
+      users.json('skills').defaultTo([""])
+      users.json('cities').defaultTo([""])
+      users.json('states').defaultTo([""])
+      users.boolean('remote').defaultTo(0)
     })
 
     .createTable('jobs', jobs => {
@@ -33,14 +30,12 @@ exports.up = function(knex) {
     //joined table -- Relationship between Users and Jobs
     .createTable('users_jobs', saved => {
       saved.increments('id')
-      saved
-        .integer('user_id', 255)
+      saved.integer('user_id', 255)
         .notNullable()
         .references('users.id')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      saved
-        .integer('jobs_id', 255)
+      saved.integer('jobs_id', 255)
         .notNullable()
         .references('jobs.id')
         .onDelete('CASCADE')
