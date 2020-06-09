@@ -6,8 +6,11 @@
 
 #### Endpoints
 
+##### Data Science
+- [DS All User Data](#DS-All-User-Data)
+- [DS Single User Data](#DS-Single-User-Data)
+
 ##### Users
-- [Get All User Data](#Get-All-User-Data)
 - [Get Single User Info](#Get-Single-User-Info)
 - [Get User by Email](#Get-User-by-Email) 
 - [Add New User](#Add-New-User)
@@ -25,74 +28,151 @@
 
 *** ***
 
-### <ins>Get All User Data</ins>
+### <ins>DS All User Data</ins>
 ### <em>GET Request</em> 
 #### URL: /ds 
 
-##### Will return every user and their jobs (Data Science endpoint)
+##### Will return every user and their jobs
 ##### https://kondo-board-api.herokuapp.com/api/ds
 
 ##### 200 (Success) 
 ```javascript
-[
-  {
+{
     "user": {
-      "id": 1,
-      "first_name": "Spider",
-      "last_name": "Man",
-      "email": "peterparker@newyork.com",
-      "profile_image": "",
-      "user_track": "Web",
-      "skills": [
-        "CSS",
-        "React",
-        "HTML"
-      ],
-      "locations": [
-        "Denver",
-        "New York",
-        "San Francisco"
-      ],
-      "remote": 1
+        "id": 3,
+        "first_name": "Captain",
+        "last_name": "America",
+        "email": "superguy@america.com",
+        "profile_image": "",
+        "user_track": "Data Science",
+        "skills": [
+            "CSS",
+            "React",
+            "HTML"
+        ],
+        "cities": [
+            "Washington DC"
+        ],
+        "states": [
+            "Maryland"
+        ],
+        "remote": false
     },
     "savedJobs": [
-      {
-        "id": 1,
-        "ds_id": "A1549335342",
-        "source_url": "[application url]",
-        "title": "Data Engineer",
-        "company": "capital_one",
-        "description": "... innovate leveraging ...",
-        "date_published": "2020-05-19",
-        "location_city": "Illinois Medical District",
-        "location_state": "Illinois",
-        "geo_locat": "41.868494,-87.673975"
-      },
-      ...
+        {
+            "id": 3,
+            "ds_id": "A1533100037",
+            "source_url": "[application url]",
+            "title": "Data Engineer",
+            "company": "mouri_tech",
+            "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
+            "date_published": "2020-04-30T06:00:00.000Z",
+            "location_city": "Wilmington",
+            "location_state": "Delaware",
+            "geo_locat": "39.73126,-75.545138"
+        }
     ],
     "irrelevantJobs": [
-      {
-        "id": 2,
-        "ds_id": "A1556216004",
-        "source_url": "[application url]",
-        "title": "Data Engineer or Big Data Engineer",
-        "company": "katalyst_technologies_inc.",
-        "description": "... Big Data Engineer ...",
-        "date_published": "2020-05-27",
-        "location_city": "San Francisco",
-        "location_state": "California",
-        "geo_locat": "37.798085,-122.466538"
-      }
+        {
+            "id": 1,
+            "ds_id": "A1549335342",
+            "source_url": "[application url]",
+            "title": "Data Engineer",
+            "company": "capital_one",
+            "description": "... innovate leveraging ...",
+            "date_published": "2020-05-19T06:00:00.000Z",
+            "location_city": "Illinois Medical District",
+            "location_state": "Illinois",
+            "geo_locat": "41.868494,-87.673975"
+        },
+        ...
     ]
-  },
-  ...
-]
+}
 ``` 
 ##### 400 (Bad Request)
 > Will receive a 400 response if no user(s) found.
 ```javascript
 {
   "message": "No users found"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>DS Single User Data</ins>
+### <em>GET Request</em> 
+#### URL: /ds/:user_id
+
+##### Will return single user and their jobs
+##### https://kondo-board-api.herokuapp.com/api/ds/3
+
+##### 200 (Success) 
+```javascript
+{
+    "user": {
+        "id": 3,
+        "first_name": "Captain",
+        "last_name": "America",
+        "email": "superguy@america.com",
+        "profile_image": "",
+        "user_track": "Data Science",
+        "skills": [
+            "CSS",
+            "React",
+            "HTML"
+        ],
+        "cities": [
+            "Washington DC"
+        ],
+        "states": [
+            "Maryland"
+        ],
+        "remote": false
+    },
+    "savedJobs": [
+        {
+            "id": 3,
+            "ds_id": "A1533100037",
+            "source_url": "[application url]",
+            "title": "Data Engineer",
+            "company": "mouri_tech",
+            "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
+            "date_published": "2020-04-30T06:00:00.000Z",
+            "location_city": "Wilmington",
+            "location_state": "Delaware",
+            "geo_locat": "39.73126,-75.545138"
+        }
+    ],
+    "irrelevantJobs": [
+        {
+            "id": 1,
+            "ds_id": "A1549335342",
+            "source_url": "[application url]",
+            "title": "Data Engineer",
+            "company": "capital_one",
+            "description": "... innovate leveraging ...",
+            "date_published": "2020-05-19T06:00:00.000Z",
+            "location_city": "Illinois Medical District",
+            "location_state": "Illinois",
+            "geo_locat": "41.868494,-87.673975"
+        },
+        ...
+    ]
+}
+``` 
+##### 400 (Bad Request)
+> Will receive a 400 response if no user(s) found.
+```javascript
+{
+  "message": "No user found"
 }
 ```
 
