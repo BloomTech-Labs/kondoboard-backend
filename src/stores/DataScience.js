@@ -8,12 +8,15 @@ module.exports = {
 };
 
 async function getAllUsers() {
-  const users = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users');
+  //const users = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users');
+  //Temporary fix till we figure out the locations or city/state setup
+  const users = await db.select('*').from('users');
   return users;
 };
 
 async function getSingleUser(userId) {
-  const user = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users').where("id", userId);
+  //const user = await db.select('id', 'user_track', 'skills', 'locations', 'remote').from('users').where("id", userId);
+  const user = await db.select('*').from('users').where("id", userId);
   return user;
 }
 
