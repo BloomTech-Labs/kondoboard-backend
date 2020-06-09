@@ -1,12 +1,5 @@
 class UserFunctions {
-	// Pull from database
-	static userParse(user) {
-		user.skills = JSON.parse(user.skills);
-		user.locations = JSON.parse(user.locations);
-		return user;
-	}
-
-	// Push to database
+	// Push array to database
 	static userStringify(changes) {
 		if (changes.skills) {
 			changes.skills = JSON.stringify(changes.skills);
