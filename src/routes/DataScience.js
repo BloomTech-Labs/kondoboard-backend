@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
     const data = await DSController.getAllData();
     res.status(200).json(data);
   } catch(err) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: err.message });
   }
 });
 

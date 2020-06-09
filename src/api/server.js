@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authenticationRequired = require('../utils/OktaAuth');
+// const authenticationRequired = require('../utils/OktaAuth');
 
 //Routes
 const UserRouter = require('../routes/Users');
@@ -17,8 +17,8 @@ server.use(cors());
 server.use(express.json());
 
 //Routes
-server.use('/api/jobs', authenticationRequired, JobsRouter);
-server.use('/api/users', authenticationRequired, UserRouter);
+server.use('/api/jobs', JobsRouter);
+server.use('/api/users', UserRouter);
 server.use('/api/ds', DSRouter);
 
 //Catch traffic
