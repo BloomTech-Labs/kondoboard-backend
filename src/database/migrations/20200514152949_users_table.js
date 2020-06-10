@@ -8,9 +8,9 @@ exports.up = function(knex) {
       users.string('email', 255).unique().notNullable().index();
       users.string('profile_image', 255).defaultTo("")
       users.string('user_track').defaultTo("")
-      users.json('skills').defaultTo([""])
-      users.json('cities').defaultTo([""])
-      users.json('states').defaultTo([""])
+      users.json('skills').defaultTo([])
+      users.json('cities').defaultTo([])
+      users.json('states').defaultTo([])
       users.boolean('remote').defaultTo(0)
     })
 
@@ -44,45 +44,41 @@ exports.up = function(knex) {
       saved.boolean('archived').defaultTo(false)
     })
 
-    // .createTable('user_tags', tag =>{
-    //   tag.increments('id')
-    //   tag
-    //     .integer('user_id', 255)
-    //     .notNullable()
-    //     .references('users.id')
-    //     .onDelete('CASCADE')
-    //     .onUpdate('CASCADE')
-    //   tag
-    //     .string('tag_name', 64)
-    //     .notNullable()
-    //   tag
-    //     .string('color', 10)
-    //     .notNullable()
-    // })
+    .createTable('user_tags', tag =>{
+      tag.increments('id')
+      tag
+        .integer('user_id', 255)
+        .notNullable()
+        .references('users.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      tag.string('tag_name', 64).notNullable()
+      tag.string('color', 10).defaultTo("#c4c4c4")
+    })
 
-    // joined table
-    // .createTable('job_tags', jobTag => {
-    //   jobTag.increments('id')
-    //   jobTag
-    //     .integer('job_tags_id', 255)
-    //     .notNullable()
-    //     .references('user_tags.id')
-    //     .onDelete('CASCADE')
-    //     .onUpdate('CASCADE')
-    //   jobTag
-    //     .integer('jobs_id', 255)
-    //     .notNullable()
-    //     .references('jobs.id')
-    //     .onDelete('CASCADE')
-    //     .onUpdate('CASCADE')
-    // })
+    //joined table
+    .createTable('job_tags', jobTag => {
+      jobTag.increments('id')
+      jobTag
+        .integer('job_tags_id', 255)
+        .notNullable()
+        .references('user_tags.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      jobTag
+        .integer('jobs_id', 255)
+        .notNullable()
+        .references('jobs.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+    })
   );
 };
 
 exports.down = function(knex) {
   return (knex.schema
-    // .dropTableIfExist('job_tags')
-    // .dropTableIfExist('user_tags')
+    .dropTableIfExist('job_tags')
+    .dropTableIfExist('user_tags')
     .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')
     .dropTableIfExist('users')

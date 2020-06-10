@@ -44,10 +44,29 @@ class Users {
     return userJobs;
   }
   
-  // static async saveJob(data) {
-  //   const favoriteJob = await UserStore.saveJob(data);
-  //   return favoriteJob;
-  // }
+  // User Tags
+
+  static async getTags(user_id) {
+    const tag = await UserStore.getTags(user_id);
+    return tag;
+  }
+
+  static async addTag(newTag) {
+    const [tag] = await UserStore.addTag(newTag);
+    return tag;
+  }
+
+  static async updateTag(id, changes) {
+    const updatedTag = await UserStore.updateTag(id, changes);
+    return updatedTag;
+  }
+
+  static async deleteTag(tag_id){
+    const tag = await UserStore.removeTag(tag_id);
+    return tag;
+  } 
+
+
 }
 
 module.exports = Users;
