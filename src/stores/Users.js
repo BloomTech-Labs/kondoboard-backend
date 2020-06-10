@@ -7,7 +7,10 @@ module.exports = {
   update,
   remove,
   getUserJobs,
-  // saveJob,
+  addTag,
+  getTags,
+  updateTag,
+  removeTag,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -47,7 +50,29 @@ async function getUserJobs(user_id, type) {
   return userJobs;
 }
 
-// async function saveJob(data) {
-//   const userJob = await db('users_jobs').insert(data);
-//   return userJob;
-// }
+async function getTagById(id) {
+  const tag = await db('user_tags').where({ id });
+  return tag;
+}
+
+async function getTags(user_id) {
+  const tags = await db('user_tags').where({ user_id });
+  console.log(tags);
+  return tags;
+}
+
+async function addTag(newTag) {
+  const [id] = await db('user_tags').insert(newTag, 'id');
+  const addedTag = await getTagById(id);
+  return addedTag;
+}
+
+async function updateTag(id, changes) {
+  const updatedTag = await db('user_tags').where({ id }).update(changes);
+  return updatedTag;
+}
+
+async function removeTag(id) {
+  const res = await db('user_tags').where({ id }).del();
+  return res;
+}

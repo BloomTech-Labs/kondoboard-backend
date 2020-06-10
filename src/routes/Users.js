@@ -120,4 +120,78 @@ router.get('/:user_id/irrelevant', async (req, res) => {
   }
 });
 
+// ~~~~~~~~~~~ User Tags ~~~~~~~~~~~
+
+// Get all tags
+router.get('/:user_id/tag', async (req, res) => {
+  const user_id = req.params.user_id;
+
+  try {
+    const tag = await UserController.getTags(user_id);
+    if (!tag) {
+      res.status(404).json({ message: 'Unable to find tags for that user.' });
+    } else {
+      res.status(201).json(tag);
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Add tag
+router.post('/:user_id/tag', async (req, res) => {
+  const userId = req.params.user_id;
+  const newTag = req.body;
+  newTag.user_id = userId;
+  try {
+    const tag = await UserController.addTag(newTag);
+    if (!tag) {
+      res.status(404).json({ message: 'Unable to create new tag.' });
+    } else {
+      res.status(201).json(tag);
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update Tag
+router.put('/:user_id/tag/:tag_id', async (req, res) => {
+  const changes = req.body;
+  const id = req.params.tag_id;
+  changes.user_id = req.params.user_id;
+
+  try {
+    const updateTag = await UserController.updateTag(id, changes);
+    if (!updateTag) {
+      res.status(404).json({ message:'Invalid request' });
+    } else {
+      res.status(201).json({ message:'Updated tag successfully' });
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Delete Tag
+router.delete('/tag/:tag_id', async (req, res) => {
+  const tag_id = req.params.tag_id;
+  try {
+    const deletedCount = await UserController.deleteTag(tag_id);
+    if (!deletedCount) {
+      res.status(404).json({ message: 'Tag not found' });
+    } else {
+      res.status(200).json({ message: 'Tag deleted successfully' });
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ "error": 'Server error' });
+  }
+});
+
+
+
 module.exports = router;
