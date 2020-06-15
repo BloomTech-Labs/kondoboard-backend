@@ -122,14 +122,13 @@ router.get('/:user_id/irrelevant', async (req, res) => {
 
 // ~~~~~~~~~~~ User Tags ~~~~~~~~~~~
 
-// Get all tags
+// Get All User's tags
 router.get('/:user_id/tag', async (req, res) => {
   const user_id = req.params.user_id;
-
   try {
     const tag = await UserController.getTags(user_id);
     if (!tag) {
-      res.status(404).json({ message: 'Unable to find tags for that user.' });
+      res.status(400).json({ message: 'Unable to find tags for that user.' });
     } else {
       res.status(201).json(tag);
     }
@@ -139,7 +138,7 @@ router.get('/:user_id/tag', async (req, res) => {
   }
 });
 
-// Add tag
+// Add User tag
 router.post('/:user_id/tag', async (req, res) => {
   const userId = req.params.user_id;
   const newTag = req.body;
@@ -147,7 +146,7 @@ router.post('/:user_id/tag', async (req, res) => {
   try {
     const tag = await UserController.addTag(newTag);
     if (!tag) {
-      res.status(404).json({ message: 'Unable to create new tag.' });
+      res.status(400).json({ message: 'Unable to create new tag.' });
     } else {
       res.status(201).json(tag);
     }
@@ -162,7 +161,6 @@ router.put('/:user_id/tag/:tag_id', async (req, res) => {
   const changes = req.body;
   const id = req.params.tag_id;
   changes.user_id = req.params.user_id;
-
   try {
     const updateTag = await UserController.updateTag(id, changes);
     if (!updateTag) {
@@ -191,6 +189,10 @@ router.delete('/tag/:tag_id', async (req, res) => {
     res.status(500).json({ "error": 'Server error' });
   }
 });
+
+// Add tag to job
+
+
 
 
 

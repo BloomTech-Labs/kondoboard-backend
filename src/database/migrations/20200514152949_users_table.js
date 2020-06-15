@@ -40,6 +40,7 @@ exports.up = function(knex) {
         .references('jobs.id')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
+      saved.json('tags').defaultTo([])
       saved.string('status', 32).notNullable()
       saved.boolean('archived').defaultTo(false)
     })
@@ -55,29 +56,12 @@ exports.up = function(knex) {
       tag.string('tag_name', 64).notNullable()
       tag.string('color', 10).defaultTo("#c4c4c4")
     })
-
-    //joined table
-    .createTable('job_tags', jobTag => {
-      jobTag.increments('id')
-      jobTag
-        .integer('job_tags_id', 255)
-        .notNullable()
-        .references('user_tags.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-      jobTag
-        .integer('jobs_id', 255)
-        .notNullable()
-        .references('jobs.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE')
-    })
+    
   );
 };
 
 exports.down = function(knex) {
   return (knex.schema
-    .dropTableIfExist('job_tags')
     .dropTableIfExist('user_tags')
     .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')

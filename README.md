@@ -1,4 +1,4 @@
-# Kondoboard Users DB
+# Kondoboard Backend Database
 ## https://kondo-board-api.herokuapp.com/api
 ##### All endpoints start with /api
 
@@ -17,12 +17,17 @@
 - [Update User](#Update-User)
 - [Delete User](#Delete-User)
 
-##### Jobs 
+##### Jobs
 - [Save Favorite](#Save-Favorite)
 - [Save Irrelevant](#Save-Irrelevant)
-- [Add Job](#Add-Job)
 
-##### Users Saved Jobs
+##### Tags
+- [Get All User Tags](#Get-All-User-Tags)
+- [Add Tag](#Add-Tag)
+- [Update Tag](#Update-Tag)
+- [Delete Tag](#Delete-Tag)
+
+##### Saved Jobs
 - [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
 - [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
 
@@ -37,57 +42,74 @@
 
 ##### 200 (Success) 
 ```javascript
-{
-    "user": {
-        "id": 3,
-        "first_name": "Captain",
-        "last_name": "America",
-        "email": "superguy@america.com",
-        "profile_image": "",
-        "user_track": "Data Science",
-        "skills": [
-            "CSS",
-            "React",
-            "HTML"
-        ],
-        "cities": [
-            "Washington DC"
-        ],
-        "states": [
-            "Maryland"
-        ],
-        "remote": false
-    },
-    "savedJobs": [
-        {
-            "id": 3,
-            "ds_id": "A1533100037",
-            "source_url": "[application url]",
-            "title": "Data Engineer",
-            "company": "mouri_tech",
-            "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
-            "date_published": "2020-04-30T06:00:00.000Z",
-            "location_city": "Wilmington",
-            "location_state": "Delaware",
-            "geo_locat": "39.73126,-75.545138"
-        }
-    ],
-    "irrelevantJobs": [
-        {
+[
+    {
+        "user": {
             "id": 1,
-            "ds_id": "A1549335342",
-            "source_url": "[application url]",
-            "title": "Data Engineer",
-            "company": "capital_one",
-            "description": "... innovate leveraging ...",
-            "date_published": "2020-05-19T06:00:00.000Z",
-            "location_city": "Illinois Medical District",
-            "location_state": "Illinois",
-            "geo_locat": "41.868494,-87.673975"
+            "first_name": "Spider",
+            "last_name": "Man",
+            "email": "peterparker@newyork.com",
+            "profile_image": "",
+            "user_track": "Web",
+            "skills": [
+                "CSS",
+                "React",
+                "HTML"
+            ],
+            "cities": [
+                "Denver",
+                "San Francisco"
+            ],
+            "states": [
+                "Colorado",
+                "New York"
+            ],
+            "remote": true
         },
-        ...
-    ]
-}
+        "savedJobs": [
+            {
+                "id": 1,
+                "ds_id": "A1549335342",
+                "source_url": "[application url]",
+                "title": "Data Engineer",
+                "company": "capital_one",
+                "description": "... innovate leveraging ...",
+                "date_published": "2020-05-19T06:00:00.000Z",
+                "location_city": "Illinois Medical District",
+                "location_state": "Illinois",
+                "geo_locat": "41.868494,-87.673975"
+            },
+            {
+                "id": 3,
+                "ds_id": "A1533100037",
+                "source_url": "[application url]",
+                "title": "Data Engineer",
+                "company": "mouri_tech",
+                "description": "Role Data Engineer Location Wilmington, DE Skillset Language PythonScalaJava ...",
+                "date_published": "2020-04-30T06:00:00.000Z",
+                "location_city": "Wilmington",
+                "location_state": "Delaware",
+                "geo_locat": "39.73126,-75.545138"
+            }
+        ],
+        "irrelevantJobs": [
+            {
+                "id": 2,
+                "ds_id": "A1556216004",
+                "source_url": "[application url]",
+                "title": "Data Engineer or Big Data Engineer",
+                "company": "katalyst_technologies_inc.",
+                "description": "... Big Data Engineer ...",
+                "date_published": "2020-05-27T06:00:00.000Z",
+                "location_city": "San Francisco",
+                "location_state": "California",
+                "geo_locat": "37.798085,-122.466538"
+            }
+        ]
+    },
+    ...
+]
+    
 ``` 
 ##### 400 (Bad Request)
 > Will receive a 400 response if no user(s) found.
@@ -294,8 +316,8 @@
   "email": "spiderpig@gmail.com",
   "profile_image": "",
   "user_track": "Web",
-  "skills": "HTML,CSS,React,Angular",
-  "locations": "New York,Seattle,Denver,Los Angeles",
+  "skills": ["HTML,CSS,React,Angular"],
+  "locations": ["New York,Seattle,Denver,Los Angeles"],
   "remote": 0
 }
 ```
@@ -303,7 +325,7 @@
 ##### 201 (Success)
 ```javascript
 {
-  "message": "User [first_name] created successfully!"
+  "message": "User Spider created successfully!"
 }
 ````
 
@@ -339,7 +361,8 @@
   "first_name": "Frodo",
   "last_name": "Baggins",
   "profile_image": "https://image.flaticon.com/icons/svg/188/188987.svg",
-  "remote": true
+  "remote": true,
+  "locations": ["Washington DC","San Francisco","New York"],
 }
 ```
 
@@ -506,9 +529,178 @@
 
 *** ***
 
+### <ins>Get All User Tags</ins>
+### <em>GET Request</em>
+#### URL: /users/:user_id/tag
+
+##### Pass in user_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "tag_name": "ReactJS",
+        "color": "#4287f5"
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "tag_name": "Front End",
+        "color": "#34e056"
+    },
+    {
+        "id": 3,
+        "user_id": 1,
+        "tag_name": "Health Care",
+        "color": "#dbde23"
+    },
+    {
+        "id": 4,
+        "user_id": 1,
+        "tag_name": "Free Coffee",
+        "color": "#e31e17"
+    }
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to find tags for that user."
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>Add Tag</ins>
+### <em>POST Request</em>
+#### URL: /users/:user_id/tag
+
+##### Pass in user_id in the URL, tag_name is required, color defaults to grey if empty
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag
+
+##### Example Request
+```javascript
+{
+    "tag_name": "Agile Development"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "id": 5,
+    "user_id": 1,
+    "tag_name": "Agile Development",
+    "color": "#c4c4c4"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to create new tag."
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>Update Tag</ins>
+### <em>POST Request</em>
+#### URL: /users/:user_id/tag/:tag_id
+
+##### Pass in user_id in the URL, tag_name is required, color defaults to grey if empty
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag/5
+
+##### Example Request
+```javascript
+{
+    "tag_name": "Agile"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Updated tag successfully"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to create new tag."
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+*** ***
+
+### <ins>Delete Tag</ins>
+### <em>DELETE Request</em>
+#### URL: /users/tag/:tag_id
+
+##### Pass in tag_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag/5
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Tag deleted successfully"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Tag not found"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
+
+
+*** ***
+
 ### <ins>Get Favorite User Jobs</ins>
 ### <em>GET Request</em>
-#### URL: /users/:id/favorite
+#### URL: /users/:user_id/favorite
 
 ##### Pass in user_id in the URL
 ##### https://kondo-board-api.herokuapp.com/api/users/2/favorite
@@ -556,7 +748,7 @@
 
 ### <ins>Get Irrelevant User Jobs</ins>
 ### <em>GET Request</em>
-#### URL: /users/:id/irrelevant
+#### URL: /users/:user_id/irrelevant
 
 ##### Pass in user_id in the URL
 ##### https://kondo-board-api.herokuapp.com/api/users/2/irrelevant
@@ -599,5 +791,6 @@
 }
 ```
 
+*** ***
 
 
