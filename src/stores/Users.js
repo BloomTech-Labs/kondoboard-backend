@@ -11,6 +11,8 @@ module.exports = {
   getTags,
   updateTag,
   removeTag,
+  getJobTags,
+  addJobTag,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -75,4 +77,14 @@ async function updateTag(id, changes) {
 async function removeTag(id) {
   const res = await db('user_tags').where({ id }).del();
   return res;
+}
+
+async function getJobTags(id) {
+  const tags = await db('users_jobs').where({ id });
+  return tags;
+}
+
+async function addJobTag(id, updatedTags) {
+  const newTag = await db('users_jobs').where({ id }).update("tags", updatedTags);
+  return newTag;
 }
