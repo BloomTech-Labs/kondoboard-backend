@@ -44,6 +44,8 @@ exports.up = function(knex) {
       saved.json('tags').defaultTo([])
       saved.string('status', 32).notNullable()
       saved.boolean('archived').defaultTo(false)
+      saved.string('notes', 1000).defaultTo("")
+      saved.boolean('applied').defaultTo(false)
     })
 
     .createTable('user_tags', tag =>{
@@ -58,6 +60,37 @@ exports.up = function(knex) {
       tag.string('color', 10).defaultTo("#c4c4c4")
     })
     
+    .createTable('columns', stage =>{
+      stage.increments('id')
+      stage
+        .integer('user_id', 255)
+        .notNullable()
+        .references('users.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      stage
+        .string('column_name', 64)
+        .notNullable()
+      stage
+        .integer('column_location')
+        .notNullable()
+    })
+
+    .createTable('job_column', job_column =>{
+      job_column.increments('id')
+      job_column
+        .integer('users_jobs_id', 255)
+        .notNullable()
+        .references('users_jobs.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      job_column
+      .integer('columns_id', 255)
+      .notNullable()
+      .references('columns.id')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
+    })
   );
 };
 

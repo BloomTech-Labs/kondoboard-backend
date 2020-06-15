@@ -9,11 +9,16 @@ exports.seed = async knex => {
       jobs_id: 1,
       status: 'favorite',
       tags: JSON.stringify(['3','4']),
+      notes: 'Cool title and good location',
+      applied: true,
     },
     {
       user_id: 1,
       jobs_id: 2,
       status: 'irrelevant',
+      tags: JSON.stringify(['1','2']),
+      notes: 'Well-paid',
+      applied: false,
     },
     {
       user_id: 2,
@@ -65,6 +70,8 @@ exports.seed = async knex => {
       jobs_id: 3,
       status: 'favorite',
       tags: JSON.stringify(['2','3']),
+      notes: 'remote-friendly',
+      applied: true,
     },
     {
       user_id: 2,
