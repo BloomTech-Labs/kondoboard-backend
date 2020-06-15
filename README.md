@@ -28,8 +28,16 @@
 - [Delete Tag](#Delete-Tag)
 
 ##### Saved Jobs
+- [Add Tag to Saved Job](#Add-Tag-to-Saved-Job)
+
 - [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
 - [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
+
+#### Kanboard (Not added yet)
+- [Get User Columns]
+- [Add Column]
+- [Update Column]
+- [Delete Column]
 
 *** ***
 

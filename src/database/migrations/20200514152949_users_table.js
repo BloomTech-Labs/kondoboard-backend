@@ -8,6 +8,7 @@ exports.up = function(knex) {
       users.string('email', 255).unique().notNullable().index();
       users.string('profile_image', 255).defaultTo("")
       users.string('user_track').defaultTo("")
+      users.string('display_track').defaultTo("")
       users.json('skills').defaultTo([])
       users.json('cities').defaultTo([])
       users.json('states').defaultTo([])

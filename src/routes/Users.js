@@ -180,7 +180,7 @@ router.delete('/tag/:tag_id', async (req, res) => {
   try {
     const deletedCount = await UserController.deleteTag(tag_id);
     if (!deletedCount) {
-      res.status(404).json({ message: 'Tag not found' });
+      res.status(400).json({ message: 'Tag not found' });
     } else {
       res.status(200).json({ message: 'Tag deleted successfully' });
     }
@@ -191,7 +191,22 @@ router.delete('/tag/:tag_id', async (req, res) => {
 });
 
 // Add tag to job
+router.put('/:tag_id/:users_job_id', async (req,res) => {
+  const tagId = req.params.tag_id;
+  const usersJobId = req.params.users_job_id;
 
+  try{
+    const tagJob = await UserController.tagJob(tagId, usersJobId);
+    if (!tagJob) {
+      res.status(400).json({ message: 'Unable to tag job' })
+    } else {
+      res.status(200).json({ message: 'Added tag to job' })
+    }
+  } catch(err) {
+    console.log(err.message);
+    res.status(500).json({ "error": 'Server error' });
+  }
+})
 
 
 
