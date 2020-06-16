@@ -62,7 +62,7 @@ async function updateJobColumn(id, changes) {
 }
 
 async function updateColumn(id, changes) {
-  const updateColumn = await db('job_column').where({ id }).update(changes);
+  const updateColumn = await db('columns').where({ id }).update(changes);
   return updateColumn;
 }
 

@@ -131,7 +131,9 @@ router.get('/:user_id/tag/:users_jobs_id', async (req, res) => {
     if (!tag) {
       res.status(400).json({ message: 'Unable to find tags for that user.' });
     } else {
-      tag.push({"users_jobs_id":users_jobs_id});
+      for(let i=0; i < tag.length; i++) {
+        tag[i]['users_jobs_id'] = users_jobs_id;
+      }
       res.status(201).json(tag);
     }
   } catch(err) {
@@ -193,9 +195,9 @@ router.delete('/tag/:tag_id', async (req, res) => {
 });
 
 // Add tag to job
-router.put('/tag/update', async (req,res) => {
+router.put('/tag/update/:users_jobs_id', async (req,res) => {
   const tagId = req.body.tag_id;
-  const usersJobId = req.body.users_jobs_id;
+  const usersJobId = req.params.users_jobs_id;
   try{
     const tagJob = await UserController.addJobTag(tagId, usersJobId);
     if (!tagJob) {
