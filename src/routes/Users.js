@@ -123,37 +123,13 @@ router.get('/:user_id/irrelevant', async (req, res) => {
 // ~~~~~~~~~~~ User Tags ~~~~~~~~~~~
 
 // Get All User's tags
-router.post('/:user_id/tag/', async (req, res) => {
-  const user_id = req.params.user_id;
-  const users_jobs_id = req.body.users_jobs_id;
-  try {
-    const tag = await UserController.getTags(user_id);
-    if (!tag) {
-      res.status(400).json({ message: 'Unable to find tags for that user.' });
-    } else {
-      for(let i=0; i < tag.length; i++) {
-        tag[i]['users_jobs_id'] = users_jobs_id;
-      }
-      res.status(201).json(tag);
-    }
-  } catch(err) {
-    console.log(err.message); //err.code
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get All User's tags
-router.get('/:user_id/tag/:users_jobs_id', async (req, res) => {
-  const users_jobs_id = req.params.users_jobs_id;
+router.get('/:user_id/tag/', async (req, res) => {
   const user_id = req.params.user_id;
   try {
     const tag = await UserController.getTags(user_id);
     if (!tag) {
       res.status(400).json({ message: 'Unable to find tags for that user.' });
-    } else {
-      for(let i=0; i < tag.length; i++) {
-        tag[i]['users_jobs_id'] = users_jobs_id;
-      }
+    } else {      
       res.status(201).json(tag);
     }
   } catch(err) {
@@ -163,16 +139,15 @@ router.get('/:user_id/tag/:users_jobs_id', async (req, res) => {
 });
 
 // Add User tag
-router.post('/:user_id/tag/:users_jobs_id', async (req, res) => {
-  const users_jobs_id = req.params.users_jobs_id;
+router.post('/:user_id/tag/', async (req, res) => {
   const newTag = req.body;
   newTag.user_id = req.params.user_id;
+  console.log(newTag);
   try {
     const tag = await UserController.addTag(newTag);
     if (!tag) {
       res.status(400).json({ message: 'Unable to create new tag.' });
     } else {
-      tag.users_jobs_id = users_jobs_id;
       res.status(201).json(tag);
     }
   } catch(err) {
