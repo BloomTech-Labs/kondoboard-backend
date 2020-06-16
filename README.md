@@ -704,13 +704,11 @@
 ##### 201 (Success)
 ```javascript
 {
-    "tag": {
-        "id": 14,
-        "user_id": 1,
-        "tag_name": "Unlimited Vacay!",
-        "color": "#c4c4c4"
-    },
-    "users_jobs_id": "3"
+    "id": 21,
+    "user_id": 1,
+    "tag_name": "Unlimited Vacay!",
+    "color": "#c4c4c4",
+    "users_jobs_id": "4"
 }
 ```
 
