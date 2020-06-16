@@ -1,4 +1,3 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('columns').del()
@@ -8,22 +7,22 @@ exports.seed = function(knex) {
         { // 1
           user_id: 1,
           name: 'Applied Jobs',
-          location: '1'
+          location: '1',
         },
         { // 2
           user_id: 1,
           name: 'Phone Interview',
-          location: '2'
+          location: '2',
         },
         { // 3
           user_id: 1,
           name: 'First Interview',
-          location: '3'
+          location: '3',
         },
         { // 4
           user_id: 1,
           name: 'Second Interview',
-          location: '4'
+          location: '4',
         },        
       ]);
     });

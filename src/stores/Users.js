@@ -23,7 +23,7 @@ async function getById(id) {
 }
 
 async function getUserByEmail(email) {
-  const user = await db("users").where({ email });
+  const user = await db('users').where({ email });
   return user;
 }
 
@@ -48,7 +48,7 @@ async function getUserJobs(user_id, type) {
     .from('users_jobs')
     .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
     .where('users_jobs.user_id', user_id)
-    .andWhere('users_jobs.status', type)
+    .andWhere('users_jobs.status', type);
   return userJobs;
 }
 
@@ -84,7 +84,7 @@ async function getJobTags(id) {
 }
 
 async function updateJobTag(id, updatedTags) {
-  const newTag = await db('users_jobs').where({ id }).update("tags", updatedTags);
+  const newTag = await db('users_jobs').where({ id }).update('tags', updatedTags);
   return newTag;
 }
 

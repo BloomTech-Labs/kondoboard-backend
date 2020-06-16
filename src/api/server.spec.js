@@ -22,7 +22,7 @@ describe('server', () => {
 
 describe('server', () => {
   describe('GET /api', () => {
-  it('should return 200', async () => {
+    it('should return 200', async () => {
       const res = await request(server).get('/api');
       expect(res.status).toBe(200);
     });

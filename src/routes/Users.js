@@ -82,7 +82,7 @@ router.delete('/:user_id', async (req, res) => {
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ "error": 'Server error' });
+    res.status(500).json({ 'error': 'Server error' });
   }
 });
 
@@ -210,7 +210,7 @@ router.delete('/tag/:tag_id', async (req, res) => {
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ "error": 'Server error' });
+    res.status(500).json({ 'error': 'Server error' });
   }
 });
 
@@ -221,15 +221,15 @@ router.put('/tag/update/:users_jobs_id', async (req,res) => {
   try{
     const tagJob = await UserController.addJobTag(tagId, usersJobId);
     if (!tagJob) {
-      res.status(400).json({ message: 'Unable to tag job' })
+      res.status(400).json({ message: 'Unable to tag job' });
     } else {
-      res.status(200).json({ message: 'Added tag to job' })
+      res.status(200).json({ message: 'Added tag to job' });
     }
   } catch(err) {
     console.log(err.message);
-    res.status(500).json({ "error": 'Server error' });
+    res.status(500).json({ 'error': 'Server error' });
   }
-})
+});
 
 //Delete tag on job
 router.put('/tag/delete', async (req,res) => {
@@ -238,15 +238,14 @@ router.put('/tag/delete', async (req,res) => {
   try{
     const tagJob = await UserController.removeJobTag(tagId, usersJobId);
     if (!tagJob) {
-      res.status(400).json({ message: 'Unable to delete tag from job' })
+      res.status(400).json({ message: 'Unable to delete tag from job' });
     } else {
-      res.status(200).json({ message: 'Deleted tag from job' })
+      res.status(200).json({ message: 'Deleted tag from job' });
     }
   } catch(err) {
     console.log(err.message);
-    res.status(500).json({ "error": 'Server error' });
+    res.status(500).json({ 'error': 'Server error' });
   }
-})
-
+});
 
 module.exports = router;

@@ -42,17 +42,17 @@ async function newColumn(data) {
 }
 
 async function getColumn(user_id) {
-  const column = await db('columns').where({ user_id })
+  const column = await db('columns').where({ user_id });
   return column;
 }
 
 async function deleteColumn(id) {
-  const deleted = await db('columns').where({ id }).del()
+  const deleted = await db('columns').where({ id }).del();
   return deleted;
 }
 
 async function newJobColumn(data) {
-  const newJobColumn = await db('job_column').insert( data )
+  const newJobColumn = await db('job_column').insert( data );
   return newJobColumn;
 }
 

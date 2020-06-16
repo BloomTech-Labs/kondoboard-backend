@@ -4,7 +4,7 @@ class DataScience {
   static async getAllData() {
     const users = await DSStore.getAllUsers();
     const data = [];
-    for (let user of users) {
+    for (const user of users) {
       const dataPoint = {};
       dataPoint.user = user;
       dataPoint.savedJobs = await DSStore.getUserSavedJobs(user.id);

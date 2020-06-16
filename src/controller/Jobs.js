@@ -21,7 +21,7 @@ class Jobs {
     const userJob = {
       user_id: parseInt(userId), 
       jobs_id: jobId, 
-      status: "favorite"
+      status: 'favorite',
     };
     const newUserJob = await this.markJob(userJob);
     return newUserJob;
@@ -32,7 +32,7 @@ class Jobs {
     const userJob = {
       user_id: parseInt(userId), 
       jobs_id: jobId, 
-      status: "irrelevant"
+      status: 'irrelevant',
     };
     const newUserJob = await this.markJob(userJob);
     return newUserJob;
@@ -66,7 +66,7 @@ class Jobs {
   }
 
   static async updateColumn(id, changes) {
-    const updateColumn = await JobStore.updateColumn(id, changes)
+    const updateColumn = await JobStore.updateColumn(id, changes);
     return updateColumn;
   }
 
@@ -82,7 +82,7 @@ class Jobs {
 
   static async markJob(userJob) {
     const newUserJob = JobStore.saveJob(userJob);
-    return newUserJob
+    return newUserJob;
   }
 
 }

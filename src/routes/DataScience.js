@@ -12,13 +12,13 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:user_id', async (req, res) => {
-	const userId = req.params.user_id;
+  const userId = req.params.user_id;
   try {
     const user = await DSController.getSingleUser(userId);
     if (!user) {
-    	res.status(400).json({ message: "User not found" });
+      res.status(400).json({ message: 'User not found' });
     } else {
-    	res.status(200).json(user);
+      res.status(200).json(user);
     }
   } catch(err) {
     res.status(500).json({ error: err });
