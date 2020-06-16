@@ -139,10 +139,9 @@ router.get('/:user_id/tag', async (req, res) => {
 });
 
 // Add User tag
-router.post('/:user_id/tag', async (req, res) => {
-  const userId = req.params.user_id;
+router.post('/:user_id/tag', async (req, res) => { 
   const newTag = req.body;
-  newTag.user_id = userId;
+  newTag.user_id = req.params.user_id;;
   try {
     const tag = await UserController.addTag(newTag);
     if (!tag) {
@@ -152,19 +151,18 @@ router.post('/:user_id/tag', async (req, res) => {
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: 'Server Error' });
   }
 });
 
 // Update Tag
-router.put('/:user_id/tag/:tag_id', async (req, res) => {
+router.put('/tag/:tag_id', async (req, res) => {
   const changes = req.body;
   const id = req.params.tag_id;
-  changes.user_id = req.params.user_id;
   try {
     const updateTag = await UserController.updateTag(id, changes);
     if (!updateTag) {
-      res.status(404).json({ message:'Invalid request' });
+      res.status(400).json({ message:'Invalid request' });
     } else {
       res.status(201).json({ message:'Updated tag successfully' });
     }
@@ -191,9 +189,9 @@ router.delete('/tag/:tag_id', async (req, res) => {
 });
 
 // Add tag to job
-router.put('/:tag_id/:users_job_id', async (req,res) => {
-  const tagId = req.params.tag_id;
-  const usersJobId = req.params.users_job_id;
+router.put('/tag/update', async (req,res) => {
+  const tagId = req.body.tag_id;
+  const usersJobId = req.body.users_jobs_id;
 
   try{
     const tagJob = await UserController.tagJob(tagId, usersJobId);
@@ -208,7 +206,7 @@ router.put('/:tag_id/:users_job_id', async (req,res) => {
   }
 })
 
-
+//Delete tag on job
 
 
 module.exports = router;

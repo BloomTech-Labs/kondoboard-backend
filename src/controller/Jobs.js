@@ -38,6 +38,8 @@ class Jobs {
     return newUserJob;
   }
 
+  //~~~~~~ Columns ~~~~~~
+
   static async addColumn(data) {
     const newColumn = await JobStore.newColumn(data);
     return newColumn;
@@ -60,16 +62,18 @@ class Jobs {
 
   static async updateJobColumn(id, changes) {
     const updateJobColumn = await JobStore.updateJobColumn(id, changes);
-    console.log(changes);
     return updateJobColumn;
   }
 
+  static async updateColumn(id, changes) {
+    const updateColumn = await JobStore.updateColumn(id, changes)
+    return updateColumn;
+  }
 
   static async findOrCreateJob(data) {
     const [existingJob] = await JobStore.getJobByDsId(data.ds_id);
     if (!existingJob) {
       const [newJob] = await JobStore.addJob(data);
-      console.log(newJob);
       return newJob.id;
     } else {
       return existingJob.id;

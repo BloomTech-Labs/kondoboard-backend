@@ -1,8 +1,6 @@
 class UserFunctions {
 	// Push array to database
 	static userStringify(changes) {
-		console.log(changes);
-		// users table
 		if (changes.skills) {
 			changes.skills = JSON.stringify(changes.skills);
 		}
@@ -14,6 +12,7 @@ class UserFunctions {
 		}
 		return changes;
 	}
+	//Push tags array to database
 	static tagsStringify(tags) {
 		tags = JSON.stringify(tags);
 		return tags;

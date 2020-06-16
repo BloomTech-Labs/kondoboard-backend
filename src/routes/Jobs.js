@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const JobsController = require('../controller/Jobs');
 
+// ~~~~~~~~~~~~~~ Jobs ~~~~~~~~~~~~
+
 // Get job by ID
 router.get('/:job_id', async (req, res) => {
   const jobId = req.params.job_id;
@@ -66,6 +68,25 @@ router.post('/:user_id/irrelevant_job', async (req, res) => {
   }
 });
 
+// ~~~~~~~~~~~~ Columns ~~~~~~~~~~~~
+
+// Get user columns
+router.get('/:user_id/column', async (req, res) => {
+  const userId = req.params.user_id;
+  try {
+    const columns = await JobsController.getColumn(userId);
+    if (!columns) {
+      res.status(400).json({ message: 'Invalid Request' });
+    } else {
+      res.status(200).json({ columns });
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: `Server error` });
+  }
+});
+
+// Add column
 router.post('/:user_id/column', async (req, res) => {
   const data = req.body;
   data.user_id = req.params.user_id;
@@ -80,42 +101,49 @@ router.post('/:user_id/column', async (req, res) => {
     console.log(err.message); //err.code
     res.status(500).json({ error: `Server error` });
   }
-})
+});
 
-router.get('/:user_id/column', async (req, res) => {
-  const userId = req.params.user_id;
+// Update Column
+router.put('/column/:column_id', async (req, res) => {
+  const id = req.params.column_id;
+  const data = req.body;
+
   try {
-    const columns = await JobsController.getColumn(userId);
-    if (!columns) {
+    const updated = await JobsController.updateColumn(id, data);
+    if (!updated) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ columns });
+      res.status(200).json(updated);
     }
   } catch(err) {
-    console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    console.log(err);
+    res.status(500).json({ error: 'Server Error' });
   }
 })
 
+// Delete column
 router.delete('/column/:column_id', async (req, res) => {
   const id = req.params.column_id;
   try {
     const deleted = await JobsController.removeColumn(id);
     if (!deleted) {
-      res.status(400).json({ message: 'Invalid Request' });
+      res.status(400).json({ message: 'Invalid request' });
     } else {
-      res.status(200).json({ message: 'column deleted' });
+      res.status(200).json({ message: 'Column deleted' });
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
-})
+});
 
-router.post('/column/:column_id/:users_jobs_id', async (req, res) => {
+// ~~~~~~~~~~ Job to Column ~~~~~~~~~~
+
+// Add job to column
+router.post('/column', async (req, res) => {
   const data = {};
-  data.columns_id = req.params.column_id;
-  data.users_jobs_id = req.params.users_jobs_id;
+  data.columns_id = req.body.column_id;
+  data.users_jobs_id = req.body.users_jobs_id;
   try {
     const newJob = await JobsController.newJobColumn(data);
     if (!newJob) {
@@ -123,29 +151,28 @@ router.post('/column/:column_id/:users_jobs_id', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Job added to column' });
     }
-  } catch (err) {
+  } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
-})
+});
 
+// Change column
 router.put('/column/:job_column_id', async (req, res) => {
-  // const data = {};
-  const id = req.params.job_column_id
-  const data = req.body.columns_id;
-  // data.users_jobs_id = req.body.users_jobs_id;
+  const id = req.params.job_column_id;
+  const moveColumn = req.body.columns_id;
   try {
-    const changes = await JobsController.updateJobColumn(id, data);
-    if (!changes) {
+    const updated = await JobsController.updateJobColumn(id, moveColumn);
+    if (!updated) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ message: 'job column updated' });
+      res.status(200).json({ message: 'Job column updated' });
     }
-  } catch (err) {
+  } catch(err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: `Server error` });
   }
-})
+});
 
 
 module.exports = router;

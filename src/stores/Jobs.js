@@ -11,6 +11,7 @@ module.exports = {
   deleteColumn,
   newJobColumn,
   updateJobColumn,
+  updateColumn,
 };
 
 async function getJobById(id) {
@@ -56,9 +57,13 @@ async function newJobColumn(data) {
 }
 
 async function updateJobColumn(id, changes) {
-  const updateJobColumn = await db('job_column').where({ id }).update(changes)
-  console.log(changes);
+  const updateJobColumn = await db('job_column').where({ id }).update(changes);
   return updateJobColumn;
+}
+
+async function updateColumn(id, changes) {
+  const updateColumn = await db('job_column').where({ id }).update(changes);
+  return updateColumn;
 }
 
 async function getJobByDsId(ds_id) {

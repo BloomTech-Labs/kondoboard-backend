@@ -20,6 +20,8 @@
 ##### Jobs
 - [Save Favorite](#Save-Favorite)
 - [Save Irrelevant](#Save-Irrelevant)
+- [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
+- [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
 
 ##### Tags
 - [Get All User Tags](#Get-All-User-Tags)
@@ -27,11 +29,8 @@
 - [Update Tag](#Update-Tag)
 - [Delete Tag](#Delete-Tag)
 
-##### Saved Jobs
-- [Add Tag to Saved Job](#Add-Tag-to-Saved-Job)
-
-- [Get Favorite User Jobs](#Get-Favorite-User-Jobs)
-- [Get Irrelevant User Jobs](#Get-Irrelevant-User-Jobs)
+#### Job Tags
+- [Add Tag to Job](#Add-Tag-to-Job)
 
 #### Kanboard (Not added yet)
 - [Get User Columns]
@@ -537,6 +536,101 @@
 
 *** ***
 
+### <ins>Get Favorite User Jobs</ins>
+### <em>GET Request</em>
+#### URL: /users/:user_id/favorite
+
+##### Pass in user_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/users/2/favorite
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 7,
+        "user_id": 2,
+        "jobs_id": 7,
+        "status": "favorite",
+        "archived": 0,
+        "ds_id": "A1552121",
+        "source_url": "[application url]",
+        "title": "Data Engineers",
+        "company": "digital_intelligence_systems,_llc",
+        "description": "Hi, This is Surya with DISYS, One of our direct client ...",
+        "date_published": "2020-05-22",
+        "location_city": "Richmond",
+        "location_state": "Virginia",
+        "geo_locat": "37.959676,-76.711917"
+    },
+    ...
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "No favorite jobs found for that user"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": ""
+}
+```
+
+*** ***
+
+### <ins>Get Irrelevant User Jobs</ins>
+### <em>GET Request</em>
+#### URL: /users/:user_id/irrelevant
+
+##### Pass in user_id in the URL
+##### https://kondo-board-api.herokuapp.com/api/users/2/irrelevant
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 2,
+        "jobs_id": 1,
+        "status": "irrelevant",
+        "archived": 0,
+        "ds_id": "A1549335342",
+        "source_url": "[application url]",
+        "title": "Data Engineer",
+        "company": "capital_one",
+        "description": "... innovate leveraging ...",
+        "date_published": "2020-05-19",
+        "location_city": "Illinois Medical District",
+        "location_state": "Illinois",
+        "geo_locat": "41.868494,-87.673975"
+    }
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "No irrelevant jobs found for that user"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server error"
+}
+```
+
+*** ***
+
 ### <ins>Get All User Tags</ins>
 ### <em>GET Request</em>
 #### URL: /users/:user_id/tag
@@ -636,10 +730,10 @@
 
 ### <ins>Update Tag</ins>
 ### <em>POST Request</em>
-#### URL: /users/:user_id/tag/:tag_id
+#### URL: /users/tag/:tag_id
 
 ##### Pass in user_id in the URL, tag_name is required, color defaults to grey if empty
-##### https://kondo-board-api.herokuapp.com/api/users/1/tag/5
+##### https://kondo-board-api.herokuapp.com/api/users/tag/5
 
 ##### Example Request
 ```javascript
@@ -678,7 +772,7 @@
 #### URL: /users/tag/:tag_id
 
 ##### Pass in tag_id in the URL
-##### https://kondo-board-api.herokuapp.com/api/users/1/tag/5
+##### https://kondo-board-api.herokuapp.com/api/users/tag/5
 
 ##### 201 (Success)
 ```javascript
@@ -701,46 +795,31 @@
 {
   "error": "Server Error"
 }
-```
+````
 
 
 *** ***
 
-### <ins>Get Favorite User Jobs</ins>
-### <em>GET Request</em>
-#### URL: /users/:user_id/favorite
+### <ins>Add Tag to Job</ins>
+### <em>PUT Request</em>
+#### URL: /users/tag/update
 
-##### Pass in user_id in the URL
-##### https://kondo-board-api.herokuapp.com/api/users/2/favorite
+##### Pass users_jobs_id(saved job id) and tag_id to add
+##### https://kondo-board-api.herokuapp.com/api/users/tag/update
 
 ##### 201 (Success)
 ```javascript
-[
-    {
-        "id": 7,
-        "user_id": 2,
-        "jobs_id": 7,
-        "status": "favorite",
-        "archived": 0,
-        "ds_id": "A1552121",
-        "source_url": "[application url]",
-        "title": "Data Engineers",
-        "company": "digital_intelligence_systems,_llc",
-        "description": "Hi, This is Surya with DISYS, One of our direct client ...",
-        "date_published": "2020-05-22",
-        "location_city": "Richmond",
-        "location_state": "Virginia",
-        "geo_locat": "37.959676,-76.711917"
-    },
-    ...
-]
+{
+    "tag_id": 2,
+    "users_jobs_id": 3
+}
 ```
 
 ##### 400 (Bad Request)
 > Will receive a 400 response if no user id, if unmatching field, or no fields exist
 ```javascript
 {
-  "message": "No favorite jobs found for that user"
+  "message": "Unable to tag job"
 }
 ```
 
@@ -748,57 +827,6 @@
 > Will receive a 500 response if there is a problem with the server
 ```javascript
 {
-  "error": ""
+  "error": "Server Error"
 }
-```
-
-*** ***
-
-### <ins>Get Irrelevant User Jobs</ins>
-### <em>GET Request</em>
-#### URL: /users/:user_id/irrelevant
-
-##### Pass in user_id in the URL
-##### https://kondo-board-api.herokuapp.com/api/users/2/irrelevant
-
-##### 201 (Success)
-```javascript
-[
-    {
-        "id": 1,
-        "user_id": 2,
-        "jobs_id": 1,
-        "status": "irrelevant",
-        "archived": 0,
-        "ds_id": "A1549335342",
-        "source_url": "[application url]",
-        "title": "Data Engineer",
-        "company": "capital_one",
-        "description": "... innovate leveraging ...",
-        "date_published": "2020-05-19",
-        "location_city": "Illinois Medical District",
-        "location_state": "Illinois",
-        "geo_locat": "41.868494,-87.673975"
-    }
-]
-```
-
-##### 400 (Bad Request)
-> Will receive a 400 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "No irrelevant jobs found for that user"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server error"
-}
-```
-
-*** ***
-
-
+````
