@@ -12,7 +12,7 @@ module.exports = {
   updateTag,
   removeTag,
   getJobTags,
-  addJobTag,
+  updateJobTag,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -83,7 +83,8 @@ async function getJobTags(id) {
   return tags;
 }
 
-async function addJobTag(id, updatedTags) {
+async function updateJobTag(id, updatedTags) {
   const newTag = await db('users_jobs').where({ id }).update("tags", updatedTags);
   return newTag;
 }
+
