@@ -38,11 +38,42 @@ class Jobs {
     return newUserJob;
   }
 
+  //~~~~~~ Columns ~~~~~~
+
+  static async addColumn(data) {
+    const newColumn = await JobStore.newColumn(data);
+    return newColumn;
+  }
+
+  static async getColumn(userId) {
+    const columns = await JobStore.getColumn(userId);
+    return columns;
+  }
+
+  static async removeColumn(id) {
+    const deleted = await JobStore.deleteColumn(id);
+    return deleted;
+  }
+
+  static async newJobColumn(data) {
+    const newJobColumn = await JobStore.newJobColumn(data);
+    return newJobColumn;
+  }
+
+  static async updateJobColumn(id, changes) {
+    const updateJobColumn = await JobStore.updateJobColumn(id, changes);
+    return updateJobColumn;
+  }
+
+  static async updateColumn(id, changes) {
+    const updateColumn = await JobStore.updateColumn(id, changes)
+    return updateColumn;
+  }
+
   static async findOrCreateJob(data) {
     const [existingJob] = await JobStore.getJobByDsId(data.ds_id);
     if (!existingJob) {
       const [newJob] = await JobStore.addJob(data);
-      console.log(newJob);
       return newJob.id;
     } else {
       return existingJob.id;

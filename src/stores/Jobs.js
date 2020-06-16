@@ -5,7 +5,13 @@ module.exports = {
   updateJob,
   addJob,
   saveJob,
-  getJobByDsId
+  getJobByDsId,
+  newColumn,
+  getColumn,
+  deleteColumn,
+  newJobColumn,
+  updateJobColumn,
+  updateColumn,
 };
 
 async function getJobById(id) {
@@ -28,6 +34,36 @@ async function updateJob(id, changes) {
 async function saveJob(data) {
   const userJob = await db('users_jobs').insert(data);
   return userJob;
+}
+
+async function newColumn(data) {
+  const newColumn = await db('columns').insert(data);
+  return newColumn;
+}
+
+async function getColumn(user_id) {
+  const column = await db('columns').where({ user_id })
+  return column;
+}
+
+async function deleteColumn(id) {
+  const deleted = await db('columns').where({ id }).del()
+  return deleted;
+}
+
+async function newJobColumn(data) {
+  const newJobColumn = await db('job_column').insert( data )
+  return newJobColumn;
+}
+
+async function updateJobColumn(id, changes) {
+  const updateJobColumn = await db('job_column').where({ id }).update(changes);
+  return updateJobColumn;
+}
+
+async function updateColumn(id, changes) {
+  const updateColumn = await db('job_column').where({ id }).update(changes);
+  return updateColumn;
 }
 
 async function getJobByDsId(ds_id) {

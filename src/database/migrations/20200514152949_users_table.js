@@ -44,25 +44,53 @@ exports.up = function(knex) {
       saved.json('tags').defaultTo([])
       saved.string('status', 32).notNullable()
       saved.boolean('archived').defaultTo(false)
+      saved.string('notes', 1000).defaultTo("")
+      saved.boolean('applied').defaultTo(false)
     })
 
     .createTable('user_tags', tag =>{
       tag.increments('id')
-      tag
-        .integer('user_id', 255)
+      tag.integer('user_id', 255)
         .notNullable()
         .references('users.id')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       tag.string('tag_name', 64).notNullable()
-      tag.string('color', 10).defaultTo("#c4c4c4")
+      tag.string('color', 22).defaultTo("#c4c4c4")
     })
-    
+
+    .createTable('columns', column =>{
+      column.increments('id')
+      column.integer('user_id', 255)
+        .notNullable()
+        .references('users.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      column.string('name', 64).notNullable()
+      column.integer('location').notNullable()
+    })
+
+    //joined table -- Relationship between users_jobs and columns
+    .createTable('job_column', job_column =>{
+      job_column.increments('id')
+      job_column.integer('users_jobs_id')
+        .notNullable()
+        .references('users_jobs.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+      job_column.integer('columns_id')
+        .notNullable()
+        .references('columns.id')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+    })
   );
 };
 
 exports.down = function(knex) {
   return (knex.schema
+    .dropTableIfExist('job_column')
+    .dropTableIfExist('columns')
     .dropTableIfExist('user_tags')
     .dropTableIfExist('users_jobs')
     .dropTableIfExist('jobs')

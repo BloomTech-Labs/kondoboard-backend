@@ -6,6 +6,9 @@
 - [Users](#Users)
 - [Jobs](#Jobs)
 - [Users Jobs](#Users-Jobs)
+- [User Tags](#Users-Tags)
+- [Columns](#Columns)
+- [Job Column](#Job-Column)
 
 *** ***
 
@@ -51,3 +54,14 @@
 | archived | boolean     |    No    | Defaults to 0                                        |
 
 *** ***
+
+### User Tags
+
+
+*** ***
+
+### Columns
+
+*** ***
+
+### Job Column

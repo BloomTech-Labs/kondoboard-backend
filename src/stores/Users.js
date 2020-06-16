@@ -59,7 +59,6 @@ async function getTagById(id) {
 
 async function getTags(user_id) {
   const tags = await db('user_tags').where({ user_id });
-  console.log(tags);
   return tags;
 }
 
