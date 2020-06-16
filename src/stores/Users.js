@@ -69,7 +69,7 @@ async function addTag(newTag) {
 }
 
 async function updateTag(id, changes) {
-  const updatedTag = await db('user_tags').where({ id }).update(changes);
+  const updatedTag = await db('users_jobs').where('id', id).update('tags', changes);
   return updatedTag;
 }
 

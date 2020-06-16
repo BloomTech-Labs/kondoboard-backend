@@ -78,7 +78,7 @@ router.get('/:user_id/column', async (req, res) => {
     if (!columns) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ columns });
+      res.status(200).json( columns );
     }
   } catch(err) {
     console.log(err.message); //err.code
@@ -107,7 +107,6 @@ router.post('/:user_id/column', async (req, res) => {
 router.put('/column/:column_id', async (req, res) => {
   const id = req.params.column_id;
   const data = req.body;
-
   try {
     const updated = await JobsController.updateColumn(id, data);
     if (!updated) {

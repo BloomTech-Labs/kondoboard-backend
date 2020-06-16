@@ -72,6 +72,7 @@ class Users {
     updatedTags.push(tagId);
     const formattedUpdatedTags = await UserFunctions.tagsStringify(updatedTags);
 
+
     const newTag = await UserStore.updateJobTag(usersJobId, formattedUpdatedTags);
     return newTag;
   }

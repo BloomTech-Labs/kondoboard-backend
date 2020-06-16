@@ -636,7 +636,7 @@
 #### URL: /users/:user_id/tag/:users_jobs_id
 
 ##### Pass in user_id and users_jobs_id(saved job ID) in the URL
-##### https://kondo-board-api.herokuapp.com/api/users/1/tag
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag/4
 
 ##### 201 (Success)
 ```javascript
