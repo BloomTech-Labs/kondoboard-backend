@@ -56,6 +56,7 @@ exports.up = function(knex) {
         .onUpdate('CASCADE');
       tag.string('tag_name', 64).notNullable();
       tag.string('color', 22).defaultTo('#c4c4c4');
+      tag.string('job_id').notNullable();
     })
 
     .createTable('columns', column =>{
