@@ -148,7 +148,8 @@ router.post('/:user_id/tag/:users_jobs_id', async (req, res) => {
     if (!tag) {
       res.status(400).json({ message: 'Unable to create new tag.' });
     } else {
-      res.status(201).json({tag, users_jobs_id});
+      tag.users_jobs_id = users_jobs_id;
+      res.status(201).json(tag);
     }
   } catch(err) {
     console.log(err.message); //err.code
