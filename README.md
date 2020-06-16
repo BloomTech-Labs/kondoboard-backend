@@ -688,25 +688,29 @@
 
 ### <ins>Add Tag</ins>
 ### <em>POST Request</em>
-#### URL: /users/:user_id/tag
+#### URL: /users/:user_id/tag/:users_jobs_id
 
-##### Pass in user_id in the URL, tag_name is required, color defaults to grey if empty
-##### https://kondo-board-api.herokuapp.com/api/users/1/tag
+##### user_id and users_jobs_id(saved job ID) passed in URL
+##### tag_name is required, color defaults to grey if empty
+##### https://kondo-board-api.herokuapp.com/api/users/1/tag/3
 
 ##### Example Request
 ```javascript
 {
-    "tag_name": "Agile Development"
+    "tag_name": "Unlimited Vacay!"
 }
 ```
 
 ##### 201 (Success)
 ```javascript
 {
-    "id": 5,
-    "user_id": 1,
-    "tag_name": "Agile Development",
-    "color": "#c4c4c4"
+    "tag": {
+        "id": 14,
+        "user_id": 1,
+        "tag_name": "Unlimited Vacay!",
+        "color": "#c4c4c4"
+    },
+    "users_jobs_id": "3"
 }
 ```
 
