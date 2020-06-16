@@ -633,20 +633,14 @@
 
 ### <ins>Get All User Tags</ins>
 ### <em>GET Request</em>
-#### URL: /users/:user_id/tag
+#### URL: /users/:user_id/tag/:users_jobs_id
 
-##### Pass in user_id in the URL
+##### Pass in user_id and users_jobs_id(saved job ID) in the URL
 ##### https://kondo-board-api.herokuapp.com/api/users/1/tag
 
 ##### 201 (Success)
 ```javascript
 [
-    {
-        "id": 1,
-        "user_id": 1,
-        "tag_name": "ReactJS",
-        "color": "#4287f5"
-    },
     {
         "id": 2,
         "user_id": 1,
@@ -664,6 +658,10 @@
         "user_id": 1,
         "tag_name": "Free Coffee",
         "color": "#e31e17"
+    },
+    ...
+    {
+        "users_jobs_id": "4"
     }
 ]
 ```
