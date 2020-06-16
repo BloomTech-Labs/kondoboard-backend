@@ -139,15 +139,16 @@ router.get('/:user_id/tag', async (req, res) => {
 });
 
 // Add User tag
-router.post('/:user_id/tag', async (req, res) => { 
+router.post('/:user_id/tag/:users_jobs_id', async (req, res) => {
+  const users_jobs_id = req.params.users_jobs_id;
   const newTag = req.body;
-  newTag.user_id = req.params.user_id;;
+  newTag.user_id = req.params.user_id;
   try {
     const tag = await UserController.addTag(newTag);
     if (!tag) {
       res.status(400).json({ message: 'Unable to create new tag.' });
     } else {
-      res.status(201).json(tag);
+      res.status(201).json({tag, users_jobs_id});
     }
   } catch(err) {
     console.log(err.message); //err.code
@@ -192,9 +193,8 @@ router.delete('/tag/:tag_id', async (req, res) => {
 router.put('/tag/update', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.body.users_jobs_id;
-
   try{
-    const tagJob = await UserController.tagJob(tagId, usersJobId);
+    const tagJob = await UserController.addJobTag(tagId, usersJobId);
     if (!tagJob) {
       res.status(400).json({ message: 'Unable to tag job' })
     } else {
@@ -207,6 +207,21 @@ router.put('/tag/update', async (req,res) => {
 })
 
 //Delete tag on job
+router.put('/tag/delete', async (req,res) => {
+  const tagId = req.body.tag_id;
+  const usersJobId = req.body.users_jobs_id;
+  try{
+    const tagJob = await UserController.removeJobTag(tagId, usersJobId);
+    if (!tagJob) {
+      res.status(400).json({ message: 'Unable to delete tag from job' })
+    } else {
+      res.status(200).json({ message: 'Deleted tag from job' })
+    }
+  } catch(err) {
+    console.log(err.message);
+    res.status(500).json({ "error": 'Server error' });
+  }
+})
 
 
 module.exports = router;

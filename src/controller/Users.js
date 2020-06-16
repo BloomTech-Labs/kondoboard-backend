@@ -66,14 +66,25 @@ class Users {
     return tag;
   } 
 
-  static async tagJob(tagId, usersJobId) {
+  static async addJobTag(tagId, usersJobId) {
     const [savedJob] = await UserStore.getJobTags(usersJobId);
     const updatedTags = savedJob.tags;
     updatedTags.push(tagId);
     const formattedUpdatedTags = await UserFunctions.tagsStringify(updatedTags);
 
-    const newTag = await UserStore.addJobTag(usersJobId, formattedUpdatedTags);
+    const newTag = await UserStore.updateJobTag(usersJobId, formattedUpdatedTags);
     return newTag;
+  }
+
+  static async removeJobTag(tagId, usersJobId) {
+    const [savedJob] = await UserStore.getJobTags(usersJobId);
+    const tagsArray = savedJob.tags;
+    console.log(tagsArray);
+
+    // const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
+    // const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
+    
+    return removedTag;
   }
 
 
