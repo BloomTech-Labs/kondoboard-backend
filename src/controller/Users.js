@@ -66,6 +66,17 @@ class Users {
     return tag;
   } 
 
+  static async getSavedJob(id) {
+    const savedJob = await UserStore.getUserJob(id);
+    return savedJob; 
+  }
+
+  static async updateSavedJob(id, changes) {
+    const update = await UserStore.updateSavedJob(id, changes);
+    return update;
+  }
+
+  // Not currently used
   static async addJobTag(tagId, usersJobId) {
     const [savedJob] = await UserStore.getJobTags(usersJobId);
     const updatedTags = savedJob.tags;
@@ -76,15 +87,16 @@ class Users {
     return newTag;
   }
 
+  // Not currently used
   static async removeJobTag(tagId, usersJobId) {
     const [savedJob] = await UserStore.getJobTags(usersJobId);
     const tagsArray = savedJob.tags;
     console.log(tagsArray);
 
-    // const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
-    // const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
+    const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
+    const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
     
-    // return removedTag;
+    return removedTag;
   }
 
 }

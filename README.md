@@ -29,8 +29,9 @@
 - [Update Tag](#Update-Tag)
 - [Delete Tag](#Delete-Tag)
 
-#### Job Tags
+#### Saved Jobs
 - [Add Tag to Job](#Add-Tag-to-Job)
+- [Update User Job](#Update-User-Job)
 
 #### Kanboard (Not added yet)
 - [Get User Columns]
@@ -820,6 +821,84 @@
 ```javascript
 {
   "message": "Unable to tag job"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Get User Job</ins>
+### <em>GET Request</em>
+#### URL: /users/saved_job/:users_jobs_id
+
+##### Pass users_jobs_id(saved job id)
+
+##### 201 (Success)
+```javascript
+{
+    "id": 5,
+    "user_id": 3,
+    "jobs_id": 2,
+    "tags": [],
+    "status": "favorite",
+    "archived": false,
+    "notes": "",
+    "applied": false
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to find saved job"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+
+*** ***
+
+### <ins>Update User Job</ins>
+### <em>PUT Request</em>
+#### URL: /users/saved_job/:users_jobs_id
+
+##### Pass users_jobs_id(saved job id) and changes
+
+##### Example Request
+```javascript
+{
+    "applied": true,
+    "notes": "Hope to work here"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "Updated successfully"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to update saved job"
 }
 ```
 
