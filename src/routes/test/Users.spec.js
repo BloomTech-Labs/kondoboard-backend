@@ -10,7 +10,8 @@ const userData = {
   profile_image: '',
   user_track: 'DS',
   skills: JSON.stringify(['HTML','CSS','JavaScript','React,Node','Express']),
-  locations: JSON.stringify(['New York','London','Los Angeles']),
+  states: JSON.stringify(['California','Colorado','Florida']),
+  cities: JSON.stringify(['San Francisco', 'Denvor', 'Miami']),
   remote: true,
 };
 

@@ -51,21 +51,72 @@ describe('Jobs router tests', () => {
       expect(res.text).toBe('{"message":"Unable to get job"}');
     });
   });
+});
 
-  describe('PUT /:job_id', () => {
-    it('edit existing job', async () => {
-      const res = await request(server).put('/api/jobs/1').send({ title: 'Web Developer', company: 'visa' });
-      const [job] = res.body;
-      expect(res.status).toBe(201);
-      expect(job.id).toBe(1);
-      expect(job.title).toBe('Web Developer');
-      expect(job.company).toBe('visa');
+const columnData = {
+  name: 'Jobs offers',
+  location: '5',
+};
+
+describe('Columns router tests', () => {
+  beforeAll(async () => {
+    await db('columns').truncate();
+  });
+
+  describe('POST /:user_id/column', () => {
+    it('adds a new column', async () => {
+      const res = await request(server).post('/api/jobs/1/column').send(columnData);
+      const newColumn = res.body;
+      console.log(newColumn);
+      expect(res.status).toBe(200);
+      expect(newColumn).toBe(1);
+    });
+  });
+
+  describe('GET /:user_id/column', () => {
+    it('get existing column', async () => {
+      const res = await request(server).get('/api/jobs/1/column');
+      const column = res.body;
+      expect(res.status).toBe(200);
+      expect(column.id).toBe(1);
+      expect(column.name).toBe('Jobs offers');
+      expect(column.location).toBe(5);
     });
 
-    it('edit non-existing job', async () => {
-      const res = await request(server).put('/api/jobs/2').send({ title: 'UX Designer' });
-      expect(res.status).toBe(400);
-      expect(res.text).toBe('{"message":"Invalid request"}');
+    describe('PUT /column/:column_id', () => {
+      it('edit existing column', async () => {
+        const res = await request(server).put('/api/jobs/column/1').send({ name: 'Reject offers', location: 6 });
+        const column = res.body;
+        expect(res.status).toBe(200);
+        expect(column).toBe(1);
+      });
+    });
+  });
+
+  describe('DELETE /column/:column_id', () => {
+    it('edit existing column', async () => {
+      const res = await request(server).delete('/api/jobs/column/1');
+      // console.log(res);
+      expect(res.status).toBe(200);
+      expect(res.text).toBe('{"message":"Column deleted"}');
+    });
+  });
+});
+
+const userJobId = {
+  users_jobs_id: 1,
+  column_id: 1,
+};
+
+describe('Add job to Columns router tests', () => {
+  beforeAll(async () => {
+    await db('job_column').truncate();
+  });
+
+  describe('POST /column', () => {
+    it('adds a new job to column', async () => {
+      const res = await request(server).post('/api/jobs/column').send(userJobId);
+      expect(res.status).toBe(200);
     });
   });
 });
