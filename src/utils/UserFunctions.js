@@ -14,8 +14,7 @@ class UserFunctions {
   }
   //Push tags array to database
   static tagsStringify(tags) {
-    tags = JSON.stringify(tags);
-    return tags;
+    return JSON.stringify(tags);
   }
 }
 

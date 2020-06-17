@@ -84,7 +84,7 @@ class Users {
     // const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
     // const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
     
-    return removedTag;
+    // return removedTag;
   }
 
 }

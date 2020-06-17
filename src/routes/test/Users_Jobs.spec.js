@@ -3,48 +3,48 @@ const request = require('supertest');
 const server = require('../../api/server');
 const db = require('../../database/dbConfig');
 
-const userData = {
-  first_name: 'Iron',
-  last_name: 'Guy',
-  email: 'ironguy@gmail.com',
-  profile_image: '',
-  user_track: 'DS',
-  skills: JSON.stringify(['HTML','CSS','JavaScript','React,Node','Express']),
-  locations: JSON.stringify(['New York','London','Los Angeles']),
-  remote: true,
-};
+// const userData = {
+//   first_name: 'Iron',
+//   last_name: 'Guy',
+//   email: 'ironguy@gmail.com',
+//   profile_image: '',
+//   user_track: 'DS',
+//   skills: JSON.stringify(['HTML','CSS','JavaScript','React,Node','Express']),
+//   locations: JSON.stringify(['New York','London','Los Angeles']),
+//   remote: true,
+// };
 
 // POST URL: api/jobs/:user_id/save_job
-const userFaveJobs = {
-  job: {
-    ds_id: 'A1549335999',
-    source_url: '[application url]',
-    title: 'Data Engineer',
-    company: 'capital_one',
-    description: '... innovate leveraging ...',
-    date_published: '2020-05-19',
-    location_city: 'Illinois Medical District',
-    location_state: 'Illinois',
-    geo_locat: '41.868494,-87.673975',
-  },
-  status: 'favorite',
-};
+// const userFaveJobs = {
+//   job: {
+//     ds_id: 'A1549335999',
+//     source_url: '[application url]',
+//     title: 'Data Engineer',
+//     company: 'capital_one',
+//     description: '... innovate leveraging ...',
+//     date_published: '2020-05-19',
+//     location_city: 'Illinois Medical District',
+//     location_state: 'Illinois',
+//     geo_locat: '41.868494,-87.673975',
+//   },
+//   status: 'favorite',
+// };
 
 // POST URL: api/jobs/:user_id/save_job
-const userIrrelevantJob = {
-  job: {
-    ds_id: 'A1549335666',
-    source_url: '[application url]',
-    title: 'Data Engineer',
-    company: 'chase',
-    description: '... work for a boss all day ...',
-    date_published: '2020-05-31',
-    location_city: 'Illinois Medical District',
-    location_state: 'Illinois',
-    geo_locat: '41.868494,-87.673975',
-  },
-  status: 'irrelevant',
-};
+// const userIrrelevantJob = {
+//   job: {
+//     ds_id: 'A1549335666',
+//     source_url: '[application url]',
+//     title: 'Data Engineer',
+//     company: 'chase',
+//     description: '... work for a boss all day ...',
+//     date_published: '2020-05-31',
+//     location_city: 'Illinois Medical District',
+//     location_state: 'Illinois',
+//     geo_locat: '41.868494,-87.673975',
+//   },
+//   status: 'irrelevant',
+// };
 
 describe('Users router tests', () => {
   beforeAll(async () => {
