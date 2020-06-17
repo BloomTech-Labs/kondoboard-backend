@@ -43,11 +43,11 @@ router.post('/:user_id/save_job', async (req, res) => {
     if (!newJob.length) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ message: `Job saved as favorite` });
+      res.status(200).json({ message: 'Job saved as favorite' });
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -60,11 +60,11 @@ router.post('/:user_id/irrelevant_job', async (req, res) => {
     if (!newJob.length) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ message: `Job saved as irrelevant` });
+      res.status(200).json({ message: 'Job saved as irrelevant' });
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -82,7 +82,7 @@ router.get('/:user_id/column', async (req, res) => {
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -95,11 +95,11 @@ router.post('/:user_id/column', async (req, res) => {
     if (!newColumn) {
       res.status(400).json({ message: 'Invalid Request' });
     } else {
-      res.status(200).json({ message: `column added` });
+      res.status(200).json({ message: 'column added' });
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -118,7 +118,7 @@ router.put('/column/:column_id', async (req, res) => {
     console.log(err);
     res.status(500).json({ error: 'Server Error' });
   }
-})
+});
 
 // Delete column
 router.delete('/column/:column_id', async (req, res) => {
@@ -169,9 +169,8 @@ router.put('/column/:job_column_id', async (req, res) => {
     }
   } catch(err) {
     console.log(err.message); //err.code
-    res.status(500).json({ error: `Server error` });
+    res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 module.exports = router;

@@ -1,7 +1,7 @@
 exports.seed = async knex => {
   // Deletes ALL existing entries
   await knex('users').del();
-    // Inserts seed entries
+  // Inserts seed entries
   await knex('users').insert([
     { // id: 1
       first_name: 'Spider',
@@ -34,7 +34,7 @@ exports.seed = async knex => {
       profile_image: '',
       user_track: 'Data Science',
       display_track: 'AI',
-      skills: JSON.stringify([ "CSS", 'React', 'HTML' ]),
+      skills: JSON.stringify([ 'CSS', 'React', 'HTML' ]),
       states: JSON.stringify(['Maryland']),
       cities: JSON.stringify(['Washington DC']),
       remote: false,

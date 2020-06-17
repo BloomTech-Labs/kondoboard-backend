@@ -58,21 +58,21 @@ describe('Users router tests', () => {
     });
   });
 
- //  describe('POST /', () => {
- //    it('adds a new user', async () => {
- //      const res = await request(server).post('/api/users').send(userData);
- //      expect(res.status).toBe(201);
- //      expect(res.body[0].id).toBe(1);
- //      expect(res.body[0].email).toBe('ironguy@gmail.com');
- //    })
-	// });
+  //  describe('POST /', () => {
+  //    it('adds a new user', async () => {
+  //      const res = await request(server).post('/api/users').send(userData);
+  //      expect(res.status).toBe(201);
+  //      expect(res.body[0].id).toBe(1);
+  //      expect(res.body[0].email).toBe('ironguy@gmail.com');
+  //    })
+  // });
 
-	// describe('Add favorite Job', () => {
-	// 	it('adds favorite job to user', async () => {
-	// 		const res = await request(server).post('api/jobs/1/save_job').send(userIrrelevantJob);
-	// 		expect(res.status).toBe(201);
-	// 	})
-	// });
+  // describe('Add favorite Job', () => {
+  // 	it('adds favorite job to user', async () => {
+  // 		const res = await request(server).post('api/jobs/1/save_job').send(userIrrelevantJob);
+  // 		expect(res.status).toBe(201);
+  // 	})
+  // });
 
 });
 

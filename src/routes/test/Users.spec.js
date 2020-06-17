@@ -21,7 +21,7 @@ describe('Users router tests', () => {
 
   describe('GET /', () => {
     it('get non-exisiting user', async () => {
-      const res = await request(server).get('/api/users')
+      const res = await request(server).get('/api/users');
       expect(res.status).toBe(404);
       expect(res.text).toBe('{"message":"There is no user with that email."}');
     });

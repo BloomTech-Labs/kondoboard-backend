@@ -54,7 +54,7 @@ describe('Jobs router tests', () => {
 
   describe('PUT /:job_id', () => {
     it('edit existing job', async () => {
-      const res = await request(server).put('/api/jobs/1').send({ title: 'Web Developer', company: "visa" });
+      const res = await request(server).put('/api/jobs/1').send({ title: 'Web Developer', company: 'visa' });
       const [job] = res.body;
       expect(res.status).toBe(201);
       expect(job.id).toBe(1);
