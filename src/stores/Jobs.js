@@ -20,7 +20,6 @@ async function getJobById(id) {
 }
 
 async function addJob(jobData) {
-  console.log(jobData);
   const [id] = await db('jobs').insert(jobData, 'id');
   const newJob = await getJobById(id);
   return newJob;

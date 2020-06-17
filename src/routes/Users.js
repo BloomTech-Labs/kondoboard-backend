@@ -189,7 +189,39 @@ router.delete('/tag/:tag_id', async (req, res) => {
   }
 });
 
-// Add tag to job
+router.get('/saved_job/:users_jobs_id', async (req,res) => {
+  const id = req.params.users_jobs_id;
+  try {
+    const [savedJob] = await UserController.getSavedJob(id);
+    if(!savedJob) {
+      res.status(400).json({ message: 'Unable to find saved job'});
+    } else {
+      res.status(200).json(savedJob);
+    }
+  } catch(err) {
+    console.log(err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Update users_jobs (notes string & applied boolean)
+router.put('/saved_job/:users_jobs_id', async (req,res) => {
+  const id = req.params.users_jobs_id;
+  const changes = req.body;
+  try {
+    const update = await UserController.updateSavedJob(id, changes);
+    if(!update) {
+      res.status(400).json({ message: 'Unable to update saved job'});
+    } else {
+      res.status(200).json({ message: 'Updated successfully' });
+    }
+  } catch(err) {
+    console.log(err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Add tag to job (not currently used)
 router.put('/tag/update/:users_jobs_id', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.params.users_jobs_id;
@@ -206,7 +238,7 @@ router.put('/tag/update/:users_jobs_id', async (req,res) => {
   }
 });
 
-//Delete tag on job
+//Delete tag on job (not currently used)
 router.put('/tag/delete', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.body.users_jobs_id;
