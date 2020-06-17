@@ -93,10 +93,10 @@ class Users {
     const tagsArray = savedJob.tags;
     console.log(tagsArray);
 
-    const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
-    const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
+    //const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
+    //const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
     
-    return removedTag;
+    //return removedTag;
   }
 
 }

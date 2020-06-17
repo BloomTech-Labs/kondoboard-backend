@@ -202,7 +202,7 @@ router.get('/saved_job/:users_jobs_id', async (req,res) => {
     console.log(err.message);
     res.status(500).json({ error: 'Server error' });
   }
-})
+});
 
 // Update users_jobs (notes string & applied boolean)
 router.put('/saved_job/:users_jobs_id', async (req,res) => {
@@ -219,7 +219,7 @@ router.put('/saved_job/:users_jobs_id', async (req,res) => {
     console.log(err.message);
     res.status(500).json({ error: 'Server error' });
   }
-})
+});
 
 // Add tag to job (not currently used)
 router.put('/tag/update/:users_jobs_id', async (req,res) => {
