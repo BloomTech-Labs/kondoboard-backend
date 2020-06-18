@@ -86,9 +86,8 @@ describe('Columns router tests', () => {
     describe('PUT /column/:column_id', () => {
       it('edit existing column', async () => {
         const res = await request(server).put('/api/jobs/column/1').send({ name: 'Reject offers', location: 6 });
-        const column = res.body;
         expect(res.status).toBe(200);
-        expect(column).toBe(1);
+        expect(res.text).toBe('{"message":"Updated column"}');
       });
     });
   });
@@ -105,7 +104,7 @@ describe('Columns router tests', () => {
 
 const userJobId = {
   users_jobs_id: 1,
-  column_id: 1,
+  columns_id: 1,
 };
 
 describe('Add job to Columns router tests', () => {
