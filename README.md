@@ -32,7 +32,7 @@
 #### Saved Jobs
 - [Add Tag to Job](#Add-Tag-to-Job)
 - [Get User Job](#Get-User-Job)
-- [Get Applied Jobs](#Get-Applied-Jobs) (Not added)
+- [Get Applied Jobs](#Get-Applied-Jobs)
 - [Update User Job](#Update-User-Job)
 
 #### Board Columns
@@ -44,7 +44,7 @@
 #### Organize Jobs
 - [Get User Job Columns](#Get-User-Job-Columns)
 - [Add Job to Column](#Add-Job-to-Column)
-- [Change Job Column](#Change-Job-Column) (Not working)
+- [Change Job Column](#Change-Job-Column)
 
 *** ***
 
@@ -876,7 +876,36 @@
   "error": "Server Error"
 }
 ````
+*** ***
 
+### <ins>Get Applied Jobs</ins>
+### <em>GET Request</em>
+#### URL: 
+
+##### not added yet
+
+##### 201 (Success)
+```javascript
+{
+   
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to find saved job"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
 
 *** ***
 
