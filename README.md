@@ -31,13 +31,19 @@
 
 #### Saved Jobs
 - [Add Tag to Job](#Add-Tag-to-Job)
+- [Get User Job](#Get-User-Job)
+- [Get Applied Jobs](#Get-Applied-Jobs) (Not added)
 - [Update User Job](#Update-User-Job)
 
-#### Kanboard (Not added yet)
-- [Get User Columns]
-- [Add Column]
-- [Update Column]
-- [Delete Column]
+#### Board Columns
+- [Get User Columns](#Get-User-Columns)
+- [Add Column](#Add-Column)
+- [Update Column](#Update-Column)
+- [Delete Column](#Delete-Column)
+
+#### Organize Jobs
+- [Add Job to Column](#Add-Job-to-Column)
+- [Change-Job-Column](#Change-Job-Column) (Not working)
 
 *** ***
 
@@ -877,7 +883,8 @@
 ### <em>PUT Request</em>
 #### URL: /users/saved_job/:users_jobs_id
 
-##### Pass users_jobs_id(saved job id) and changes
+##### Pass users_jobs_id(saved job id) in URL
+##### Changes passed in body
 
 ##### Example Request
 ```javascript
@@ -899,6 +906,254 @@
 ```javascript
 {
   "message": "Unable to update saved job"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Get User Columns</ins>
+### <em>GET Request</em>
+#### URL: /jobs/:user_id/column
+
+##### user_id passed in URL
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "name": "Applied Jobs",
+        "location": 1
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "name": "Phone Interview",
+        "location": 2
+    },
+    {
+        "id": 3,
+        "user_id": 1,
+        "name": "First Interview",
+        "location": 3
+    },
+    {
+        "id": 4,
+        "user_id": 1,
+        "name": "Second Interview",
+        "location": 4
+    }
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to get columns"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Add Column</ins>
+### <em>POST Request</em>
+#### URL: /jobs/:user_id/column
+
+##### Example request
+```javascript
+{
+    "name": "New Jobs",
+    "location": 5
+}
+````
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Column added"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to update saved job"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Update Column</ins>
+### <em>PUT Request</em>
+#### URL: /jobs/column/:column_id
+
+##### Pass column_id in URL
+##### Changes passed in body
+
+##### Example Request
+```javascript
+{
+    "location": 6
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Updated column"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to make column changes"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Delete Column</ins>
+### <em>DELETE Request</em>
+#### URL: /jobs/column/:column_id
+
+##### Pass column_id in URL
+##### Changes passed in body
+
+##### Example Request
+```javascript
+{
+    "location": 6
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Column deleted"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to find column"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Add Job to Column</ins>
+### <em>POST Request</em>
+#### URL: /jobs/column/:column_id
+
+##### Pass column_id in URL
+##### Changes passed in body
+
+##### Example Request
+```javascript
+{
+    "users_jobs_id": 1,
+    "columns_id": 1
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Job added to column"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to add job to column"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
+### <ins>Change Job Column</ins>
+### <em>PUT Request</em>
+#### URL: /jobs/column/:job_column_id
+
+##### Pass column_id in URL
+##### Changes passed in body
+
+##### Example Request
+```javascript
+{
+  "Not working yet"
+}
+```
+
+##### 201 (Success)
+```javascript
+{
+    "message": "Job changed column"
+}
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to change column"
 }
 ```
 
