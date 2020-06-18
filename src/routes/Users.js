@@ -94,7 +94,7 @@ router.get('/:user_id/favorite', async (req, res) => {
   try {
     const jobs = await UserController.getFavoriteJobs(userId);
     if (!jobs.length) {
-      res.status(200).json({ message: 'No favorite jobs found for that user' });
+      res.status(404).json({ message: 'No favorite jobs found for that user' });
     } else {
       res.status(200).json(jobs);
     }
@@ -254,8 +254,8 @@ router.put('/tag/update/:users_jobs_id', async (req,res) => {
   }
 });
 
-//Delete tag on job (not currently used)
-router.put('/tag/delete', async (req,res) => {
+//Delete tag on job
+router.delete('/tag/delete', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.body.users_jobs_id;
   try {

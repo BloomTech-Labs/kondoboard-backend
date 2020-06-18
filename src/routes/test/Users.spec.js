@@ -10,7 +10,8 @@ const userData = {
   profile_image: '',
   user_track: 'DS',
   skills: JSON.stringify(['HTML','CSS','JavaScript','React,Node','Express']),
-  locations: JSON.stringify(['New York','London','Los Angeles']),
+  states: JSON.stringify(['California','Colorado','Florida']),
+  cities: JSON.stringify(['San Francisco', 'Denvor', 'Miami']),
   remote: true,
 };
 
@@ -97,6 +98,50 @@ describe('Users router tests', () => {
       const res = await request(server).delete('/api/users/1');
       expect(res.status).toBe(404);
       expect(res.text).toBe('{"message":"User not found"}');
+    });
+  });
+});
+
+const userTag = {
+  user_id: 1,
+  tag_name: 'ReactJS',
+  color: '#4287f5',
+  job_id: 'JS927927c0a7eb091796b82aea8f3a0770459567e4c662b9d727a428ccdeea092a',
+};
+
+describe('Users Tag router tests', () => {
+  beforeAll(async () => {
+    await db('user_tags').truncate();
+  });
+
+  describe('POST /:user_id/tag/', () => {
+    it('adds a new tag', async () => {
+      const res = await request(server).post('/api/users/1/tag/').send(userTag);
+      const tag = res.body;
+      expect(res.status).toBe(201);
+      expect(tag.id).toBe(1);
+      expect(tag.tag_name).toBe('ReactJS');
+      expect(tag.color).toBe('#4287f5');
+      expect(tag.job_id).toBe('JS927927c0a7eb091796b82aea8f3a0770459567e4c662b9d727a428ccdeea092a');
+    });
+  });
+
+  // describe('PUT /tag/:tag_id', () => {
+  //   it('edit existing tag', async () => {
+  //     const res = await request(server).put('/api/users/tag/1').send({ tag_name: 'NodeJS' });
+  //     const update = res.body;
+  //     console.log(res.body);
+  //     expect(res.status).toBe(201);
+  //     expect(update.id).toBe(1);
+  //     expect(update.tag_name).toBe('NodeJS');
+  //   });
+  // });
+
+  describe('DELETE /tag/:tag_id', () => {
+    it('delete existing tag', async () => {
+      const res = await request(server).delete('/api/users/tag/1');
+      expect(res.status).toBe(200);
+      expect(res.text).toBe('{"message":"Tag deleted successfully"}');
     });
   });
 });
