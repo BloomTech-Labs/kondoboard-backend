@@ -74,7 +74,7 @@ router.post('/:user_id/irrelevant_job', async (req, res) => {
 router.get('/:user_id/column', async (req, res) => {
   const userId = req.params.user_id;
   try {
-    const [columns] = await JobsController.getColumn(userId);
+    const columns = await JobsController.getColumn(userId);
     if (!columns) {
       res.status(400).json({ message: 'Unable to get columns' });
     } else {

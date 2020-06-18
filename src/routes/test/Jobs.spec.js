@@ -78,9 +78,9 @@ describe('Columns router tests', () => {
       const res = await request(server).get('/api/jobs/1/column');
       const column = res.body;
       expect(res.status).toBe(200);
-      expect(column.id).toBe(1);
-      expect(column.name).toBe('Jobs offers');
-      expect(column.location).toBe(5);
+      expect(column[0].id).toBe(1);
+      expect(column[0].name).toBe('Jobs offers');
+      expect(column[0].location).toBe(5);
     });
 
     describe('PUT /column/:column_id', () => {
