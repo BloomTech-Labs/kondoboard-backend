@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     } else {
       res.status(200).json(user);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -30,7 +30,7 @@ router.get('/:user_id', async (req, res) => {
     } else {
       res.status(200).json(user);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     } else {
       res.status(201).json(user);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: err.message });
   }
@@ -64,7 +64,7 @@ router.put('/:user_id', async (req, res) => {
       const updatedUser = await UserController.getUser(userId);
       res.status(201).json(updatedUser);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -80,7 +80,7 @@ router.delete('/:user_id', async (req, res) => {
     } else {
       res.status(200).json({ message: 'User deleted successfully' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ 'error': 'Server error' });
   }
@@ -98,7 +98,7 @@ router.get('/:user_id/favorite', async (req, res) => {
     } else {
       res.status(200).json(jobs);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -108,14 +108,30 @@ router.get('/:user_id/favorite', async (req, res) => {
 router.get('/:user_id/irrelevant', async (req, res) => {
   const userId = req.params.user_id;
   try {
-    const jobs = await UserController.getIrrelevantJobs(userId, 'irrelevant');
+    const jobs = await UserController.getIrrelevantJobs(userId);
     if (!jobs.length) {
       res.status(404).json({ message: 'No irrelevant jobs found for that user' });
     } else {
       res.status(200).json(jobs);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Get Applied Jobs
+router.get('/:user_id/applied', async (req, res) => {
+  const userId = req.params.user_id;
+  try {
+    const jobs = await UserController.getAppliedJobs(userId);
+    if (!jobs.length) {
+      res.status(404).json({ message: 'No applied jobs found for that user' });
+    } else {
+      res.status(200).json(jobs);
+    }
+  } catch (err) {
+    console.log(err.message);
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -132,7 +148,7 @@ router.get('/:user_id/tag/', async (req, res) => {
     } else {      
       res.status(201).json(tag);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: err.message });
   }
@@ -150,7 +166,7 @@ router.post('/:user_id/tag/', async (req, res) => {
     } else {
       res.status(201).json(tag);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server Error' });
   }
@@ -167,7 +183,7 @@ router.put('/tag/:tag_id', async (req, res) => {
     } else {
       res.status(201).json({ message:'Updated tag successfully' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -183,7 +199,7 @@ router.delete('/tag/:tag_id', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Tag deleted successfully' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ 'error': 'Server error' });
   }
@@ -193,12 +209,12 @@ router.get('/saved_job/:users_jobs_id', async (req,res) => {
   const id = req.params.users_jobs_id;
   try {
     const [savedJob] = await UserController.getSavedJob(id);
-    if(!savedJob) {
+    if (!savedJob) {
       res.status(400).json({ message: 'Unable to find saved job'});
     } else {
       res.status(200).json(savedJob);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ error: 'Server error' });
   }
@@ -210,12 +226,12 @@ router.put('/saved_job/:users_jobs_id', async (req,res) => {
   const changes = req.body;
   try {
     const update = await UserController.updateSavedJob(id, changes);
-    if(!update) {
+    if (!update) {
       res.status(400).json({ message: 'Unable to update saved job'});
     } else {
       res.status(200).json({ message: 'Updated successfully' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ error: 'Server error' });
   }
@@ -225,14 +241,14 @@ router.put('/saved_job/:users_jobs_id', async (req,res) => {
 router.put('/tag/update/:users_jobs_id', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.params.users_jobs_id;
-  try{
+  try {
     const tagJob = await UserController.addJobTag(tagId, usersJobId);
     if (!tagJob) {
       res.status(400).json({ message: 'Unable to tag job' });
     } else {
       res.status(200).json({ message: 'Added tag to job' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ 'error': 'Server error' });
   }
@@ -242,14 +258,14 @@ router.put('/tag/update/:users_jobs_id', async (req,res) => {
 router.put('/tag/delete', async (req,res) => {
   const tagId = req.body.tag_id;
   const usersJobId = req.body.users_jobs_id;
-  try{
+  try {
     const tagJob = await UserController.removeJobTag(tagId, usersJobId);
     if (!tagJob) {
       res.status(400).json({ message: 'Unable to delete tag from job' });
     } else {
       res.status(200).json({ message: 'Deleted tag from job' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ 'error': 'Server error' });
   }

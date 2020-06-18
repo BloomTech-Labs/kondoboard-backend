@@ -72,6 +72,15 @@
     ],
     "no-whitespace-before-property": [
       "error"
+    ],
+    "keyword-spacing": [
+      "error"
+    ],
+    "space-before-blocks": [
+      "error"
+    ],
+    "arrow-spacing": [
+      "error"
     ]
   }
 }

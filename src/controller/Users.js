@@ -22,7 +22,7 @@ class Users {
     return updatedUser;
   }
 
-  static async deleteUser(userId){
+  static async deleteUser(userId) {
     const user = await UserStore.remove(userId);
     return user;
   } 
@@ -41,6 +41,11 @@ class Users {
 
   static async getIrrelevantJobs(userId) {
     const userJobs = await UserStore.getUserJobs(userId, 'irrelevant');
+    return userJobs;
+  }
+
+  static async getAppliedJobs(userId) {
+    const userJobs = await UserStore.getAppliedJobs(userId);
     return userJobs;
   }
   
