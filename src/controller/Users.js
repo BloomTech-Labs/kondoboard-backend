@@ -45,7 +45,7 @@ class Users {
   }
 
   static async getAppliedJobs(userId) {
-    const userJobs = await UserStore.getAppliedJobs(userId);
+    const userJobs = await UserStore.getUserAppliedJobs(userId);
     return userJobs;
   }
   
