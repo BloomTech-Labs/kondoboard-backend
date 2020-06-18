@@ -66,7 +66,7 @@ class Users {
     return updatedTag;
   }
 
-  static async deleteTag(tag_id){
+  static async deleteTag(tag_id) {
     const tag = await UserStore.removeTag(tag_id);
     return tag;
   } 
