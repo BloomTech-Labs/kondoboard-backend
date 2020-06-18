@@ -42,7 +42,7 @@ async function newColumn(data) {
 }
 
 async function getColumn(user_id) {
-  const column = await db('columns').where({ user_id });
+  const column = await db('columns').where({ user_id }).orderBy('location','asc');
   return column;
 }
 
@@ -66,12 +66,13 @@ async function newJobColumn(data) {
 }
 
 async function updateJobColumn(id, changes) {
+  console.log('test', changes);
   const updateJobColumn = await db('job_column').where({ id }).update(changes);
   return updateJobColumn;
 }
 
 async function updateColumn(id, changes) {
-  const updateColumn = await db('columns').where({ id }).update('columns_id', changes);
+  const updateColumn = await db('columns').where({ id }).update(changes);
   return updateColumn;
 }
 

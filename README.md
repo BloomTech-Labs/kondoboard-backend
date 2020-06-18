@@ -32,7 +32,6 @@
 #### Saved Jobs
 - [Add Tag to Job](#Add-Tag-to-Job)
 - [Get User Job](#Get-User-Job)
-- [Get Applied Jobs](#Get-Applied-Jobs)
 - [Update User Job](#Update-User-Job)
 
 #### Board Columns
@@ -42,6 +41,7 @@
 - [Delete Column](#Delete-Column)
 
 #### Organize Jobs
+- [Get Applied Jobs](#Get-Applied-Jobs)
 - [Get User Job Columns](#Get-User-Job-Columns)
 - [Add Job to Column](#Add-Job-to-Column)
 - [Change Job Column](#Change-Job-Column)
@@ -876,36 +876,6 @@
   "error": "Server Error"
 }
 ````
-*** ***
-
-### <ins>Get Applied Jobs</ins>
-### <em>GET Request</em>
-#### URL: 
-
-##### not added yet
-
-##### 201 (Success)
-```javascript
-{
-   
-}
-```
-
-##### 400 (Bad Request)
-> Will receive a 400 response if no user id, if unmatching field, or no fields exist
-```javascript
-{
-  "message": "Unable to find saved job"
-}
-```
-
-##### 500 (Internal Server Error)
-> Will receive a 500 response if there is a problem with the server
-```javascript
-{
-  "error": "Server Error"
-}
-```
 
 *** ***
 
@@ -1115,6 +1085,61 @@
   "error": "Server Error"
 }
 ````
+
+*** ***
+
+### <ins>Get Applied Jobs</ins>
+### <em>GET Request</em>
+#### URL: /users/:user_id/applied
+
+##### user_id in URL
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "jobs_id": 1,
+        "tags": [
+            "3",
+            "4"
+        ],
+        "status": "favorite",
+        "archived": false,
+        "notes": "Cool title and good location",
+        "applied": true,
+        "ds_id": "A1549335342",
+        "source_url": "[application url]",
+        "title": "Data Engineer",
+        "company": "capital_one",
+        "description": "... innovate leveraging ...",
+        "date_published": "2020-05-19T06:00:00.000Z",
+        "location_city": "Illinois Medical District",
+        "location_state": "Illinois",
+        "geo_locat": "41.868494,-87.673975",
+        "users_jobs_id": 1,
+        "columns_id": 1
+    },
+    ...
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+    "message": "No applied jobs found for that user"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+```
 
 *** ***
 

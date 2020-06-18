@@ -115,7 +115,7 @@ router.put('/column/:column_id', async (req, res) => {
       res.status(200).json(({ message: 'Updated column' }));
     }
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     res.status(500).json({ error: 'Server Error' });
   }
 });
@@ -143,12 +143,12 @@ router.get('/column/:user_id', async (req,res) => {
   const user_id = req.params.user_id;
   try {
     const jobColumns = await JobsController.getJobColumns(user_id);
-    if(!jobColumns) {
+    if (!jobColumns) {
       res.status(400).json({ message: 'Unable to find job columns' });
     } else {
       res.status(200).json(jobColumns);
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
