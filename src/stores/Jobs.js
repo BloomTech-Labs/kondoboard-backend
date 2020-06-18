@@ -10,6 +10,7 @@ module.exports = {
   getColumn,
   deleteColumn,
   newJobColumn,
+  getJobColumns,
   updateJobColumn,
   updateColumn,
 };
@@ -41,7 +42,7 @@ async function newColumn(data) {
 }
 
 async function getColumn(user_id) {
-  const column = await db('columns').where({ user_id });
+  const column = await db('columns').where({ user_id }).orderBy('location','asc');
   return column;
 }
 
@@ -50,12 +51,22 @@ async function deleteColumn(id) {
   return deleted;
 }
 
+async function getJobColumns(user_id) {
+  const jobColumnInfo = await db('job_column')
+    .select('job_column.*')
+    .from('users_jobs')
+    .join('job_column', 'users_jobs.id', 'job_column.users_jobs_id')
+    .where('users_jobs.user_id', user_id);
+  return jobColumnInfo;
+}
+
 async function newJobColumn(data) {
   const newJobColumn = await db('job_column').insert( data );
   return newJobColumn;
 }
 
 async function updateJobColumn(id, changes) {
+  console.log('test', changes);
   const updateJobColumn = await db('job_column').where({ id }).update(changes);
   return updateJobColumn;
 }

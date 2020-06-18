@@ -47,7 +47,7 @@ exports.up = function(knex) {
       saved.boolean('applied').defaultTo(false);
     })
 
-    .createTable('user_tags', tag =>{
+    .createTable('user_tags', tag => {
       tag.increments('id');
       tag.integer('user_id', 255)
         .notNullable()
@@ -59,7 +59,7 @@ exports.up = function(knex) {
       tag.string('job_id').notNullable();
     })
 
-    .createTable('columns', column =>{
+    .createTable('columns', column => {
       column.increments('id');
       column.integer('user_id', 255)
         .notNullable()
@@ -71,18 +71,14 @@ exports.up = function(knex) {
     })
 
     //joined table -- Relationship between users_jobs and columns
-    .createTable('job_column', job_column =>{
+    .createTable('job_column', job_column => {
       job_column.increments('id');
       job_column.integer('users_jobs_id')
         .notNullable()
         .references('users_jobs.id')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
-      job_column.integer('columns_id')
-        .notNullable()
-        .references('columns.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE');
+      job_column.integer('columns_id');
     })
   );
 };

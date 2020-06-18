@@ -7,6 +7,7 @@ module.exports = {
   update,
   remove,
   getUserJobs,
+  getUserAppliedJobs,
   addTag,
   getTags,
   updateTag,
@@ -51,6 +52,16 @@ async function getUserJobs(user_id, type) {
     .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
     .where('users_jobs.user_id', user_id)
     .andWhere('users_jobs.status', type);
+  return userJobs;
+}
+
+async function getUserAppliedJobs(user_id) {
+  const userJobs = await db('jobs.*, users_jobs.status, job_column.columns_id')
+    .from('users_jobs')
+    .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
+    .join('job_column', 'users_jobs.id', 'job_column.users_jobs_id')
+    .where('users_jobs.user_id', user_id)
+    .andWhere('users_jobs.applied', true);
   return userJobs;
 }
 

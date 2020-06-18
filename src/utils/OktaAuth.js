@@ -20,7 +20,7 @@ const authenticationRequired = async (req, res, next) => {
     const jwt = await oktaJwtVerifier.verifyAccessToken(accessToken, process.env.AUDIENCE);
     req.jwt = jwt;
     next();
-  } catch(err) {
+  } catch (err) {
     res.status(401).json({ error: err.message });
   }
 };
