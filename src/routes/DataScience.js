@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   try {
     const data = await DSController.getAllData();
     res.status(200).json(data);
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -20,7 +20,7 @@ router.get('/:user_id', async (req, res) => {
     } else {
       res.status(200).json(user);
     }
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({ error: err });
   }
 });

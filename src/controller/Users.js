@@ -22,7 +22,7 @@ class Users {
     return updatedUser;
   }
 
-  static async deleteUser(userId){
+  static async deleteUser(userId) {
     const user = await UserStore.remove(userId);
     return user;
   } 
@@ -43,6 +43,11 @@ class Users {
     const userJobs = await UserStore.getUserJobs(userId, 'irrelevant');
     return userJobs;
   }
+
+  static async getAppliedJobs(userId) {
+    const userJobs = await UserStore.getUserAppliedJobs(userId);
+    return userJobs;
+  }
   
   // User Tags
 
@@ -61,7 +66,7 @@ class Users {
     return updatedTag;
   }
 
-  static async deleteTag(tag_id){
+  static async deleteTag(tag_id) {
     const tag = await UserStore.removeTag(tag_id);
     return tag;
   } 

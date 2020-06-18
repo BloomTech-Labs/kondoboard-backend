@@ -11,7 +11,7 @@ class Jobs {
     return newJob;
   }    
 
-  static async updateJob(job_id, changes){
+  static async updateJob(job_id, changes) {
     const updatedJob = await JobStore.updateJob(job_id, changes);
     return updatedJob;
   }

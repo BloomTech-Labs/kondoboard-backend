@@ -9,7 +9,7 @@ router.get('/:job_id', async (req, res) => {
   const jobId = req.params.job_id;
   try {
     const job = await JobsController.getById(jobId);    
-    if (!job.length){
+    if (!job.length) {
       res.status(400).json({ message: 'Unable to get job' });
     } else {
       res.status(201).json(job);
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
   const newJob = req.body;
   try {
     const job = await JobsController.addJob(newJob);
-    if (!job){
+    if (!job) {
       res.status(400).json({ message: 'Unable to add job' });
     } else {
       res.status(201).json(job);
@@ -45,7 +45,7 @@ router.post('/:user_id/save_job', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Job saved as favorite' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -62,7 +62,7 @@ router.post('/:user_id/irrelevant_job', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Job saved as irrelevant' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -80,7 +80,7 @@ router.get('/:user_id/column', async (req, res) => {
     } else {
       res.status(200).json( columns );
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -97,7 +97,7 @@ router.post('/:user_id/column', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Column added' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -114,7 +114,7 @@ router.put('/column/:column_id', async (req, res) => {
     } else {
       res.status(200).json(({ message: 'Updated column' }));
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Server Error' });
   }
@@ -130,7 +130,7 @@ router.delete('/column/:column_id', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Column deleted' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -166,7 +166,7 @@ router.post('/column', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Job added to column' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
@@ -183,7 +183,7 @@ router.put('/column/:entry_id/update', async (req, res) => {
     } else {
       res.status(200).json({ message: 'Job column updated' });
     }
-  } catch(err) {
+  } catch (err) {
     console.log(err.message); //err.code
     res.status(500).json({ error: 'Server error' });
   }
