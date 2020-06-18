@@ -50,6 +50,11 @@ class Jobs {
     return columns;
   }
 
+  static async updateColumn(id, changes) {
+    const updateColumn = await JobStore.updateColumn(id, changes);
+    return updateColumn;
+  }
+
   static async removeColumn(id) {
     const deleted = await JobStore.deleteColumn(id);
     return deleted;
@@ -60,14 +65,14 @@ class Jobs {
     return newJobColumn;
   }
 
+  static async getJobColumns(user_id) {
+    const getJobColumns = await JobStore.getJobColumns(user_id);
+    return getJobColumns;
+  }
+
   static async updateJobColumn(id, changes) {
     const updateJobColumn = await JobStore.updateJobColumn(id, changes);
     return updateJobColumn;
-  }
-
-  static async updateColumn(id, changes) {
-    const updateColumn = await JobStore.updateColumn(id, changes);
-    return updateColumn;
   }
 
   static async findOrCreateJob(data) {

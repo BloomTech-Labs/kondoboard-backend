@@ -42,8 +42,9 @@
 - [Delete Column](#Delete-Column)
 
 #### Organize Jobs
+- [Get User Job Columns](#Get-User-Job-Columns)
 - [Add Job to Column](#Add-Job-to-Column)
-- [Change-Job-Column](#Change-Job-Column) (Not working)
+- [Change Job Column](#Change-Job-Column) (Not working)
 
 *** ***
 
@@ -1088,12 +1089,54 @@
 
 *** ***
 
+### <ins>Get User Job Columns</ins>
+### <em>GET Request</em>
+#### URL: /jobs/column/:user_id
+
+##### Pass user_id in URL
+##### users_jobs_id & columns_id are how jobs are connected to a column
+##### id in this response is job_column_id to pass into the URL on [Change Job Column](#Change-Job-Column)
+
+##### 201 (Success)
+```javascript
+[
+    {
+        "id": 1,
+        "users_jobs_id": 1,
+        "columns_id": 1
+    },
+    {
+        "id": 2,
+        "users_jobs_id": 2,
+        "columns_id": 5
+    }
+]
+```
+
+##### 400 (Bad Request)
+> Will receive a 400 response if no user id, if unmatching field, or no fields exist
+```javascript
+{
+  "message": "Unable to add job to column"
+}
+```
+
+##### 500 (Internal Server Error)
+> Will receive a 500 response if there is a problem with the server
+```javascript
+{
+  "error": "Server Error"
+}
+````
+
+*** ***
+
 ### <ins>Add Job to Column</ins>
 ### <em>POST Request</em>
 #### URL: /jobs/column/:column_id
 
 ##### Pass column_id in URL
-##### Changes passed in body
+##### Pass in ids to connect in body
 
 ##### Example Request
 ```javascript
@@ -1132,20 +1175,20 @@
 ### <em>PUT Request</em>
 #### URL: /jobs/column/:job_column_id
 
-##### Pass column_id in URL
-##### Changes passed in body
+##### Pass job_column_id in URL (incremented id in job_column table)
+##### Can only change columns_id
 
 ##### Example Request
 ```javascript
 {
-  "Not working yet"
+    "columns_id": 5
 }
 ```
 
 ##### 201 (Success)
 ```javascript
 {
-    "message": "Job changed column"
+    "message": "Job column updated"
 }
 ```
 

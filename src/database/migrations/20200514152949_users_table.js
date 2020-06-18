@@ -78,11 +78,7 @@ exports.up = function(knex) {
         .references('users_jobs.id')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
-      job_column.integer('columns_id')
-        .notNullable()
-        .references('columns.id')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE');
+      job_column.integer('columns_id');
     })
   );
 };

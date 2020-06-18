@@ -138,6 +138,22 @@ router.delete('/column/:column_id', async (req, res) => {
 
 // ~~~~~~~~~~ Job to Column ~~~~~~~~~~
 
+// Get user job columns
+router.get('/column/:user_id', async (req,res) => {
+  const user_id = req.params.user_id;
+  try {
+    const jobColumns = await JobsController.getJobColumns(user_id);
+    if(!jobColumns) {
+      res.status(400).json({ message: 'Unable to find job columns' });
+    } else {
+      res.status(200).json(jobColumns);
+    }
+  } catch(err) {
+    console.log(err.message); //err.code
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Add job to column
 router.post('/column', async (req, res) => {
   const data = {};
@@ -146,7 +162,7 @@ router.post('/column', async (req, res) => {
   try {
     const newJob = await JobsController.newJobColumn(data);
     if (!newJob) {
-      res.status(400).json({ message: 'Invalid Request' });
+      res.status(400).json({ message: 'Unable to add job to column' });
     } else {
       res.status(200).json({ message: 'Job added to column' });
     }
@@ -157,13 +173,13 @@ router.post('/column', async (req, res) => {
 });
 
 // Change column
-router.put('/column/:job_column_id', async (req, res) => {
-  const id = req.params.job_column_id;
-  const moveColumn = req.body.columns_id;
+router.put('/column/:entry_id/update', async (req, res) => {
+  const id = req.params.entry_id;
+  const changes = req.body;
   try {
-    const updated = await JobsController.updateJobColumn(id, moveColumn);
+    const updated = await JobsController.updateJobColumn(id, changes);
     if (!updated) {
-      res.status(400).json({ message: 'Invalid Request' });
+      res.status(400).json({ message: 'Unable to change column' });
     } else {
       res.status(200).json({ message: 'Job column updated' });
     }
