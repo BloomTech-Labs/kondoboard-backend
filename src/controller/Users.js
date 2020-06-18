@@ -22,7 +22,7 @@ class Users {
     return updatedUser;
   }
 
-  static async deleteUser(userId){
+  static async deleteUser(userId) {
     const user = await UserStore.remove(userId);
     return user;
   } 
@@ -43,6 +43,11 @@ class Users {
     const userJobs = await UserStore.getUserJobs(userId, 'irrelevant');
     return userJobs;
   }
+
+  static async getAppliedJobs(userId) {
+    const userJobs = await UserStore.getUserAppliedJobs(userId);
+    return userJobs;
+  }
   
   // User Tags
 
@@ -61,11 +66,22 @@ class Users {
     return updatedTag;
   }
 
-  static async deleteTag(tag_id){
+  static async deleteTag(tag_id) {
     const tag = await UserStore.removeTag(tag_id);
     return tag;
   } 
 
+  static async getSavedJob(id) {
+    const savedJob = await UserStore.getUserJob(id);
+    return savedJob; 
+  }
+
+  static async updateSavedJob(id, changes) {
+    const update = await UserStore.updateSavedJob(id, changes);
+    return update;
+  }
+
+  // Not currently used
   static async addJobTag(tagId, usersJobId) {
     const [savedJob] = await UserStore.getJobTags(usersJobId);
     const updatedTags = savedJob.tags;
@@ -76,15 +92,16 @@ class Users {
     return newTag;
   }
 
+  // Not currently used
   static async removeJobTag(tagId, usersJobId) {
     const [savedJob] = await UserStore.getJobTags(usersJobId);
     const tagsArray = savedJob.tags;
     console.log(tagsArray);
 
-    // const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
-    // const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
+    //const formattedUpdatedTags = await UserFunction.tagsStringify(updatedTags);
+    //const [removedTag] = await UserStore.updateJobTag(tagId, formattedUpdatedTags);
     
-    // return removedTag;
+    //return removedTag;
   }
 
 }

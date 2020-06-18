@@ -7,12 +7,15 @@ module.exports = {
   update,
   remove,
   getUserJobs,
+  getUserAppliedJobs,
   addTag,
   getTags,
   updateTag,
   removeTag,
   getJobTags,
   updateJobTag,
+  getUserJob,
+  updateSavedJob,
 };
 
 // ~~~~~~~~~~ Users ~~~~~~~~~
@@ -52,6 +55,16 @@ async function getUserJobs(user_id, type) {
   return userJobs;
 }
 
+async function getUserAppliedJobs(user_id) {
+  const userJobs = await db('jobs.*, users_jobs.status, job_column.columns_id')
+    .from('users_jobs')
+    .join('jobs', 'users_jobs.jobs_id', 'jobs.id')
+    .join('job_column', 'users_jobs.id', 'job_column.users_jobs_id')
+    .where('users_jobs.user_id', user_id)
+    .andWhere('users_jobs.applied', true);
+  return userJobs;
+}
+
 async function getTagById(id) {
   const tag = await db('user_tags').where({ id });
   return tag;
@@ -88,3 +101,12 @@ async function updateJobTag(id, updatedTags) {
   return newTag;
 }
 
+async function getUserJob(id) {
+  const savedJob = await db('users_jobs').where({ id });
+  return savedJob;
+}
+
+async function updateSavedJob(id, changes) {
+  const updateColumn = await db('users_jobs').where({ id }).update(changes);
+  return updateColumn;
+}

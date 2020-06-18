@@ -8,8 +8,8 @@
     "start": "node index.js",
     "test": "cross-env NODE_ENV=testing jest --watch",
     "lint": "npx eslint src",
-    "lintFix": "npx eslint --fix src",
-    "predeploy": "npm run lint"
+    "lint:fix": "npx eslint --fix src",
+    "predeploy": "npm run lint:fix && npm run lint"
   },
   "repository": {
     "type": "git",
