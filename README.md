@@ -1187,10 +1187,9 @@
 
 ### <ins>Add Job to Column</ins>
 ### <em>POST Request</em>
-#### URL: /jobs/column/:column_id
+#### URL: /jobs/column/
 
-##### Pass column_id in URL
-##### Pass in ids to connect in body
+##### Pass in users_jobs_id(saved job) and columns_id(id of column) in body
 
 ##### Example Request
 ```javascript
@@ -1230,7 +1229,7 @@
 #### URL: /jobs/column/:job_column_id
 
 ##### Pass job_column_id in URL (incremented id in job_column table)
-##### Can only change columns_id
+##### Can only update columns_id
 
 ##### Example Request
 ```javascript
