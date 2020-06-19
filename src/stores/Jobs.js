@@ -13,6 +13,7 @@ module.exports = {
   getJobColumns,
   updateJobColumn,
   updateColumn,
+  getJobsInColumns,
 };
 
 async function getJobById(id) {
@@ -80,4 +81,11 @@ async function updateColumn(id, changes) {
 async function getJobByDsId(ds_id) {
   const job = await db('jobs').where({ ds_id });
   return job;
+}
+
+async function getJobsInColumns(columns_id) {
+  const jobs = await db('job_column')
+                      .select('users_jobs_id as id')
+                      .where({ columns_id });
+  return jobs;
 }
