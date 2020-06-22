@@ -47,7 +47,19 @@ class Jobs {
 
   static async getColumn(userId) {
     const columns = await JobStore.getColumn(userId);
-    return columns;
+    const fullData = [];
+    for (const column of columns) {
+      const data = {};
+      let jobObjects = await JobStore.getJobsInColumns(column.id);
+      let list = [];
+      for (let jobs of jobObjects) {
+        list.push(jobs.id)
+      }
+      data.column = column;
+      data.column.savedJobs = list;
+      fullData.push(data.column);
+    }
+    return fullData;
   }
 
   static async updateColumn(id, changes) {

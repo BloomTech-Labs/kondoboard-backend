@@ -929,29 +929,26 @@
 ```javascript
 [
     {
-        "id": 1,
-        "user_id": 1,
-        "name": "Applied Jobs",
-        "location": 1
-    },
-    {
         "id": 2,
         "user_id": 1,
         "name": "Phone Interview",
-        "location": 2
+        "location": 2,
+        "savedJobs": [
+            3,
+            2,
+            3
+        ]
     },
     {
         "id": 3,
         "user_id": 1,
         "name": "First Interview",
-        "location": 3
+        "location": 3,
+        "savedJobs": [
+            4
+        ]
     },
-    {
-        "id": 4,
-        "user_id": 1,
-        "name": "Second Interview",
-        "location": 4
-    }
+    ...
 ]
 ```
 
