@@ -69,7 +69,7 @@ describe('Columns router tests', () => {
       const newColumn = res.body;
       console.log(newColumn);
       expect(res.status).toBe(200);
-      expect(newColumn).toBe(1);
+      expect(res.text).toBe('{"message":"Column has been added"}');
     });
   });
 
