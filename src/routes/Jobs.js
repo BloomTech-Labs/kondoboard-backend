@@ -95,7 +95,7 @@ router.post('/:user_id/column', async (req, res) => {
     if (!newColumn) {
       res.status(400).json({ message: 'Unable to add column' });
     } else {
-      res.status(200).json({ messge: 'Column has been added' });
+      res.status(200).json({ message: 'Column has been added' });
     }
   } catch (err) {
     console.log(err.message); //err.code
