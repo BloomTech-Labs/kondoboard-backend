@@ -91,11 +91,11 @@ router.post('/:user_id/column', async (req, res) => {
   const data = req.body;
   data.user_id = req.params.user_id;
   try {
-    const [newColumn] = await JobsController.addColumn(data);
+    const newColumn = await JobsController.addColumn(data);
     if (!newColumn) {
       res.status(400).json({ message: 'Unable to add column' });
     } else {
-      res.status(200).json(newColumn);
+      res.status(200).json({ messge: 'Column has been added' });
     }
   } catch (err) {
     console.log(err.message); //err.code
