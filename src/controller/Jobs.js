@@ -82,8 +82,8 @@ class Jobs {
     return getJobColumns;
   }
 
-  static async updateJobColumn(id, changes) {
-    const updateJobColumn = await JobStore.updateJobColumn(id, changes);
+  static async updateJobColumn(id, column) {
+    const updateJobColumn = await JobStore.updateJobColumn(id, column);
     return updateJobColumn;
   }
 

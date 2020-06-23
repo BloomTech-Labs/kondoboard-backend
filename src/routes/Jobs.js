@@ -173,15 +173,15 @@ router.post('/column', async (req, res) => {
 });
 
 // Change column
-router.put('/column/:entry_id/update', async (req, res) => {
-  const id = req.params.entry_id;
-  const changes = req.body;
+router.put('/column/update/job', async (req, res) => {
+  const id = req.body.users_jobs_id;
+  const column = req.body.columns_id;
   try {
-    const updated = await JobsController.updateJobColumn(id, changes);
+    const updated = await JobsController.updateJobColumn(id, column);
     if (!updated) {
       res.status(400).json({ message: 'Unable to change column' });
     } else {
-      res.status(200).json({ message: 'Job column updated' });
+      res.status(200).json({ message: 'Job column changed' });
     }
   } catch (err) {
     console.log(err.message); //err.code

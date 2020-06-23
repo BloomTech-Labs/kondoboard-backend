@@ -1,6 +1,7 @@
 # Kondoboard Backend Database
 ## https://kondo-board-api.herokuapp.com/api
 ##### All endpoints start with /api
+##### (View table structures)[TABLES.md]
 
 *** ***
 
@@ -1223,14 +1224,15 @@
 
 ### <ins>Change Job Column</ins>
 ### <em>PUT Request</em>
-#### URL: /jobs/column/:job_column_id
+#### URL: /jobs/column/update/job
 
-##### Pass job_column_id in URL (incremented id in job_column table)
+##### Pass in users_jobs_id and columns_id in body
 ##### Can only update columns_id
 
 ##### Example Request
 ```javascript
 {
+    "users_jobs_id": 12
     "columns_id": 5
 }
 ```
@@ -1238,7 +1240,7 @@
 ##### 201 (Success)
 ```javascript
 {
-    "message": "Job column updated"
+    "message": "Job column changed"
 }
 ```
 
