@@ -66,15 +66,15 @@ async function newJobColumn(data) {
   return newJobColumn;
 }
 
-async function updateJobColumn(id, changes) {
-  console.log('test', changes);
-  const updateJobColumn = await db('job_column').where({ id }).update(changes);
+async function updateJobColumn(users_jobs_id, columns_id) {
+  console.log("id -", users_jobs_id);
+  console.log("column -", columns_id);
+  const updateJobColumn = await db('job_column').where({ users_jobs_id }).update({ columns_id });
   return updateJobColumn;
 }
 
 async function updateColumn(id, changes) {
   const updateColumn = await db('columns').where({ id }).update(changes);
-  console.log(changes);
   return updateColumn;
 }
 
