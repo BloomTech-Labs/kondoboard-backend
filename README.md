@@ -1,7 +1,12 @@
 # Kondoboard Backend Database
 ## https://kondo-board-api.herokuapp.com/api
 ##### All endpoints start with /api
-##### (View table structures)[TABLES.md]
+##### Table structures are in TABLES.md
+
+##### Route work by: /routes -> /controller -> stores
+###### Routes contain the endpoints
+###### Controllers manipulate data if needed, most will just pass the request to the stores 
+###### Stores are used to access the Database
 
 *** ***
 
