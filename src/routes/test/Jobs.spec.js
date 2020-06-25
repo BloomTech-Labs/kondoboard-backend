@@ -119,9 +119,9 @@ describe('Add job to Columns router tests', () => {
     });
   });
 
-  describe('PUT /column/:entry_id/update', () => {
+  describe('PUT /column/update/job', () => {
     it('change column', async () => {
-      const res = await request(server).put('/api/jobs/column/1/update').send({ columns_id: 2 });
+      const res = await request(server).put('/api/jobs/column/update/job').send({ users_jobs_id: 1, columns_id: 2 });
       expect(res.status).toBe(200);
     });
   });
