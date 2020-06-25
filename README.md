@@ -3,10 +3,12 @@
 ##### All endpoints start with /api
 ##### Table structures are in TABLES.md
 
-##### Route work by: /routes -> /controller -> stores
-###### Routes contain the endpoints
-###### Controllers manipulate data if needed, most will just pass the request to the stores 
-###### Stores are used to access the Database
+*** ***
+
+##### Structure works by: /routes -> /controller -> /stores
+###### Routes contain the endpoints, and pass URL/request data to controller
+###### Controllers manipulate data if needed, most will only pass the data to the stores 
+###### Stores are used to access the Database, and return response to controllers, then back to routes
 
 *** ***
 
